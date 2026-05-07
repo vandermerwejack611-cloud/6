@@ -2352,9 +2352,19 @@
         }
 
         .testimonial-grid {
-            display: grid;
-            grid-template-columns: 1fr;
+            position: relative;
+            padding: 0 40px;
+        }
+
+        .testimonial-slider-wrapper {
+            overflow: hidden;
+            width: 100%;
+        }
+
+        .testimonial-track {
+            display: flex;
             gap: 40px;
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         .testimonial-card {
@@ -2363,7 +2373,64 @@
             display: flex;
             overflow: hidden;
             min-height: 500px;
+            flex: 0 0 100%;
             transition: transform 0.4s ease;
+        }
+
+        /* Slider Controls */
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            transform: translateY(-50%);
+            display: flex;
+            justify-content: space-between;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .slider-btn {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            pointer-events: auto;
+            transition: all 0.3s;
+        }
+
+        .slider-btn:hover {
+            background: var(--lime-green);
+            color: var(--primary-green);
+            border-color: var(--lime-green);
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 40px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .dot.active {
+            background: var(--lime-green);
+            width: 30px;
+            border-radius: 6px;
         }
 
         .testimonial-card:hover {
@@ -2825,44 +2892,60 @@
             </div>
 
             <div class="testimonial-grid">
-                <!-- Testimonial 1 -->
-                <div class="testimonial-card">
-                    <div class="testimonial-card-left">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1000&fit=crop" alt="Partner">
-                        <div class="testimonial-author-overlay">
-                            <h4>Johan de Vries</h4>
-                            <p><span class="status-dot"></span> Founder, Green Impact SA</p>
-                        </div>
-                    </div>
-                    <div class="testimonial-card-right">
-                        <p class="testimonial-quote">"Working with Simphiwe has transformed how we approach community investment. His vision for 2052 isn't just a dream—it's a roadmap that we are actively building today. The depth of insight provided is unmatched in the African context."</p>
-                        <a href="#" class="testimonial-cta">
-                            Read customer experience
-                            <div class="cta-circle">
-                                <i class="fas fa-arrow-up-right-from-square" style="transform: rotate(45deg);"></i>
+                <div class="testimonial-slider-wrapper">
+                    <div class="testimonial-track" id="testimonialTrack">
+                        <!-- Testimonial 1 -->
+                        <div class="testimonial-card">
+                            <div class="testimonial-card-left">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1000&fit=crop" alt="Partner">
+                                <div class="testimonial-author-overlay">
+                                    <h4>Johan de Vries</h4>
+                                    <p><span class="status-dot"></span> Founder, Green Impact SA</p>
+                                </div>
                             </div>
-                        </a>
+                            <div class="testimonial-card-right">
+                                <p class="testimonial-quote">"Working with Simphiwe has transformed how we approach community investment. His vision for 2052 isn't just a dream—it's a roadmap that we are actively building today. The depth of insight provided is unmatched in the African context."</p>
+                                <a href="#" class="testimonial-cta">
+                                    Read customer experience
+                                    <div class="cta-circle">
+                                        <i class="fas fa-arrow-up-right-from-square" style="transform: rotate(45deg);"></i>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial 2 -->
+                        <div class="testimonial-card">
+                            <div class="testimonial-card-left">
+                                <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=1000&fit=crop" alt="Partner">
+                                <div class="testimonial-author-overlay">
+                                    <h4>Sarah Nkosi</h4>
+                                    <p><span class="status-dot"></span> Director of Sustainability, TechAfrica</p>
+                                </div>
+                            </div>
+                            <div class="testimonial-card-right">
+                                <p class="testimonial-quote">"The clarity of thought and the systemic approach to solving inequality is what sets Simphiwe apart. His ability to connect corporate strategy with grassroots impact is revolutionary."</p>
+                                <a href="#" class="testimonial-cta">
+                                    Read customer experience
+                                    <div class="cta-circle">
+                                        <i class="fas fa-arrow-up-right-from-square" style="transform: rotate(45deg);"></i>
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Testimonial 2 -->
-                <div class="testimonial-card">
-                    <div class="testimonial-card-left">
-                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=1000&fit=crop" alt="Partner">
-                        <div class="testimonial-author-overlay">
-                            <h4>Sarah Nkosi</h4>
-                            <p><span class="status-dot"></span> Director of Sustainability, TechAfrica</p>
-                        </div>
-                    </div>
-                    <div class="testimonial-card-right">
-                        <p class="testimonial-quote">"The clarity of thought and the systemic approach to solving inequality is what sets Simphiwe apart. His ability to connect corporate strategy with grassroots impact is revolutionary."</p>
-                        <a href="#" class="testimonial-cta">
-                            Read customer experience
-                            <div class="cta-circle">
-                                <i class="fas fa-arrow-up-right-from-square" style="transform: rotate(45deg);"></i>
-                            </div>
-                        </a>
-                    </div>
+                <!-- Slider Nav -->
+                <div class="slider-nav">
+                    <div class="slider-btn" onclick="slideTestimonials(-1)"><i class="fas fa-chevron-left"></i></div>
+                    <div class="slider-btn" onclick="slideTestimonials(1)"><i class="fas fa-chevron-right"></i></div>
+                </div>
+
+                <!-- Slider Dots -->
+                <div class="slider-dots" id="testimonialDots">
+                    <div class="dot active" onclick="goToTestimonial(0)"></div>
+                    <div class="dot" onclick="goToTestimonial(1)"></div>
                 </div>
             </div>
         </div>
@@ -3457,6 +3540,33 @@
             // Initialize Podcast Content
             updateTabContent();
         });
+
+        // Testimonial Slider Logic
+        let testimonialIndex = 0;
+        const totalTestimonials = 2; // Adjust if you add more cards
+
+        function slideTestimonials(dir) {
+            testimonialIndex += dir;
+            if (testimonialIndex < 0) testimonialIndex = totalTestimonials - 1;
+            if (testimonialIndex >= totalTestimonials) testimonialIndex = 0;
+            updateSlider();
+        }
+
+        function goToTestimonial(index) {
+            testimonialIndex = index;
+            updateSlider();
+        }
+
+        function updateSlider() {
+            const track = document.getElementById('testimonialTrack');
+            const dots = document.querySelectorAll('.dot');
+            const offset = testimonialIndex * 100;
+            track.style.transform = `translateX(-${offset}%)`;
+            
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === testimonialIndex);
+            });
+        }
     </script>
 </body>
 </html>
