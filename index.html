@@ -98,6 +98,28 @@
         }
 
         /* ============================================
+           SPA PAGE SYSTEM
+           ============================================ */
+        main {
+            display: none;
+            padding-top: 0;
+            min-height: 100vh;
+        }
+
+        body.show-home #home-page,
+        body.show-about #about-page,
+        body.show-contact #contact-page,
+        body.show-podcast #podcast-page,
+        body.show-magazine #magazine-page {
+            display: block;
+        }
+
+        /* Ensure nav is always visible */
+        .top-nav {
+            z-index: 2000;
+        }
+
+        /* ============================================
            NAVIGATION SYSTEM
            ============================================ */
 
@@ -157,7 +179,9 @@
             height: 85px;
             width: auto;
             transition: transform 0.3s;
+            animation: pulseFade 4s ease-in-out infinite;
         }
+
 
         .logo:hover img {
             transform: scale(1.03);
@@ -760,22 +784,20 @@
             height: 100px;
             width: auto;
             transition: transform 0.3s;
-            animation: pulseFade 2.5s ease-in-out infinite;
+            animation: pulseFade 4s ease-in-out infinite;
         }
 
         @keyframes pulseFade {
-
-            0%,
-            100% {
-                opacity: 0.6;
+            0%, 100% {
+                opacity: 0.85;
                 transform: scale(1);
             }
-
             50% {
                 opacity: 1;
-                transform: scale(1.05);
+                transform: scale(1.04);
             }
         }
+
 
         .side-panel-content h3 {
             font-family: 'Georgia', serif;
@@ -804,6 +826,356 @@
             font-size: 18px;
             font-weight: 500;
             color: var(--primary-dark);
+        }
+
+        /* ============================================
+           PODCAST PAGE - MAILCHIMP INSPIRED
+           Split Layout: Fixed Left, Scrollable Right
+           ============================================ */
+        #podcast-page {
+            background: #ffffff;
+            padding-top: 0 !important;
+        }
+
+        .podcast-split-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Left Side: Sticky Player */
+        .podcast-player-sidebar {
+            width: 50%;
+            background: var(--primary-green);
+            color: #ffffff;
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 10% 8%;
+            overflow: hidden;
+        }
+
+        .podcast-player-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .podcast-player-bg img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.4;
+            filter: grayscale(100%);
+        }
+
+        .podcast-player-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(26, 77, 62, 0.95) 0%, rgba(10, 10, 10, 0.8) 100%);
+            z-index: 2;
+        }
+
+        .podcast-player-content {
+            position: relative;
+            z-index: 3;
+        }
+
+        .player-meta {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--lime-green);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .player-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(32px, 4vw, 56px);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 30px;
+        }
+
+        /* Custom Audio Player UI */
+        .premium-player-ui {
+            margin-top: 40px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .player-play-btn {
+            width: 80px;
+            height: 80px;
+            background: var(--lime-green);
+            color: var(--primary-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .player-play-btn:hover {
+            transform: scale(1.05);
+            background: var(--white);
+        }
+
+        .player-controls-wrap {
+            flex-grow: 1;
+        }
+
+        .player-progress-container {
+            height: 6px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+            position: relative;
+            cursor: pointer;
+            margin-bottom: 15px;
+        }
+
+        .player-progress-bar {
+            height: 100%;
+            background: var(--lime-green);
+            width: 0%;
+            border-radius: 3px;
+            transition: width 0.1s linear;
+        }
+
+        .player-time-info {
+            display: flex;
+            justify-content: space-between;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            opacity: 0.8;
+        }
+
+        /* Social Share Bar */
+        .podcast-social-bar {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 30px;
+        }
+
+        .social-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .social-link:hover {
+            opacity: 1;
+            color: var(--lime-green);
+        }
+
+        /* Episode Details / Transcript Tabs */
+        .podcast-tabs {
+            margin-top: 40px;
+            display: flex;
+            gap: 30px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 10px;
+        }
+
+        .podcast-tab-btn {
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            opacity: 0.5;
+            transition: all 0.3s;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .podcast-tab-btn.active {
+            opacity: 1;
+        }
+
+        .podcast-tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -11px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--lime-green);
+        }
+
+        .podcast-tab-content {
+            margin-top: 30px;
+            max-height: 250px;
+            overflow-y: auto;
+            padding-right: 15px;
+            font-size: 15px;
+            line-height: 1.8;
+            opacity: 0.9;
+        }
+
+        /* Custom Scrollbar for dark side */
+        .podcast-tab-content::-webkit-scrollbar {
+            width: 4px;
+        }
+        .podcast-tab-content::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        .podcast-tab-content::-webkit-scrollbar-thumb {
+            background: var(--lime-green);
+            border-radius: 2px;
+        }
+
+        /* Right Side: Episode List */
+        .podcast-episodes-list {
+            width: 50%;
+            background: #ffffff;
+            padding: 8% 5%;
+        }
+
+        .list-header {
+            margin-bottom: 60px;
+        }
+
+        .list-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+        }
+
+        .list-header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .episode-row {
+            display: flex;
+            gap: 30px;
+            padding: 40px 0;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .episode-row:hover {
+            background: #fafafa;
+            padding-left: 15px;
+        }
+
+        .episode-row.active {
+            border-left: 4px solid var(--lime-green);
+            padding-left: 20px;
+            background: #f5f8f5;
+        }
+
+        .episode-thumb {
+            width: 140px;
+            height: 140px;
+            flex-shrink: 0;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .episode-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .episode-info {
+            flex-grow: 1;
+        }
+
+        .ep-meta {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--accent-teal);
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .ep-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--primary-green);
+            line-height: 1.3;
+            margin-bottom: 12px;
+            transition: color 0.3s;
+        }
+
+        .episode-row:hover .ep-title {
+            color: var(--lime-green);
+        }
+
+        .ep-excerpt {
+            font-size: 15px;
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 15px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        .ep-duration {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        @media (max-width: 1024px) {
+            .podcast-split-container {
+                flex-direction: column;
+            }
+            .podcast-player-sidebar, .podcast-episodes-list {
+                width: 100%;
+            }
+            .podcast-player-sidebar {
+                height: auto;
+                min-height: 60vh;
+                position: relative;
+                padding: 120px 30px 60px;
+            }
+            .podcast-episodes-list {
+                padding: 60px 30px;
+            }
         }
 
         .side-panel-cta {
@@ -842,6 +1214,40 @@
         .side-panel-nav a:hover {
             color: var(--primary-green);
         }
+
+        /* Side Panel staggered entry animation - Slower & Smoother */
+        .side-panel > *:not(.side-panel-close),
+        .side-panel-content > *,
+        .side-panel-contact > *,
+        .side-panel-nav li {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .side-panel.active > *:not(.side-panel-close),
+        .side-panel.active .side-panel-content > *,
+        .side-panel.active .side-panel-contact > *,
+        .side-panel.active .side-panel-nav li {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Refined Staggered Delays for buttery sequence */
+        .side-panel.active .side-panel-logo { transition-delay: 0.4s; }
+        .side-panel.active .side-panel-content h3 { transition-delay: 0.5s; }
+        .side-panel.active .side-panel-content p { transition-delay: 0.6s; }
+        
+        .side-panel.active .side-panel-contact-item:nth-child(1) { transition-delay: 0.7s; }
+        .side-panel.active .side-panel-contact-item:nth-child(2) { transition-delay: 0.8s; }
+        .side-panel.active .side-panel-contact-item:nth-child(3) { transition-delay: 0.9s; }
+
+        .side-panel.active .side-panel-nav li:nth-child(1) { transition-delay: 1.0s; }
+        .side-panel.active .side-panel-nav li:nth-child(2) { transition-delay: 1.1s; }
+        .side-panel.active .side-panel-nav li:nth-child(3) { transition-delay: 1.2s; }
+        .side-panel.active .side-panel-nav li:nth-child(4) { transition-delay: 1.3s; }
+        
+        .side-panel.active .side-panel-cta { transition-delay: 1.4s; }
 
         /* ============================================
            WEF IMPACT SECTION - BRAND COLORS + 10% PADDING
@@ -1580,6 +1986,274 @@
         }
 
         /* ============================================
+           FOUNDATION GRID SECTION
+           ============================================ */
+        .foundation-section {
+            padding: 120px 0;
+            background: #ffffff;
+        }
+
+        .foundation-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 80px;
+            margin-top: 64px;
+        }
+
+        .foundation-card {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding-right: 20px;
+        }
+
+        .foundation-card-img {
+            width: 100%;
+            height: 220px;
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 8px;
+            background: var(--light-gray);
+        }
+
+        .foundation-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+        }
+
+        .foundation-card:hover .foundation-card-img img {
+            transform: scale(1.08);
+        }
+
+        .foundation-card h3 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--primary-green);
+            line-height: 1.2;
+        }
+
+        .foundation-card p {
+            font-size: 17px;
+            line-height: 1.7;
+            color: #444;
+            margin: 0;
+        }
+
+        .foundation-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 700;
+            color: var(--primary-green);
+            text-decoration: none;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            margin-top: auto;
+            padding-top: 10px;
+        }
+
+        .foundation-link svg {
+            transition: transform 0.3s ease;
+        }
+
+        .foundation-link:hover {
+            color: var(--lime-green);
+        }
+
+        .foundation-link:hover svg {
+            transform: translateX(5px);
+        }
+
+        @media (max-width: 1024px) {
+            .foundation-grid {
+                grid-template-columns: 1fr;
+                gap: 60px;
+            }
+            .foundation-card {
+                padding-right: 0;
+                border-bottom: 1px solid var(--medium-gray);
+                padding-bottom: 40px;
+            }
+            .foundation-card:last-child {
+                border-bottom: none;
+            }
+        }
+
+        /* ============================================
+           CTA BANNER SECTION
+           ============================================ */
+        .cta-banner-section {
+            padding: 80px 0 40px;
+            background: #ffffff;
+        }
+
+        .cta-card {
+            background: var(--primary-green);
+            border-radius: 16px;
+            color: #ffffff;
+            overflow: hidden;
+            box-shadow: 0 20px 40px rgba(26, 77, 62, 0.15);
+        }
+
+        .cta-top {
+            padding: 48px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .cta-info-wrap {
+            display: flex;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .cta-logo-box {
+            width: 72px;
+            height: 72px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .cta-logo-box img {
+            width: 48px;
+            height: auto;
+            filter: brightness(0) invert(1);
+        }
+
+        .cta-text-content h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .cta-text-content h4 span {
+            font-weight: 400;
+            opacity: 0.8;
+            font-size: 20px;
+        }
+
+        .cta-text-content p {
+            font-size: 16px;
+            opacity: 0.9;
+            max-width: 600px;
+            line-height: 1.5;
+        }
+
+        .cta-btn {
+            padding: 14px 32px;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            color: #ffffff;
+            border-radius: 40px;
+            font-size: 15px;
+            font-weight: 700;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+            white-space: nowrap;
+        }
+
+        .cta-btn:hover {
+            background: var(--lime-green);
+            color: var(--primary-green);
+            transform: translateY(-2px);
+            border-color: var(--lime-green);
+        }
+
+        .cta-bottom {
+            padding: 28px 60px;
+            background: rgba(0, 0, 0, 0.15);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .cta-follow-text {
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: -0.2px;
+        }
+
+        .cta-socials {
+            display: flex;
+            gap: 28px;
+        }
+
+        .cta-socials a {
+            color: #ffffff;
+            font-size: 20px;
+            opacity: 0.7;
+            transition: all 0.3s ease;
+        }
+
+        .cta-socials a:hover {
+            opacity: 1;
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 1024px) {
+            .cta-top {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 40px;
+                gap: 30px;
+            }
+            .cta-bottom {
+                flex-direction: column;
+                gap: 24px;
+                align-items: flex-start;
+                padding: 32px 40px;
+            }
+            .cta-socials {
+                width: 100%;
+                justify-content: space-between;
+                gap: 15px;
+            }
+        }
+
+        /* ============================================
+           NEXT SECTION
+           ============================================ */
+        .next-section-placeholder {
+            padding: 120px 0;
+            text-align: center;
+            background: #f8f9fa;
+        }
+
+        /* ============================================
+           SCROLL REVEAL SYSTEM
+           ============================================ */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .reveal-delay-1 { transition-delay: 0.1s; }
+        .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; }
+        .reveal-delay-4 { transition-delay: 0.4s; }
+
+        /* ============================================
            RESPONSIVE DESIGN
            ============================================ */
 
@@ -1642,11 +2316,171 @@
                 padding: 0 25px;
             }
         }
+        /* ============================================
+           TESTIMONIAL SECTION (Klantervaringen)
+           Inspired by rechtdoorzeebymoxie
+           ============================================ */
+        .testimonial-section {
+            background: #111111;
+            padding: 120px 0;
+            color: #ffffff;
+        }
+
+        .testimonial-header {
+            margin-bottom: 80px;
+            text-align: center;
+        }
+
+        .testimonial-kicker {
+            font-family: 'Inter', sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--lime-green);
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .testimonial-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: clamp(32px, 5vw, 56px);
+            font-weight: 800;
+            line-height: 1.1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 40px;
+        }
+
+        .testimonial-card {
+            background: #1e1e1a;
+            border-radius: 40px;
+            display: flex;
+            overflow: hidden;
+            min-height: 500px;
+            transition: transform 0.4s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: scale(1.01);
+        }
+
+        .testimonial-card-left {
+            width: 45%;
+            position: relative;
+        }
+
+        .testimonial-card-left img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .testimonial-author-overlay {
+            position: absolute;
+            bottom: 40px;
+            left: 40px;
+            z-index: 2;
+        }
+
+        .testimonial-author-overlay h4 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .testimonial-author-overlay p {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            font-weight: 500;
+            color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--lime-green);
+            border-radius: 50%;
+        }
+
+        .testimonial-card-right {
+            width: 55%;
+            padding: 80px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .testimonial-quote {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 22px;
+            font-weight: 500;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            font-style: italic;
+        }
+
+        .testimonial-cta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 15px;
+            transition: color 0.3s;
+        }
+
+        .testimonial-cta:hover {
+            color: var(--lime-green);
+        }
+
+        .cta-circle {
+            width: 44px;
+            height: 44px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .testimonial-cta:hover .cta-circle {
+            border-color: var(--lime-green);
+            background: var(--lime-green);
+            color: var(--primary-green);
+        }
+
+        @media (max-width: 1024px) {
+            .testimonial-card {
+                flex-direction: column;
+            }
+            .testimonial-card-left, .testimonial-card-right {
+                width: 100%;
+            }
+            .testimonial-card-left {
+                height: 400px;
+            }
+            .testimonial-card-right {
+                padding: 40px;
+            }
+        }
     </style>
     <base target="_blank">
 </head>
 
-<body>
+<body class="show-home">
 
     <!-- ============================================
          NAVIGATION HEADER
@@ -1684,13 +2518,13 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#">Resources <i class="vamtamtheme- vamtam-theme-arrow-dawn"
+                        <a href="javascript:void(0)">Resources <i class="vamtamtheme- vamtam-theme-arrow-dawn"
                                 style="font-size: 12px; margin-left: 5px;"></i></a>
                         <ul class="dropdown">
-                            <li><a href="https://simphiwemtetwa.africa/podcast/">Podcast</a></li>
+                            <li><a href="javascript:void(0)" onclick="showPage('podcast')">Podcast</a></li>
+                            <li><a href="javascript:void(0)" onclick="showPage('magazine')">Matter Magazine</a></li>
                             <li><a href="https://simphiwemtetwa.africa/changemakers-library/">Changemakers Library</a>
                             </li>
-                            <li><a href="https://simphiwemtetwa.africa/matter-magazine/">Matter Magazine</a></li>
                             <li><a href="https://simphiwemtetwa.africa/legacy-conference/">Legacy Conference</a></li>
                         </ul>
                     </li>
@@ -1718,7 +2552,8 @@
         </div>
     </nav>
 
-    <!-- Side Panel Drawer & Backdrop -->
+    <!-- Master Container for SPA -->
+    <main id="home-page">
     <div class="side-panel-backdrop" id="sidePanelBackdrop"></div>
     <div class="side-panel" id="sidePanel">
         <div class="side-panel-close" id="closeSidePanel">
@@ -1726,7 +2561,7 @@
         </div>
 
         <div class="side-panel-logo">
-            <img src="https://simphiwemtetwa.africa/wp-content/uploads/2024/04/Simphiwe-6.png"
+            <img src="https://www.image2url.com/r2/default/images/1777649055436-1057d549-9fe6-4e04-b970-568610a4c0a0.png"
                 alt="Simphiwe Mtetwa Logo">
         </div>
 
@@ -1892,7 +2727,7 @@
     <!-- ============================================
          IMPACT SECTION - WEF STYLE WITH BRAND COLORS
          ============================================ -->
-    <section class="wef-impact-section">
+    <section class="wef-impact-section reveal">
         <div class="wef-container">
             <!-- HERO SPLIT: Text Left + Video Right -->
             <div class="wef-hero-split">
@@ -1980,31 +2815,64 @@
     </section>
 
     <!-- ============================================
-         SCROLLING NEWS BANNER (Parallax)
+         TESTIMONIAL SECTION
          ============================================ -->
-    <div class="news-banner-container">
-        <div class="news-scroll-track" id="newsTrack">
-            <!-- Plain News Scroll -->
-            <div class="news-item">
-                News <span class="news-dot"></span> News <span class="news-dot"></span> News <span class="news-dot"></span> News <span class="news-dot"></span> News <span class="news-dot"></span> News
+    <section class="testimonial-section reveal">
+        <div class="wef-container">
+            <div class="testimonial-header">
+                <span class="testimonial-kicker">Customer experiences</span>
+                <h2 class="testimonial-title">Experiences of our customers</h2>
             </div>
-            <div class="news-item outline">
-                News <span class="news-dot"></span> News <span class="news-dot"></span> News <span class="news-dot"></span> News <span class="news-dot"></span> News <span class="news-dot"></span> News
-            </div>
-            <div class="news-item">
-                News <span class="news-dot"></span> News <span class="news-dot"></span> News <span class="news-dot"></span> News <span class="news-dot"></span> News <span class="news-dot"></span> News
-            </div>
-            <div class="news-item outline">
-                News <span class="news-dot"></span> News <span class="news-dot"></span> News <span class="news-dot"></span> News <span class="news-dot"></span> News <span class="news-dot"></span> News
+
+            <div class="testimonial-grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-card-left">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1000&fit=crop" alt="Partner">
+                        <div class="testimonial-author-overlay">
+                            <h4>Johan de Vries</h4>
+                            <p><span class="status-dot"></span> Founder, Green Impact SA</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-card-right">
+                        <p class="testimonial-quote">"Working with Simphiwe has transformed how we approach community investment. His vision for 2052 isn't just a dream—it's a roadmap that we are actively building today. The depth of insight provided is unmatched in the African context."</p>
+                        <a href="#" class="testimonial-cta">
+                            Read customer experience
+                            <div class="cta-circle">
+                                <i class="fas fa-arrow-up-right-from-square" style="transform: rotate(45deg);"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card">
+                    <div class="testimonial-card-left">
+                        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=1000&fit=crop" alt="Partner">
+                        <div class="testimonial-author-overlay">
+                            <h4>Sarah Nkosi</h4>
+                            <p><span class="status-dot"></span> Director of Sustainability, TechAfrica</p>
+                        </div>
+                    </div>
+                    <div class="testimonial-card-right">
+                        <p class="testimonial-quote">"The clarity of thought and the systemic approach to solving inequality is what sets Simphiwe apart. His ability to connect corporate strategy with grassroots impact is revolutionary."</p>
+                        <a href="#" class="testimonial-cta">
+                            Read customer experience
+                            <div class="cta-circle">
+                                <i class="fas fa-arrow-up-right-from-square" style="transform: rotate(45deg);"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
 
 
     <!-- ============================================
          SPOTLIGHT SECTION
          ============================================ -->
-    <div class="wef-container" style="padding-top: 100px; padding-bottom: 100px; background: #ffffff;">
+    <div class="wef-container reveal" style="padding-top: 100px; padding-bottom: 100px; background: #ffffff;">
         <div class="wef-tabs-row" style="margin-bottom: 0;">
             <span class="wef-tabs-label">Spotlight</span>
         </div>
@@ -2102,22 +2970,392 @@
     </div>
 
 
-    <!-- Next Section Placeholder -->
-    <section
-        style="height: 60vh; background: var(--primary-green); display: flex; align-items: center; justify-content: center;">
-        <h2
-            style="font-family: 'Montserrat', sans-serif; color: var(--white); font-size: 2.5rem; text-align: center; padding: 0 10%;">
-            Empowering Africa's <span style="color: var(--lime-green);">Tomorrow</span></h2>
+    <!-- ============================================
+         CTA NEWSLETTER BANNER
+         ============================================ -->
+    <section class="cta-banner-section">
+        <div class="wef-container">
+            <div class="cta-card reveal">
+                <!-- Top: Newsletter Info -->
+                <div class="cta-top">
+                    <div class="cta-info-wrap">
+                        <div class="cta-logo-box">
+                            <img src="https://simphiwemtetwa.africa/wp-content/uploads/2024/04/Simphiwe-6.png" alt="Logo">
+                        </div>
+                        <div class="cta-text-content">
+                            <h4>Simphiwe Mtetwa <span>Insights newsletter</span></h4>
+                            <p>Bringing you weekly curated insights and analysis on the global issues that matter.</p>
+                        </div>
+                    </div>
+                    <a href="#" class="cta-btn">
+                        Subscribe today
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Bottom: Social Bar -->
+                <div class="cta-bottom">
+                    <span class="cta-follow-text">Follow us wherever you get your content</span>
+                    <div class="cta-socials">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- ============================================
+         FOUNDATION INFO SECTION
+         ============================================ -->
+    <section class="foundation-section reveal">
+        <div class="wef-container">
+            <div class="wef-tabs-row" style="margin-bottom: 0; border-bottom: 1px solid var(--medium-gray); padding-bottom: 24px;">
+                <span class="wef-tabs-label">More about Simphiwe Mtetwa</span>
+            </div>
+
+            <div class="foundation-grid">
+                <!-- Our Role -->
+                <div class="foundation-card">
+                    <div class="foundation-card-img">
+                        <img src="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?w=600&h=400&fit=crop" alt="Our Role">
+                    </div>
+                    <h3>Our Role</h3>
+                    <p>For over 25 years, the Gates Foundation has been committed to fighting the greatest inequities in the world.</p>
+                    <a href="#" class="foundation-link">
+                        Learn more
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- How We Work -->
+                <div class="foundation-card">
+                    <div class="foundation-card-img">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" alt="How we Work">
+                    </div>
+                    <h3>How we Work</h3>
+                    <p>We are focused on results. Those that can be measured. And those measured in ways beyond numbers.</p>
+                    <a href="#" class="foundation-link">
+                        Learn more
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+
+                <!-- Our Story -->
+                <div class="foundation-card">
+                    <div class="foundation-card-img">
+                        <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=600&h=400&fit=crop" alt="Our Story">
+                    </div>
+                    <h3>Our Story</h3>
+                    <p>Learn about the origins of the foundation and the values that drive our work.</p>
+                    <a href="#" class="foundation-link">
+                        Learn more
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================
+         NEXT SECTION
+         ============================================ -->
+    <section class="next-section-placeholder reveal">
+        <div class="wef-container">
+            <h2 style="font-family: 'Montserrat', sans-serif; font-size: 32px; color: var(--primary-green); margin-bottom: 16px;">Next Section</h2>
+            <div style="width: 60px; height: 3px; background: var(--lime-green); margin: 0 auto 24px;"></div>
+            <p style="opacity: 0.6; font-size: 18px; max-width: 600px; margin: 0 auto;">Our design exploration continues. What impact would you like to build next?</p>
+        </div>
     </section>
 
     <!-- ============================================
          JAVASCRIPT FUNCTIONALITY
          ============================================ -->
+    </main><!-- End Home Page -->
+
+    <!-- ============================================
+         PODCAST PAGE
+         ============================================ -->
+    <main id="podcast-page">
+        <div class="podcast-split-container">
+            <!-- Left Panel: Sticky Player -->
+            <div class="podcast-player-sidebar">
+                <div class="podcast-player-bg">
+                    <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/02/SIMPHIWE-MTETWA-1920-x-825-mm-1-1.jpg" id="activeEpImage" alt="Active Episode">
+                </div>
+                <div class="podcast-player-overlay"></div>
+                
+                <div class="podcast-player-content">
+                    <span class="player-meta" id="activeEpNumber">SERIES 1 • EPISODE 4</span>
+                    <h1 class="player-title" id="activeEpTitle">What to Do When You Feel Overwhelmed: A Practical Guide</h1>
+                    
+                    <div class="premium-player-ui">
+                        <div class="player-play-btn" id="masterPlayBtn" onclick="togglePodcastPlayback()">
+                            <i class="fas fa-play" id="masterPlayIcon"></i>
+                        </div>
+                        <div class="player-controls-wrap">
+                            <div class="player-progress-container" id="playerProgressBar" onclick="seekAudio(event)">
+                                <div class="player-progress-bar" id="playerProgressFill"></div>
+                            </div>
+                            <div class="player-time-info">
+                                <span id="playerCurrentTime">0:00</span>
+                                <span id="playerTotalTime">19:29</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="podcast-social-bar">
+                        <a href="javascript:void(0)" class="social-link"><i class="fas fa-rss"></i> Subscribe</a>
+                        <a href="https://facebook.com" target="_blank" class="social-link"><i class="fab fa-facebook-f"></i> Facebook</a>
+                        <a href="https://twitter.com" target="_blank" class="social-link"><i class="fab fa-twitter"></i> Twitter</a>
+                        <a href="mailto:info@simphiwemtetwa.africa" class="social-link"><i class="fas fa-envelope"></i> Email</a>
+                        <a href="javascript:void(0)" class="social-link" onclick="copyEpLink()"><i class="fas fa-link"></i> Copy Link</a>
+                    </div>
+
+                    <div class="podcast-tabs">
+                        <button class="podcast-tab-btn active" onclick="switchTab('details')">Episode details</button>
+                        <button class="podcast-tab-btn" onclick="switchTab('transcript')">Transcript</button>
+                    </div>
+
+                    <div class="podcast-tab-content" id="activeEpContent">
+                        SaraCampz knows exactly who she is—her eclectic wardrobe of bold colours, standout patterns, and daring silhouettes has captivated a loyal audience. We meet the sustainable maximalist inspiring millions with her style.
+                    </div>
+                    
+                    <audio id="globalAudioPlayer" src="https://simphiwemtetwa.africa/wp-content/uploads/2026/02/Episode-4-Find-Your-Y.mp3"></audio>
+                </div>
+            </div>
+
+            <!-- Right Panel: Episode List -->
+            <div class="podcast-episodes-list">
+                <div class="list-header">
+                    <h2>Recent Episodes</h2>
+                    <p>Conversations that shape the future of Corporate Social Investment in Africa.</p>
+                </div>
+
+                <div class="episodes-container">
+                    <!-- Episode 1 -->
+                    <div class="episode-row active" onclick="loadEpisode(0)">
+                        <div class="episode-thumb">
+                            <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/02/SIMPHIWE-MTETWA-1920-x-825-mm-1-1.jpg" alt="Ep 1">
+                        </div>
+                        <div class="episode-info">
+                            <span class="ep-meta">Episode 04</span>
+                            <h3 class="ep-title">What to Do When You Feel Overwhelmed</h3>
+                            <p class="ep-excerpt">In this guide, we explore what being overwhelmed really means, why it happens, and practical steps to regain control—especially in the workplace.</p>
+                            <div class="ep-duration"><i class="fas fa-clock"></i> 19:29</div>
+                        </div>
+                    </div>
+
+                    <!-- Episode 2 -->
+                    <div class="episode-row" onclick="loadEpisode(1)">
+                        <div class="episode-thumb">
+                            <img src="https://simphiwemtetwa.africa/wp-content/uploads/2024/07/WhatsApp-Image-2024-07-16-at-23.00.08.jpeg" alt="Ep 2">
+                        </div>
+                        <div class="episode-info">
+                            <span class="ep-meta">Episode 03</span>
+                            <h3 class="ep-title">Insights From Lunga Schoeman</h3>
+                            <p class="ep-excerpt">Lunga Schoeman, Head of CSI at DBSA, shares his insights on the evolving landscape of CSI and what the future might hold.</p>
+                            <div class="ep-duration"><i class="fas fa-clock"></i> 24:15</div>
+                        </div>
+                    </div>
+
+                    <!-- Episode 3 -->
+                    <div class="episode-row" onclick="loadEpisode(2)">
+                        <div class="episode-thumb">
+                            <img src="https://simphiwemtetwa.africa/wp-content/uploads/2024/07/WhatsApp-Image-2024-07-16-at-20.41.26.jpeg" alt="Ep 3">
+                        </div>
+                        <div class="episode-info">
+                            <span class="ep-meta">Episode 02</span>
+                            <h3 class="ep-title">Understanding Trauma in the Workplace</h3>
+                            <p class="ep-excerpt">CEO Nomfundo Mogapi explains how trauma affects corporate social investment and community impact.</p>
+                            <div class="ep-duration"><i class="fas fa-clock"></i> 21:03</div>
+                        </div>
+                    </div>
+
+                    <!-- Episode 4 -->
+                    <div class="episode-row" onclick="loadEpisode(3)">
+                        <div class="episode-thumb">
+                            <img src="https://simphiwemtetwa.africa/wp-content/uploads/2024/07/WhatsApp-Image-2024-07-16-at-20.41.25-1.jpeg" alt="Ep 4">
+                        </div>
+                        <div class="episode-info">
+                            <span class="ep-meta">Episode 01</span>
+                            <h3 class="ep-title">Pioneering The Future of CSI</h3>
+                            <p class="ep-excerpt">Khaya Tyatya reflects on the 30-year journey of CSI in South Africa and the systemic shift towards 2050.</p>
+                            <div class="ep-duration"><i class="fas fa-clock"></i> 26:45</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Placeholder Pages -->
+    <main id="about-page"><div style="padding: 150px 10vw;"><h1>About Us</h1><p>Content coming soon...</p></div></main>
+    <main id="contact-page"><div style="padding: 150px 10vw;"><h1>Contact</h1><p>Content coming soon...</p></div></main>
+    <main id="store-page"><div style="padding: 150px 10vw;"><h1>Official Store</h1><p>Content coming soon...</p></div></main>
+    <main id="magazine-page"><div style="padding: 150px 10vw;"><h1>Matter Magazine</h1><p>Content coming soon...</p></div></main>
+
     <script>
+        const podcastData = [
+            {
+                title: "What to Do When You Feel Overwhelmed: A Practical Guide",
+                meta: "SERIES 1 • EPISODE 4",
+                image: "https://simphiwemtetwa.africa/wp-content/uploads/2026/02/SIMPHIWE-MTETWA-1920-x-825-mm-1-1.jpg",
+                audio: "https://simphiwemtetwa.africa/wp-content/uploads/2026/02/Episode-4-Find-Your-Y.mp3",
+                duration: "19:29",
+                details: "Simphiwe Mtetwa shares a practical guide on navigating the common feeling of being overwhelmed in the workplace. This episode explores why it happens and how to regain control.",
+                transcript: "Feeling overwhelmed is something almost everyone experiences at some point. It’s that sense of being pulled in multiple directions at once... Overwhelmed literally means to be swamped or flooded by water."
+            },
+            {
+                title: "Insights From Lunga Schoeman: The Future of CSI",
+                meta: "SERIES 1 • EPISODE 3",
+                image: "https://simphiwemtetwa.africa/wp-content/uploads/2024/07/WhatsApp-Image-2024-07-16-at-23.00.08.jpeg",
+                audio: "https://simphiwemtetwa.africa/wp-content/uploads/2024/07/WhatsApp-Audio-2024-07-17-at-06.49.56.mp3",
+                duration: "24:15",
+                details: "Lunga Schoeman, Head of CSI at DBSA, discusses the strategic shift in Corporate Social Investment beyond traditional philanthropy towards systemic impact.",
+                transcript: "In the latest episode of The Future of Corporate Social Investment, Lunga Schoeman shares his insights on the evolving landscape... The problems we face are much bigger than just food donations."
+            },
+            {
+                title: "Understanding Trauma in the Workplace",
+                meta: "SERIES 1 • EPISODE 2",
+                image: "https://simphiwemtetwa.africa/wp-content/uploads/2024/07/WhatsApp-Image-2024-07-16-at-20.41.26.jpeg",
+                audio: "https://simphiwemtetwa.africa/wp-content/uploads/2024/07/WhatsApp-Audio-2024-07-16-at-11.08.21.mp3",
+                duration: "21:03",
+                details: "Nomfundo Mogapi, CEO of Centre for Mental Wellness, explains the 'wound of the soul' and its impact on corporate leadership and community context.",
+                transcript: "Understanding trauma in the workplace is not just important; it is essential. Ms. Nomfundo Mogapi explains that trauma can be described as the 'wound of the soul'..."
+            },
+            {
+                title: "Pioneering The Future of CSI: Khaya Tyatya",
+                meta: "SERIES 1 • EPISODE 1",
+                image: "https://simphiwemtetwa.africa/wp-content/uploads/2024/07/WhatsApp-Image-2024-07-16-at-20.41.25-1.jpeg",
+                audio: "https://simphiwemtetwa.africa/wp-content/uploads/2024/08/Future-of-CSI-Khaya-Tyatya-Final-.mp3",
+                duration: "26:45",
+                details: "Khaya Tyatya reflects on the 30-year journey of CSI in South Africa and the need for a more coherent, systemic approach towards 2050.",
+                transcript: "Khaya Tyatya offers a profound reflection on the journey and future of CSI in South Africa. He believes that while the need for CSI will persist, the approach will become far more systemic."
+            }
+        ];
+
+        let currentEpIndex = 0;
+        let activeTab = 'details';
+        const audio = document.getElementById('globalAudioPlayer');
+        const playIcon = document.getElementById('masterPlayIcon');
+        const progressFill = document.getElementById('playerProgressFill');
+        const currentTimeEl = document.getElementById('playerCurrentTime');
+
+        function loadEpisode(index) {
+            currentEpIndex = index;
+            const ep = podcastData[index];
+            
+            document.getElementById('activeEpTitle').innerText = ep.title;
+            document.getElementById('activeEpNumber').innerText = ep.meta;
+            document.getElementById('activeEpImage').src = ep.image;
+            document.getElementById('playerTotalTime').innerText = ep.duration;
+            audio.src = ep.audio;
+            
+            updateTabContent();
+
+            // Update Active Class in List
+            document.querySelectorAll('.episode-row').forEach((row, i) => {
+                row.classList.toggle('active', i === index);
+            });
+
+            audio.play();
+            playIcon.className = 'fas fa-pause';
+        }
+
+        function switchTab(tab) {
+            activeTab = tab;
+            document.querySelectorAll('.podcast-tab-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.innerText.toLowerCase().includes(tab));
+            });
+            updateTabContent();
+        }
+
+        function updateTabContent() {
+            const ep = podcastData[currentEpIndex];
+            const contentEl = document.getElementById('activeEpContent');
+            contentEl.innerText = activeTab === 'details' ? ep.details : ep.transcript;
+        }
+
+        function copyEpLink() {
+            navigator.clipboard.writeText(window.location.href);
+            alert('Link copied to clipboard!');
+        }
+
+        function togglePodcastPlayback() {
+            if (audio.paused) {
+                audio.play();
+                playIcon.className = 'fas fa-pause';
+            } else {
+                audio.pause();
+                playIcon.className = 'fas fa-play';
+            }
+        }
+
+        audio.ontimeupdate = () => {
+            const pct = (audio.currentTime / audio.duration) * 100;
+            progressFill.style.width = pct + '%';
+            
+            const mins = Math.floor(audio.currentTime / 60);
+            const secs = Math.floor(audio.currentTime % 60);
+            currentTimeEl.innerText = `${mins}:${secs.toString().padStart(2, '0')}`;
+        };
+
+        function seekAudio(e) {
+            const bar = document.getElementById('playerProgressBar');
+            const pct = e.offsetX / bar.offsetWidth;
+            audio.currentTime = pct * audio.duration;
+        }
+
+        function showPage(pageId) {
+            console.log('Navigating to:', pageId);
+            document.body.className = 'show-' + pageId;
+            window.scrollTo(0, 0);
+            
+            // Close Side Panel if open
+            const sidePanel = document.getElementById('sidePanel');
+            const backdrop = document.getElementById('sidePanelBackdrop');
+            if (sidePanel) sidePanel.classList.remove('active');
+            if (backdrop) backdrop.classList.remove('active');
+            document.body.style.overflow = 'auto';
+
+            // Special handling for nav scroll effect
+            const nav = document.getElementById('mainNav');
+            const logoWhite = document.querySelector('.logo-white');
+            const logoBlack = document.querySelector('.logo-black');
+
+            if (pageId !== 'home') {
+                nav.classList.add('scrolled');
+                if (logoWhite) logoWhite.style.display = 'none';
+                if (logoBlack) logoBlack.style.display = 'block';
+            } else {
+                if (window.scrollY < 50) {
+                    nav.classList.remove('scrolled');
+                    if (logoWhite) logoWhite.style.display = 'block';
+                    if (logoBlack) logoBlack.style.display = 'none';
+                }
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
             // Navigation scroll effect
             const nav = document.getElementById('mainNav');
             window.addEventListener('scroll', () => {
+                if (!document.body.classList.contains('show-home')) return;
+
                 const logoWhite = document.querySelector('.logo-white');
                 const logoBlack = document.querySelector('.logo-black');
 
@@ -2132,15 +3370,13 @@
                 }
             });
 
-            // Scrolling News Banner - Mouse Scroll Parallax
+            // Scrolling News Banner
             const newsTrack = document.getElementById('newsTrack');
             window.addEventListener('scroll', () => {
-                if (newsTrack) {
+                if (newsTrack && document.body.classList.contains('show-home')) {
                     const scrollPos = window.scrollY;
                     const sectionOffset = newsTrack.parentElement.offsetTop;
                     const windowHeight = window.innerHeight;
-                    
-                    // Animate based on scroll relative to the section
                     if (scrollPos > sectionOffset - windowHeight && scrollPos < sectionOffset + windowHeight) {
                         const movement = (scrollPos - sectionOffset) * 0.8;
                         newsTrack.style.transform = `translateX(${-movement}px)`;
@@ -2148,7 +3384,7 @@
                 }
             });
 
-            // Side Panel Implementation
+            // Side Panel
             const mobileToggle = document.getElementById('mobileToggle');
             const closeSidePanel = document.getElementById('closeSidePanel');
             const sidePanel = document.getElementById('sidePanel');
@@ -2157,7 +3393,6 @@
             if (mobileToggle) {
                 mobileToggle.addEventListener('click', (e) => {
                     e.preventDefault();
-                    e.stopPropagation();
                     sidePanel.classList.add('active');
                     backdrop.classList.add('active');
                     document.body.style.overflow = 'hidden';
@@ -2172,39 +3407,23 @@
                 });
             }
 
-            if (backdrop) {
-                backdrop.addEventListener('click', () => {
-                    sidePanel.classList.remove('active');
-                    backdrop.classList.remove('active');
-                    document.body.style.overflow = 'auto';
-                });
-            }
-
-            // Hero Slider Functionality
+            // Hero Slider
             const slides = document.querySelectorAll('.hero-slide');
             const tabs = document.querySelectorAll('.hero-tab');
             const progressBars = document.querySelectorAll('.tab-progress');
             let currentSlide = 0;
             let slideInterval;
-            let progressInterval;
             let startTime;
             const duration = 6000;
 
             function startSlider() {
                 startTime = Date.now();
-                updateProgress();
                 slideInterval = setInterval(nextSlide, duration);
             }
 
-            function updateProgress() {
-                if (progressInterval) clearInterval(progressInterval);
-                progressInterval = setInterval(() => {
-                    const elapsed = Date.now() - startTime;
-                    const progress = Math.min((elapsed / duration) * 100, 100);
-                    if (progressBars[currentSlide]) {
-                        progressBars[currentSlide].style.width = progress + '%';
-                    }
-                }, 50);
+            function nextSlide() {
+                let next = (currentSlide + 1) % slides.length;
+                showSlide(next);
             }
 
             function showSlide(index) {
@@ -2214,49 +3433,30 @@
                     if (tabs[i]) tabs[i].classList.remove('active');
                     if (progressBars[i]) progressBars[i].style.width = '0%';
                 });
-
                 slides[index].classList.add('active');
                 if (tabs[index]) tabs[index].classList.add('active');
                 currentSlide = index;
                 startTime = Date.now();
-                updateProgress();
-
-                clearInterval(slideInterval);
-                slideInterval = setInterval(nextSlide, duration);
-            }
-
-            function nextSlide() {
-                let next = (currentSlide + 1) % slides.length;
-                showSlide(next);
             }
 
             tabs.forEach((tab, index) => {
-                tab.addEventListener('click', () => {
-                    showSlide(index);
-                });
+                tab.addEventListener('click', () => showSlide(index));
             });
 
             if (slides.length > 0) startSlider();
 
-            const scrollBtn = document.getElementById('scrollToNextSection');
-            if (scrollBtn) {
-                scrollBtn.addEventListener('click', () => {
-                    const nextSection = document.querySelector('.news-banner-container');
-                    if (nextSection) {
-                        const navHeight = 80;
-                        const top = nextSection.getBoundingClientRect().top + window.pageYOffset - navHeight;
-                        window.scrollTo({ top: top, behavior: 'smooth' });
-                    }
+            // Reveal
+            const revealObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('active');
                 });
-            }
+            }, { threshold: 0.15 });
+
+            document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+            // Initialize Podcast Content
+            updateTabContent();
         });
-
-        function showPage(pageId) {
-            console.log('Navigating to:', pageId);
-            window.scrollTo(0, 0);
-        }
     </script>
-
 </body>
-
 </html>
