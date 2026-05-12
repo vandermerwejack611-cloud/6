@@ -121,49 +121,52 @@
             transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        .btn-primary {
-            background: var(--accent-lime);
-            color: #000;
-            border: 1px solid var(--accent-lime);
-        }
-
-        .btn-primary:hover {
-            background: #000;
-            color: #fff;
-            border-color: #000;
-            transform: translateY(-2px);
-        }
-
-        .btn-outline {
-            background: transparent;
-            color: var(--text-main);
-            border: 1px solid var(--border-light);
-        }
-
-        .btn-outline:hover {
-            border-color: var(--text-main);
-            background: var(--text-main);
-            color: #fff;
-            transform: translateY(-2px);
-        }
-
-        .icon-circle {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: rgba(0, 0, 0, 0.05);
-            display: flex;
+        .animated-line-link {
+            font-family: var(--font-sans);
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-lime) !important;
+            text-decoration: none;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            transition: transform 0.3s;
+            gap: 12px;
+            position: relative;
+            padding-bottom: 8px;
+            margin-top: 30px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            z-index: 10;
         }
 
-        .btn:hover .icon-circle {
-            transform: rotate(45deg);
+        .animated-line-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--accent-lime);
+            transform: scaleX(0.3);
+            transform-origin: left;
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
-        .btn-primary .icon-circle {
-            background: rgba(0, 0, 0, 0.1);
+        .animated-line-link:hover {
+            gap: 18px;
+            opacity: 1;
+        }
+
+        .animated-line-link:hover::after {
+            transform: scaleX(1);
+        }
+
+        .animated-line-link i {
+            transition: transform 0.4s ease;
+        }
+
+        .animated-line-link:hover i {
+            transform: translateX(5px);
         }
 
         /* Floating Navigation */
@@ -236,6 +239,54 @@
             display: flex;
             align-items: center;
             gap: 20px;
+        }
+
+        .nav-dropdown {
+            position: relative;
+        }
+
+        .nav-dropdown > a {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            top: calc(100% + 16px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a1a1a;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 16px;
+            padding: 12px 0;
+            min-width: 220px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            z-index: 9999;
+        }
+
+        .nav-dropdown:hover .dropdown-menu {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .dropdown-menu a {
+            display: block;
+            padding: 10px 24px;
+            font-size: 13px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            white-space: nowrap;
+        }
+
+        .dropdown-menu a:hover {
+            background: rgba(255,255,255,0.06);
+            color: var(--accent-lime);
         }
 
         .menu-toggle {
@@ -421,6 +472,7 @@
             transition: opacity 0.6s ease;
             pointer-events: none;
             background: #000;
+            object-fit: cover;
         }
 
         .editorial-split.video-active .section-bg-video {
@@ -634,22 +686,72 @@
             border-radius: 24px;
             overflow: hidden;
             cursor: pointer;
-            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+            transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.6s ease;
+        }
+
+        .blog-card-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(196, 216, 46, 0.1) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: 2;
+        }
+
+        .blog-card-overlay::after {
+            content: '';
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 50px;
+            height: 50px;
+            background: var(--accent-lime);
+            opacity: 0.2;
+            filter: blur(30px);
+            z-index: 1;
+            transition: all 0.5s ease;
+        }
+
+        .blog-card-overlay:hover::before {
+            opacity: 1;
+        }
+
+        .blog-card-overlay:hover::after {
+            width: 80px;
+            height: 80px;
+            opacity: 0.4;
         }
 
         .blog-card-overlay:hover {
-            transform: translateY(-10px);
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 40px 80px rgba(196, 216, 46, 0.15), 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .blog-card-overlay > a {
+            position: absolute;
+            inset: 0;
+            z-index: 5;
         }
 
         .blog-card-overlay img {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.6s ease;
+            transition: transform 0.8s ease, filter 0.5s ease;
+            z-index: 0;
+            filter: grayscale(20%);
         }
 
         .blog-card-overlay:hover img {
-            transform: scale(1.05);
+            transform: scale(1.1);
+            filter: grayscale(0%);
         }
 
         .blog-card-overlay .card-gradient {
@@ -731,6 +833,47 @@
             transform: rotate(-45deg);
         }
 
+        /* Podcast Cards */
+        .podcast-card {
+            cursor: pointer;
+        }
+
+        .podcast-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-lime), #a6d44a, var(--accent-lime));
+            transform: scaleX(0);
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            z-index: 5;
+        }
+
+        .podcast-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .podcast-card:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(196, 216, 46, 0.12), 0 15px 30px rgba(0, 0, 0, 0.08);
+        }
+
+        .podcast-card:hover .podcast-thumb img {
+            transform: scale(1.08);
+            filter: grayscale(0%) brightness(1.05);
+        }
+
+        .podcast-card:hover .podcast-overlay {
+            opacity: 1;
+        }
+
+        .podcast-card:hover .play-btn {
+            transform: scale(1.15);
+            box-shadow: 0 15px 40px rgba(196, 216, 46, 0.5);
+        }
+
         @media (max-width: 1024px) {
             .blog-overlay-grid {
                 grid-template-columns: 1fr;
@@ -752,10 +895,14 @@
         }
 
         .blog-card-overlay-alt img {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: transform 0.6s ease;
+            z-index: 0;
         }
 
         .blog-card-overlay-alt:hover img {
@@ -821,12 +968,12 @@
         }
 
         .blog-card-overlay-alt .author-thumb {
-            width: 40px;
-            height: 40px;
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
             border: 2px solid var(--accent-lime);
             overflow: hidden;
-            margin-bottom: 15px;
+            margin-bottom: 18px;
             opacity: 0;
             transform: scale(0.5);
             transition: 0.5s cubic-bezier(0.23, 1, 0.32, 1);
@@ -1188,14 +1335,19 @@
             <li><a href="#">Think Tank</a></li>
             <li><a href="#">Podcast</a></li>
             <li><a href="#">Magazine</a></li>
-            <li><a href="#" onclick="showView('view-insight-1')">Insights</a></li>
-            <li><a href="#" onclick="showView('view-insight-2')">Insights (2)</a></li>
-            <li><a href="#" onclick="showView('view-insight-3')">Insights (3)</a></li>
-            <li><a href="#" onclick="showView('view-insight-4')">Insights (4)</a></li>
-            <li><a href="#" onclick="showView('view-insight-5')">Insights (5)</a></li>
-            <li><a href="#" onclick="showView('view-insight-6')">Insights (6)</a></li>
-            <li><a href="#" onclick="showView('view-insight-7')">Insights (7)</a></li>
-            <li><a href="#" onclick="showView('view-insight-8')">Insights (8)</a></li>
+            <li class="nav-dropdown">
+                <a href="#" onclick="showView('view-insight-1')">Insights <i class="fas fa-chevron-down" style="font-size:10px; margin-left:6px;"></i></a>
+                <div class="dropdown-menu">
+                    <a href="#" onclick="showView('view-insight-1')">Insights (Default)</a>
+                    <a href="#" onclick="showView('view-insight-2')">Insights (Article)</a>
+                    <a href="#" onclick="showView('view-insight-4')">Insights (Snap)</a>
+                    <a href="#" onclick="showView('view-insight-5')">Insights (Full)</a>
+                    <a href="#" onclick="showView('view-insight-6')">Insights (Dark)</a>
+                    <a href="#" onclick="showView('view-insight-7')">Insights (Light)</a>
+                    <a href="#" onclick="showView('view-insight-8')">Insights (Editorial)</a>
+                </div>
+            </li>
+            <li><a href="#" onclick="showView('view-insight-3')">Insights (Full Site)</a></li>
             <li><a href="#">Articles</a></li>
         </ul>
 
@@ -1219,10 +1371,8 @@
                     We convert ambition into focused action. Transforming Corporate Social Investment frameworks across
                     the continent.
                 </p>
-                <a href="#" class="btn btn-primary">
-                    Read the article
-                    <div class="icon-circle"><i class="fas fa-arrow-right" style="color: #000; font-size: 12px;"></i>
-                    </div>
+                <a href="#" onclick="showView('view-insight-1')" class="animated-line-link">
+                    Read the article <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
         </div>
@@ -1234,17 +1384,15 @@
                     alt="CSI Magazine">
                 <div class="hero-overlay"></div>
             </div>
-            <div class="hero-title-wrap" style="margin-left: auto; text-align: right;">
+            <div class="hero-title-wrap" style="margin-right: auto;">
                 <div class="kicker-pill">CSI Magazine</div>
                 <h1>Dismantling Inequality.<br><span class="italic-accent">A 25-Year Vision</span> in Motion.</h1>
-                <p style="font-size: 20px; color: var(--text-muted); max-width: 600px; margin: 0 0 40px auto;">
+                <p style="font-size: 20px; color: var(--text-muted); max-width: 600px; margin: 0 0 40px 0;">
                     We convert ambition into focused action. Transforming Corporate Social Investment frameworks across
                     the continent.
                 </p>
-                <a href="#" class="btn btn-primary">
-                    Discover our methodology
-                    <div class="icon-circle"><i class="fas fa-arrow-right" style="color: #000; font-size: 12px;"></i>
-                    </div>
+                <a href="#" onclick="showView('view-insight-6')" class="animated-line-link">
+                    Discover our methodology <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
         </div>
@@ -1252,7 +1400,7 @@
         <!-- Slide 3 (Left Aligned) -->
         <div class="hero-slide">
             <div class="hero-slide-bg">
-                <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-11-scaled.jpg"
+                <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=1920&h=1000&fit=crop"
                     alt="CSI Awards">
                 <div class="hero-overlay"></div>
             </div>
@@ -1263,10 +1411,8 @@
                 <p style="font-size: 20px; color: var(--text-muted); max-width: 600px; margin: 0 0 40px 0;">
                     A deep dive into the true cost of systemic barriers and the solutions we can build today.
                 </p>
-                <a href="#" class="btn btn-primary">
-                    Read more
-                    <div class="icon-circle"><i class="fas fa-arrow-right" style="color: #000; font-size: 12px;"></i>
-                    </div>
+                <a href="#" onclick="showView('view-insight-6')" class="animated-line-link">
+                    Read more <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
         </div>
@@ -1274,20 +1420,20 @@
         <!-- Slide 4 (Right Aligned) -->
         <div class="hero-slide">
             <div class="hero-slide-bg">
-                <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-12-scaled.jpg"
-                    alt="Media">
+                <video autoplay muted loop playsinline preload="auto"
+                    style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+                    <source src="https://raw.githubusercontent.com/vandermerwejack611-cloud/videos/main/Wan_Video_Generate_hero%20section%20aimation%20so%20maybe%20just%20make%20hiw%20turn%20to%20thfront%20.mp4" type="video/mp4">
+                </video>
                 <div class="hero-overlay"></div>
             </div>
-            <div class="hero-title-wrap" style="margin-left: auto; text-align: right;">
+            <div class="hero-title-wrap" style="margin-right: auto;">
                 <div class="kicker-pill">Media</div>
                 <h1>Conversations That<br><span class="italic-accent">Shape The Future</span> of CSI.</h1>
-                <p style="font-size: 20px; color: var(--text-muted); max-width: 600px; margin: 0 0 40px auto;">
+                <p style="font-size: 20px; color: var(--text-muted); max-width: 600px; margin: 0 0 40px 0;">
                     Listen to insights and discussions with the brightest minds across the African continent.
                 </p>
-                <a href="#" class="btn btn-primary">
-                    Listen Now
-                    <div class="icon-circle"><i class="fas fa-arrow-right" style="color: #000; font-size: 12px;"></i>
-                    </div>
+                <a href="#" class="animated-line-link">
+                    Listen Now <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
         </div>
@@ -1316,18 +1462,25 @@
     <!-- Editorial Split -->
     <section class="editorial-split" id="editorialSection">
         <!-- Background Video Elements -->
-        <iframe id="sectionBgVideo" class="section-bg-video" src="" allow="autoplay; fullscreen" allowfullscreen
-            frameborder="0"></iframe>
+        <video id="sectionBgVideo" class="section-bg-video" playsinline loop
+            style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 0.6s ease; z-index: 0; pointer-events: none;"></video>
         <div class="section-bg-overlay"></div>
 
+        <!-- Volume Control (Hidden by default) -->
+        <div id="videoVolumeControl"
+            style="display: none; position: absolute; bottom: 40px; right: 40px; align-items: center; gap: 15px; background: rgba(0,0,0,0.6); padding: 12px 20px; border-radius: 50px; backdrop-filter: blur(10px); color: #fff; z-index: 100;">
+            <i class="fas fa-volume-up" id="volumeIcon"></i>
+            <input type="range" id="videoVolumeRange" min="0" max="1" step="0.05" value="1"
+                style="width: 100px; accent-color: var(--accent-lime); cursor: pointer;">
+        </div>
+
         <div class="editorial-content reveal">
-            <h2
-                style="font-family: var(--font-sans); font-size: clamp(24px, 3vw, 36px); font-weight: 700; line-height: 1.3; color: var(--text-main); margin-bottom: 40px; letter-spacing: -0.5px; transition: color 0.5s;">
-                Committed to dismantling inequality and driving measurable, noticeable change in South Africa over the
-                next 25 years through transformative Corporate Social Investment.
+            <h2 id="editorialHeading"
+                style="font-family: var(--font-sans); font-size: clamp(32px, 5vw, 64px); font-weight: 800; line-height: 1.1; color: var(--text-main); margin-bottom: 40px; letter-spacing: -2px; transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1); transform-origin: left;">
+                Committed to dismantling inequality and driving measurable, noticeable change.
             </h2>
-            <a href="#"
-                style="font-family: var(--font-sans); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent-lime); text-decoration: none; display: inline-flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--accent-lime); padding-bottom: 4px; transition: color 0.5s;">
+
+            <a href="#" class="animated-line-link" style="color: var(--accent-lime);">
                 MORE ABOUT THE FORUM <i class="fas fa-arrow-right"></i>
             </a>
         </div>
@@ -1394,8 +1547,7 @@
                                 <p>Founder, Green Impact SA</p>
                             </div>
                         </div>
-                        <a href="#"
-                            style="font-family: var(--font-sans); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent-lime); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; border-bottom: 1px solid var(--accent-lime); padding-bottom: 4px;">
+                        <a href="#" class="animated-line-link" style="color: var(--accent-lime); margin-top: 20px;">
                             Read the article <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
@@ -1415,8 +1567,7 @@
                                 <p>Director of Sustainability, TechAfrica</p>
                             </div>
                         </div>
-                        <a href="#"
-                            style="font-family: var(--font-sans); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent-lime); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; border-bottom: 1px solid var(--accent-lime); padding-bottom: 4px;">
+                        <a href="#" class="animated-line-link" style="color: var(--accent-lime); margin-top: 20px;">
                             Read the article <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
@@ -1435,8 +1586,7 @@
                                 <p>CEO, Pan-African Ventures</p>
                             </div>
                         </div>
-                        <a href="#"
-                            style="font-family: var(--font-sans); font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; color: var(--accent-lime); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; margin-top: 20px; border-bottom: 1px solid var(--accent-lime); padding-bottom: 4px;">
+                        <a href="#" class="animated-line-link" style="color: var(--accent-lime); margin-top: 20px;">
                             Read the article <i class="fas fa-arrow-right"></i>
                         </a>
                     </div>
@@ -1444,63 +1594,7 @@
             </div>
         </div>
 
-        <!-- Recent Blog Articles Section 01 -->
-        <div class="reveal" style="padding: 0 5%; margin-top: 120px; margin-bottom: 40px;">
-            <span class="kicker">Insights</span>
-            <h2><span
-                    style="font-family: var(--font-sans); font-size: 0.55em; font-weight: 700; color: var(--text-muted); vertical-align: super; margin-right: 10px; letter-spacing: 0;">01</span>Recent
-                <span class="italic-accent">blog</span> articles</h2>
-        </div>
 
-        <!-- Article Cards: Read the Article -->
-        <div class="articles-grid reveal" style="padding: 0 5%; margin-top: 0;">
-
-            <!-- Article 1 -->
-            <div class="article-card">
-                <div class="article-card-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&h=500&fit=crop"
-                        class="article-card-img" alt="Johan de Vries">
-                </div>
-                <div class="article-card-body">
-                    <span class="kicker" style="font-size: 11px; margin-bottom: 12px;">Green Impact SA</span>
-                    <h4>How Vision for 2052 Is Actively Being Built Today</h4>
-                    <p>Johan de Vries reflects on community investment strategies and how Simphiwe's roadmap is
-                        reshaping the industry from the ground up.</p>
-                    <a href="#" class="article-link">Read the article <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-
-            <!-- Article 2 -->
-            <div class="article-card">
-                <div class="article-card-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=500&fit=crop"
-                        class="article-card-img" alt="Sarah Nkosi">
-                </div>
-                <div class="article-card-body">
-                    <span class="kicker" style="font-size: 11px; margin-bottom: 12px;">TechAfrica</span>
-                    <h4>Connecting Strategy With Grassroots Impact</h4>
-                    <p>Sarah Nkosi on the systemic approach to solving inequality — and why clarity of thought is the
-                        most revolutionary tool in CSI.</p>
-                    <a href="#" class="article-link">Read the article <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-
-            <!-- Article 3 -->
-            <div class="article-card">
-                <div class="article-card-img-wrap">
-                    <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=500&fit=crop"
-                        class="article-card-img" alt="Michael Ndlovu">
-                </div>
-                <div class="article-card-body">
-                    <span class="kicker" style="font-size: 11px; margin-bottom: 12px;">Pan-African Ventures</span>
-                    <h4>How the Podcast Reshaped Our Board's ESG Approach</h4>
-                    <p>Michael Ndlovu shares how a deep dive into Africa's socio-economic realities transformed the way
-                        Pan-African Ventures reports on impact.</p>
-                    <a href="#" class="article-link">Read the article <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </div>
-
-        </div>
 
         <!-- Recent Blog Articles Section 02 -->
         <div class="reveal" style="padding: 0 5%; margin-top: 120px; margin-bottom: 40px;">
@@ -1517,45 +1611,42 @@
             <div class="blog-card-overlay">
                 <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&h=1000&fit=crop"
                     alt="Johan de Vries">
-                <div class="card-gradient"></div>
+                <div class="card-gradient" onclick="showView('view-temp-empty')" style="cursor: pointer;"></div>
                 <div class="card-content">
                     <h4>A management team is only as sharp as the chairman.</h4>
                     <p>Johan de Vries reflects on community investment strategies and Simphiwe's roadmap.</p>
+                    <a href="#" class="animated-line-link" style="color: var(--accent-lime); margin-top: 20px;">
+                        Read article <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
-                <a href="#" class="read-article-link">
-                    <span>Read article</span>
-                    <div class="arrow-circle"><i class="fas fa-arrow-right"></i></div>
-                </a>
             </div>
 
             <!-- Article 2 -->
             <div class="blog-card-overlay">
                 <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=1000&fit=crop"
                     alt="Sarah Nkosi">
-                <div class="card-gradient"></div>
+                <div class="card-gradient" onclick="showView('view-temp-empty')" style="cursor: pointer;"></div>
                 <div class="card-content">
                     <h4>Without bilateral meetings, there is no insight into the work.</h4>
                     <p>Sarah Nkosi on the systemic approach to solving inequality through dialogue.</p>
+                    <a href="#" class="animated-line-link" style="color: var(--accent-lime); margin-top: 20px;">
+                        Read article <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
-                <a href="#" class="read-article-link">
-                    <span>Read article</span>
-                    <div class="arrow-circle"><i class="fas fa-arrow-right"></i></div>
-                </a>
             </div>
 
             <!-- Article 3 -->
             <div class="blog-card-overlay">
                 <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1000&fit=crop"
                     alt="Michael Ndlovu">
-                <div class="card-gradient"></div>
+                <div class="card-gradient" onclick="showView('view-temp-empty')" style="cursor: pointer;"></div>
                 <div class="card-content">
                     <h4>Strategy is the link between goals and concrete results.</h4>
                     <p>Michael Ndlovu shares how ESG reporting transformations drive real-world outcomes.</p>
+                    <a href="#" class="animated-line-link" style="color: var(--accent-lime); margin-top: 20px;">
+                        Read article <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
-                <a href="#" class="read-article-link">
-                    <span>Read article</span>
-                    <div class="arrow-circle"><i class="fas fa-arrow-right"></i></div>
-                </a>
             </div>
 
         </div>
@@ -1575,45 +1666,42 @@
             <div class="blog-card-overlay-alt">
                 <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=800&h=1000&fit=crop"
                     alt="Johan de Vries">
-                <div class="card-gradient"></div>
+                <div class="card-gradient" onclick="showView('view-temp-empty')" style="cursor: pointer;"></div>
                 <div class="card-content">
                     <h4>A management team is only as sharp as the chairman.</h4>
                     <p>Johan de Vries reflects on community investment strategies and Simphiwe's roadmap.</p>
+                    <a href="#" class="animated-line-link" style="color: var(--accent-lime); margin-top: 20px;">
+                        Read article <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
-                <a href="#" class="read-article-link">
-                    <span>Read article</span>
-                    <div class="arrow-circle"><i class="fas fa-arrow-right"></i></div>
-                </a>
             </div>
 
             <!-- Article 2 -->
             <div class="blog-card-overlay-alt">
                 <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&h=1000&fit=crop"
                     alt="Sarah Nkosi">
-                <div class="card-gradient"></div>
+                <div class="card-gradient" onclick="showView('view-temp-empty')" style="cursor: pointer;"></div>
                 <div class="card-content">
                     <h4>Without bilateral meetings, there is no insight into the work.</h4>
                     <p>Sarah Nkosi on the systemic approach to solving inequality through dialogue.</p>
+                    <a href="#" class="animated-line-link" style="color: var(--accent-lime); margin-top: 20px;">
+                        Read article <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
-                <a href="#" class="read-article-link">
-                    <span>Read article</span>
-                    <div class="arrow-circle"><i class="fas fa-arrow-right"></i></div>
-                </a>
             </div>
 
             <!-- Article 3 -->
             <div class="blog-card-overlay-alt">
                 <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&h=1000&fit=crop"
                     alt="Michael Ndlovu">
-                <div class="card-gradient"></div>
+                <div class="card-gradient" onclick="showView('view-temp-empty')" style="cursor: pointer;"></div>
                 <div class="card-content">
                     <h4>Strategy is the link between goals and concrete results.</h4>
                     <p>Michael Ndlovu shares how ESG reporting transformations drive real-world outcomes.</p>
+                    <a href="#" class="animated-line-link" style="color: var(--accent-lime); margin-top: 20px;">
+                        Read article <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
-                <a href="#" class="read-article-link">
-                    <span>Read article</span>
-                    <div class="arrow-circle"><i class="fas fa-arrow-right"></i></div>
-                </a>
             </div>
 
         </div>
@@ -1631,9 +1719,9 @@
 
             <!-- Article 1 -->
             <div class="blog-card-overlay-alt">
-                <img src="https://images.unsplash.com/photo-1454165833767-1319d3bb763c?w=800&h=1000&fit=crop"
+                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&h=1000&fit=crop"
                     alt="Management">
-                <div class="card-gradient"></div>
+                <div class="card-gradient" onclick="showView('view-temp-empty')" style="cursor: pointer;"></div>
                 <div class="card-content">
                     <div class="author-thumb">
                         <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop"
@@ -1641,18 +1729,17 @@
                     </div>
                     <h4>A management team is only as sharp as the chairman.</h4>
                     <p>Johan de Vries on leadership dynamics in CSI initiatives.</p>
+                    <a href="#" class="animated-line-link" style="color: var(--accent-lime); margin-top: 20px;">
+                        Read article <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
-                <a href="#" class="read-article-link">
-                    <span>Read article</span>
-                    <div class="arrow-circle"><i class="fas fa-arrow-right"></i></div>
-                </a>
             </div>
 
             <!-- Article 2 -->
             <div class="blog-card-overlay-alt">
                 <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=800&h=1000&fit=crop"
                     alt="Bilateral Meetings">
-                <div class="card-gradient"></div>
+                <div class="card-gradient" onclick="showView('view-temp-empty')" style="cursor: pointer;"></div>
                 <div class="card-content">
                     <div class="author-thumb">
                         <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&h=100&fit=crop"
@@ -1660,18 +1747,17 @@
                     </div>
                     <h4>Without bilateral meetings, there is no insight into the work.</h4>
                     <p>Sarah Nkosi exploring the necessity of cross-sector dialogue.</p>
+                    <a href="#" class="animated-line-link" style="color: var(--accent-lime); margin-top: 20px;">
+                        Read article <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
-                <a href="#" class="read-article-link">
-                    <span>Read article</span>
-                    <div class="arrow-circle"><i class="fas fa-arrow-right"></i></div>
-                </a>
             </div>
 
             <!-- Article 3 -->
             <div class="blog-card-overlay-alt">
                 <img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&h=1000&fit=crop"
                     alt="Strategy">
-                <div class="card-gradient"></div>
+                <div class="card-gradient" onclick="showView('view-temp-empty')" style="cursor: pointer;"></div>
                 <div class="card-content">
                     <div class="author-thumb">
                         <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&h=100&fit=crop"
@@ -1679,15 +1765,69 @@
                     </div>
                     <h4>Strategy is the link between goals and concrete results.</h4>
                     <p>Michael Ndlovu on bridging the gap in ESG performance.</p>
+                    <a href="#" class="animated-line-link" style="color: var(--accent-lime); margin-top: 20px;">
+                        Read article <i class="fas fa-arrow-right"></i>
+                    </a>
                 </div>
-                <a href="#" class="read-article-link">
-                    <span>Read article</span>
-                    <div class="arrow-circle"><i class="fas fa-arrow-right"></i></div>
-                </a>
             </div>
 
         </div>
     </section>
+
+    <!-- Recent Blog Articles Section 05 -->
+    <div class="reveal" style="padding: 0 5%; margin-top: 120px; margin-bottom: 40px;">
+        <span class="kicker">Insights</span>
+        <h2><span
+                style="font-family: var(--font-sans); font-size: 0.55em; font-weight: 700; color: var(--text-muted); vertical-align: super; margin-right: 10px; letter-spacing: 0;">05</span>Recent
+            <span class="italic-accent">blog</span> articles</h2>
+    </div>
+
+    <!-- Article Cards: Section 05 (New Stories) -->
+    <div class="blog-overlay-grid reveal" style="margin-bottom: 120px;">
+
+        <!-- Article 1 -->
+        <div class="blog-card-overlay">
+            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&h=1000&fit=crop"
+                alt="Leadership">
+            <div class="card-gradient" onclick="showView('view-temp-empty')" style="cursor: pointer;"></div>
+            <div class="card-content">
+                <h4>Leadership in the Age of Artificial Intelligence.</h4>
+                <p>How African executives are leveraging AI to bridge the technology gap.</p>
+                <a href="#" class="animated-line-link" style="color: var(--accent-lime); margin-top: 20px;">
+                    Read article <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Article 2 -->
+        <div class="blog-card-overlay">
+            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800&h=1000&fit=crop"
+                alt="Collaboration">
+            <div class="card-gradient" onclick="showView('view-temp-empty')" style="cursor: pointer;"></div>
+            <div class="card-content">
+                <h4>The Power of Cross-Border Philanthropy.</h4>
+                <p>Developing unified CSI frameworks for the SADC region's unique challenges.</p>
+                <a href="#" class="animated-line-link" style="color: var(--accent-lime); margin-top: 20px;">
+                    Read article <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Article 3 -->
+        <div class="blog-card-overlay">
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&h=1000&fit=crop"
+                alt="Strategy">
+            <div class="card-gradient" onclick="showView('view-temp-empty')" style="cursor: pointer;"></div>
+            <div class="card-content">
+                <h4>Sustainable Mining: Beyond the Social License.</h4>
+                <p>Rethinking community engagement in the extractive industries for long-term impact.</p>
+                <a href="#" class="animated-line-link" style="color: var(--accent-lime); margin-top: 20px;">
+                    Read article <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+
+    </div>
 
     <!-- Massive CTA Footer -->
     <section class="massive-cta reveal">
@@ -1697,6 +1837,152 @@
             Book a Consultation
             <div class="icon-circle"><i class="fas fa-arrow-right" style="color: #000;"></i></div>
         </a>
+    </section>
+
+    <!-- Podcasts Section -->
+    <section class="podcasts-section reveal" style="padding: 100px 5%; background: var(--bg-card); margin: 60px 0; position: relative;">
+        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 4px; background: linear-gradient(90deg, transparent, var(--accent-lime), transparent);"></div>
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px;">
+                <div>
+                    <span class="kicker">Audio Experience</span>
+                    <h2 style="font-size: clamp(36px, 5vw, 56px); margin-bottom: 0;"><span class="italic-accent">Podcast</span> Series</h2>
+                </div>
+                <a href="#" class="animated-line-link" style="color: var(--accent-lime);">
+                    View all episodes <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;">
+                <!-- Podcast Card 1 -->
+                <div class="podcast-card" style="background: #fff; border-radius: 24px; overflow: hidden; border: 1px solid var(--border-light); transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s ease; position: relative;">
+                    <div class="podcast-thumb" style="position: relative; aspect-ratio: 16/9; background: #111; overflow: hidden;">
+                        <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-12-scaled.jpg" alt="Podcast" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: transform 0.6s ease, filter 0.4s ease; filter: grayscale(30%);">
+                        <div class="podcast-overlay" style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(196, 216, 46, 0.15) 0%, transparent 60%); transition: opacity 0.4s ease;"></div>
+                        <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
+                            <div class="play-btn" style="width: 70px; height: 70px; background: var(--accent-lime); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease; box-shadow: 0 10px 30px rgba(196, 216, 46, 0.3);">
+                                <i class="fas fa-play" style="color: #000; margin-left: 4px;"></i>
+                            </div>
+                        </div>
+                        <div style="position: absolute; top: 16px; left: 16px; background: var(--accent-lime); color: #000; padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">Episode 01</div>
+                        <div style="position: absolute; bottom: 16px; right: 16px; background: rgba(0,0,0,0.8); color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; backdrop-filter: blur(5px);">32:15</div>
+                    </div>
+                    <div style="padding: 28px; position: relative;">
+                        <div style="position: absolute; top: -3px; left: 28px; width: 60px; height: 4px; background: var(--accent-lime); border-radius: 4px;"></div>
+                        <h4 style="font-family: var(--font-serif); font-size: 22px; margin-bottom: 12px; line-height: 1.3; border-left: 3px solid var(--accent-lime); padding-left: 16px;">Conversations That Shape The Future of Africa</h4>
+                        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">Join Simphiwe Mtetwa as he discusses systemic change with the continent's most influential voices.</p>
+                    </div>
+                </div>
+
+                <!-- Podcast Card 2 -->
+                <div class="podcast-card" style="background: #fff; border-radius: 24px; overflow: hidden; border: 1px solid var(--border-light); transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s ease; position: relative;">
+                    <div class="podcast-thumb" style="position: relative; aspect-ratio: 16/9; background: #111; overflow: hidden;">
+                        <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-10-scaled.jpg" alt="Podcast" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: transform 0.6s ease, filter 0.4s ease; filter: grayscale(30%);">
+                        <div class="podcast-overlay" style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(196, 216, 46, 0.15) 0%, transparent 60%); transition: opacity 0.4s ease;"></div>
+                        <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
+                            <div class="play-btn" style="width: 70px; height: 70px; background: var(--accent-lime); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease; box-shadow: 0 10px 30px rgba(196, 216, 46, 0.3);">
+                                <i class="fas fa-play" style="color: #000; margin-left: 4px;"></i>
+                            </div>
+                        </div>
+                        <div style="position: absolute; top: 16px; left: 16px; background: var(--accent-lime); color: #000; padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">Episode 02</div>
+                        <div style="position: absolute; bottom: 16px; right: 16px; background: rgba(0,0,0,0.8); color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; backdrop-filter: blur(5px);">28:42</div>
+                    </div>
+                    <div style="padding: 28px; position: relative;">
+                        <div style="position: absolute; top: -3px; left: 28px; width: 60px; height: 4px; background: var(--accent-lime); border-radius: 4px;"></div>
+                        <h4 style="font-family: var(--font-serif); font-size: 22px; margin-bottom: 12px; line-height: 1.3; border-left: 3px solid var(--accent-lime); padding-left: 16px;">Dismantling Inequality: A Framework for Change</h4>
+                        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">A deep dive into the socio-economic realities of Africa and what we can do to drive measurable change.</p>
+                    </div>
+                </div>
+
+                <!-- Podcast Card 3 -->
+                <div class="podcast-card" style="background: #fff; border-radius: 24px; overflow: hidden; border: 1px solid var(--border-light); transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s ease; position: relative;">
+                    <div class="podcast-thumb" style="position: relative; aspect-ratio: 16/9; background: #111; overflow: hidden;">
+                        <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-11-scaled.jpg" alt="Podcast" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: transform 0.6s ease, filter 0.4s ease; filter: grayscale(30%);">
+                        <div class="podcast-overlay" style="position: absolute; inset: 0; background: linear-gradient(135deg, rgba(196, 216, 46, 0.15) 0%, transparent 60%); transition: opacity 0.4s ease;"></div>
+                        <div style="position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;">
+                            <div class="play-btn" style="width: 70px; height: 70px; background: var(--accent-lime); border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease; box-shadow: 0 10px 30px rgba(196, 216, 46, 0.3);">
+                                <i class="fas fa-play" style="color: #000; margin-left: 4px;"></i>
+                            </div>
+                        </div>
+                        <div style="position: absolute; top: 16px; left: 16px; background: var(--accent-lime); color: #000; padding: 6px 14px; border-radius: 20px; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;">Episode 03</div>
+                        <div style="position: absolute; bottom: 16px; right: 16px; background: rgba(0,0,0,0.8); color: #fff; padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: 700; backdrop-filter: blur(5px);">45:18</div>
+                    </div>
+                    <div style="padding: 28px; position: relative;">
+                        <div style="position: absolute; top: -3px; left: 28px; width: 60px; height: 4px; background: var(--accent-lime); border-radius: 4px;"></div>
+                        <h4 style="font-family: var(--font-serif); font-size: 22px; margin-bottom: 12px; line-height: 1.3; border-left: 3px solid var(--accent-lime); padding-left: 16px;">The Future of Corporate Social Investment</h4>
+                        <p style="font-size: 14px; color: var(--text-muted); line-height: 1.6;">Exploring how corporate social investment is evolving to meet the demands of a changing world.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Podcasts Section (02) - New Overlay Design -->
+    <section class="podcasts-section reveal" style="padding: 100px 5%; margin: 60px 0; position: relative;">
+        <div style="max-width: 1400px; margin: 0 auto;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px;">
+                <div>
+                    <span class="kicker">Audio Experience</span>
+                    <h2 style="font-size: clamp(36px, 5vw, 56px); margin-bottom: 0;"><span class="italic-accent">Podcast</span> Series (02)</h2>
+                </div>
+                <a href="#" class="animated-line-link" style="color: var(--accent-lime);">
+                    View all episodes <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+
+            <div class="blog-overlay-grid">
+                <!-- Podcast 1 -->
+                <div class="blog-card-overlay-alt">
+                    <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-12-scaled.jpg" alt="Podcast">
+                    <div class="card-gradient" onclick="showView('view-podcast-01')" style="cursor: pointer;"></div>
+                    <div class="card-content">
+                        <div style="position: absolute; top: 20px; right: 20px; background: var(--accent-lime); color: #000; padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: 800; z-index: 10;">32:15</div>
+                        <div class="author-thumb" style="margin-bottom: 15px;">
+                            <img src="https://secure.gravatar.com/avatar/5c4f7d314b1333a63f1f505274fed38df3f9317a1cfd3722aba48a88a738a663?s=96&d=mm&r=g" alt="Simphiwe">
+                        </div>
+                        <h4>Conversations That Shape The Future of Africa</h4>
+                        <p>Simphiwe Mtetwa discusses systemic change with influential voices.</p>
+                        <a href="#" class="animated-line-link" style="color: var(--accent-lime); margin-top: 20px;">
+                            Listen now <i class="fas fa-play"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Podcast 2 -->
+                <div class="blog-card-overlay-alt">
+                    <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-10-scaled.jpg" alt="Podcast">
+                    <div class="card-gradient" onclick="showView('view-podcast-02')" style="cursor: pointer;"></div>
+                    <div class="card-content">
+                        <div style="position: absolute; top: 20px; right: 20px; background: var(--accent-lime); color: #000; padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: 800; z-index: 10;">28:42</div>
+                        <div class="author-thumb" style="margin-bottom: 15px;">
+                            <img src="https://secure.gravatar.com/avatar/5c4f7d314b1333a63f1f505274fed38df3f9317a1cfd3722aba48a88a738a663?s=96&d=mm&r=g" alt="Simphiwe">
+                        </div>
+                        <h4>Dismantling Inequality: A Framework for Change</h4>
+                        <p>A deep dive into socio-economic realities and measurable change.</p>
+                        <a href="#" class="animated-line-link" style="color: var(--accent-lime); margin-top: 20px;">
+                            Listen now <i class="fas fa-play"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Podcast 3 -->
+                <div class="blog-card-overlay-alt">
+                    <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-11-scaled.jpg" alt="Podcast">
+                    <div class="card-gradient" onclick="showView('view-podcast-03')" style="cursor: pointer;"></div>
+                    <div class="card-content">
+                        <div style="position: absolute; top: 20px; right: 20px; background: var(--accent-lime); color: #000; padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: 800; z-index: 10;">45:18</div>
+                        <div class="author-thumb" style="margin-bottom: 15px;">
+                            <img src="https://secure.gravatar.com/avatar/5c4f7d314b1333a63f1f505274fed38df3f9317a1cfd3722aba48a88a738a663?s=96&d=mm&r=g" alt="Simphiwe">
+                        </div>
+                        <h4>The Future of Corporate Social Investment</h4>
+                        <p>Exploring how CSI is evolving to meet modern demands.</p>
+                        <a href="#" class="animated-line-link" style="color: var(--accent-lime); margin-top: 20px;">
+                            Listen now <i class="fas fa-play"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
     <div class="reveal" style="text-align: center; margin-top: 150px; margin-bottom: 20px;">
@@ -1771,69 +2057,7 @@
         </div>
     </section>
 
-    <!-- Our Impact Section 2 -->
-    <section class="impact-section" id="impactSection2">
-        <div class="impact-header reveal">
-            <span class="kicker">CSI In Action</span>
-            <h2><span
-                    style="font-family: var(--font-sans); font-size: 0.55em; font-weight: 700; color: var(--text-muted); vertical-align: super; margin-right: 10px; letter-spacing: 0;">02</span>Driving
-                <span class="italic-accent">Systemic</span> Change</h2>
-            <p>From education to economic empowerment — real programmes, real outcomes, real impact across Africa.</p>
-        </div>
 
-        <div class="impact-grid">
-            <!-- Top Left Card -->
-            <div class="impact-card reveal">
-                <img src="https://images.unsplash.com/photo-1509099836639-18ba1795216d?w=800&h=600&fit=crop"
-                    alt="Youth Skills Programme">
-                <div class="impact-card-bottom">
-                    <h3>Youth Skills Programme</h3>
-                    <p>Equipping young South Africans with vocational skills and entrepreneurship training to break the
-                        cycle of unemployment.</p>
-                </div>
-                <div class="impact-card-overlay">
-                    <span class="impact-tag">Education</span>
-                    <h3>Youth Skills Programme</h3>
-                    <p>Equipping young South Africans with vocational skills and entrepreneurship training to break the
-                        cycle of unemployment.</p>
-                </div>
-            </div>
-
-            <!-- Top Right Card -->
-            <div class="impact-card reveal" style="transition-delay: 0.15s;">
-                <img src="https://images.unsplash.com/photo-1531482615713-2afd69097998?w=800&h=600&fit=crop"
-                    alt="Women in Leadership">
-                <div class="impact-card-bottom">
-                    <h3>Women in Leadership</h3>
-                    <p>Championing gender equity in corporate boardrooms and community governance structures across the
-                        continent.</p>
-                </div>
-                <div class="impact-card-overlay">
-                    <span class="impact-tag">Equity</span>
-                    <h3>Women in Leadership</h3>
-                    <p>Championing gender equity in corporate boardrooms and community governance structures across the
-                        continent.</p>
-                </div>
-            </div>
-
-            <!-- Bottom Wide Card -->
-            <div class="impact-card wide reveal" style="transition-delay: 0.3s;">
-                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&h=600&fit=crop"
-                    alt="Corporate Investment Forum">
-                <div class="impact-card-bottom">
-                    <h3>Corporate Investment Forum</h3>
-                    <p>Bringing together Africa's top corporations to align CSI strategies with the continent's most
-                        pressing social challenges.</p>
-                </div>
-                <div class="impact-card-overlay">
-                    <span class="impact-tag">Forum</span>
-                    <h3>Corporate Investment Forum</h3>
-                    <p>Bringing together Africa's top corporations to align CSI strategies with the continent's most
-                        pressing social challenges.</p>
-                </div>
-            </div>
-        </div>
-    </section>
 
     <!-- Our Impact Section 3 -->
     <section class="impact-section" id="impactSection3" style="padding-top: 0;">
@@ -2028,7 +2252,7 @@
     
 </div>
 <div id="view-insight-3" class="spa-view" style="display:none;">
-
+    <main class="article-v3-wrapper">
         <!-- Hero Section -->
         <section class="hero-v3 reveal">
             <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-12-scaled.jpg" alt="Article Image">
@@ -2048,9 +2272,10 @@
         <!-- Main Content -->
         <div class="content-card-v3 reveal">
             <div class="article-grid-v3">
-                <aside class="article-sidebar">
-                    <div class="sidebar-meta">
-                        <span>Listen to the podcast</span>
+                <!-- Meta Info (Audio & Themes) now at the top -->
+                <div class="article-top-meta" style="display: flex; justify-content: space-between; align-items: flex-start; padding-bottom: 40px; border-bottom: 1px solid #eee; margin-bottom: 60px; gap: 40px; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 300px;">
+                        <span style="display: block; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 12px;">Listen to this article</span>
                         <div class="audio-pill">
                             <i class="fas fa-headphones" style="font-size: 24px; color: var(--accent-lime);"></i>
                             <audio controls style="width: 100%;">
@@ -2058,11 +2283,11 @@
                             </audio>
                         </div>
                     </div>
-                    <div class="sidebar-meta" style="border-bottom:0;">
-                        <span>Key Themes</span>
-                        <p style="font-size: 14px; font-weight: 500;">Structural Inequality • Corporate Responsibility • South African History • Economic Reform</p>
+                    <div style="flex: 1; min-width: 300px;">
+                        <span style="display: block; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; color: var(--text-muted); margin-bottom: 12px;">Key Themes</span>
+                        <p style="font-size: 14px; font-weight: 500; color: var(--text-main); margin: 0;">Structural Inequality • Corporate Responsibility • South African History • Economic Reform</p>
                     </div>
-                </aside>
+                </div>
 
                 <article class="article-main-v3">
                     <p><strong style="font-family: var(--font-serif); font-size: 1.5em; color: var(--text-main);">T</strong>here is a detail from South Africa’s corporate history that deserves far greater attention than it receives — and it belongs, fittingly, at the beginning of this story. In the mid-1980s, as apartheid entered its final phase and pressure mounted both domestically and internationally, Anglo-American, the most powerful mining conglomerate in the country at the time, did not simply wait for history to unfold. It prepared for it. Under the leadership of its chairman Gavin Relly, and driven by executive Clem Sunter, the company developed a series of scenario-planning models that would later become widely known as the “High Road” and the “Low Road”.</p>
@@ -2082,10 +2307,7 @@
 
         <!-- Second Content Card -->
         <div class="content-card-v3 reveal">
-            <div class="article-grid-v3">
-                <div class="article-sidebar">
-                    <!-- Blank or metadata -->
-                </div>
+            <div class="article-grid-v3" style="grid-template-columns: 1fr;">
                 <article class="article-main-v3">
                     <p>It is an image that is difficult to shake: think about it, slaves seated at a table, negotiating with their masters. The force of that idea became clearer to me through an entirely ordinary, domestic experience. Recently, I had to carry out some maintenance on my house. There were cracked tiles, peeling paint, and a roof beginning to yield to the Johannesburg rains. I sat down and worked through the costs — tiles, waterproofing, sealant, labour — and arrived at a figure of roughly R10,000.</p>
 
@@ -2103,15 +2325,154 @@
         </div>
 
         <!-- Footer Bio Card -->
-        <section class="content-card-v3 reveal" style="background: var(--text-main); color: #fff;">
-            <div class="author-v3" style="flex-direction: column; text-align: center;">
-                <img src="https://secure.gravatar.com/avatar/5c4f7d314b1333a63f1f505274fed38df3f9317a1cfd3722aba48a88a738a663?s=140&d=mm&r=g" alt="Author" style="width: 140px; height: 140px;">
-                <h3 style="font-family: var(--font-serif); font-size: 32px; margin: 20px 0;">Simphiwe Mtetwa</h3>
-                <p style="max-width: 800px; font-size: 16px; opacity: 0.7;">Simphiwe Mtetwa is South Africa’s leading Corporate Social Responsibility news, media and publishing firm. We create content on social responsibility, helping government, corporates, consultants, NPOs and NGOs to reach their target markets through appropriate, targeted development news.</p>
+        <section class="content-card-v3 reveal" style="background: var(--text-main); color: #fff; border-top: none; position: relative; margin-top: 60px;">
+            <div style="position: absolute; top: 0; left: 0; right: 0; height: 6px; background: linear-gradient(90deg, var(--accent-lime), #8bc034, var(--accent-lime)); border-radius: var(--radius-large) var(--radius-large) 0 0;"></div>
+            <div class="author-v3" style="flex-direction: column; text-align: center; padding: 60px 20px;">
+                <img src="https://secure.gravatar.com/avatar/5c4f7d314b1333a63f1f505274fed38df3f9317a1cfd3722aba48a88a738a663?s=140&d=mm&r=g" alt="Author" style="width: 140px; height: 140px; border: 4px solid var(--accent-lime); border-radius: 50%; margin-bottom: 30px; object-fit: cover;">
+                <h3 style="font-family: var(--font-serif); font-size: 32px; margin: 20px 0; color: var(--accent-lime);">Simphiwe Mtetwa</h3>
+                <p style="max-width: 800px; font-size: 16px; opacity: 0.7; border-left: 4px solid var(--accent-lime); padding-left: 30px; text-align: left; margin: 20px auto; line-height: 1.6;">Simphiwe Mtetwa is South Africa’s leading Corporate Social Responsibility news, media and publishing firm. We create content on social responsibility, helping government, corporates, consultants, NPOs and NGOs to reach their target markets through appropriate, targeted development news.</p>
             </div>
         </section>
-    
+        <!-- Other Insights Grid -->
+        <section class="other-insights-v3 reveal">
+            <div style="max-width: 1400px; margin: 0 auto;">
+                <span class="kicker">More Articles</span>
+                <h2 style="font-family: var(--font-serif); font-size: 42px;">Other <span class="italic-accent">Insights</span></h2>
+                
+                <div class="insights-grid-v3">
+                    <!-- Card 1 -->
+                    <a href="#" class="insight-card-v3">
+                        <div class="insight-card-img">
+                            <img src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=600&fit=crop" alt="Sharp Meeting">
+                        </div>
+                        <div class="insight-card-content">
+                            <span>Sharp Meeting • April 16, 2026</span>
+                            <h3>An MT is only as sharp as the chairman</h3>
+                            <p>Exploring the critical role of leadership in executive management teams.</p>
+                        </div>
+                    </a>
+
+                    <!-- Card 2 -->
+                    <a href="#" class="insight-card-v3">
+                        <div class="insight-card-img">
+                            <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-12-scaled.jpg" alt="Inequality">
+                        </div>
+                        <div class="insight-card-content">
+                            <span>Inequality • April 15, 2026</span>
+                            <h3>Why Inequality Persists</h3>
+                            <p>A deep dive into the structural barriers of economic reform in South Africa.</p>
+                        </div>
+                    </a>
+
+                    <!-- Card 3 -->
+                    <a href="#" class="insight-card-v3">
+                        <div class="insight-card-img">
+                            <img src="https://cdn.prod.website-files.com/69e12ca9c69e68ea68efc7b7/69e12ca9c69e68ea68efcb82_Zonder%20bila%20geen%20zicht%20op%20het%20werk%20-%20bijgesneden.avif" alt="Insight">
+                        </div>
+                        <div class="insight-card-content">
+                            <span>Insight • March 5, 2026</span>
+                            <h3>Without bilas no view of the work</h3>
+                            <p>The importance of visibility and transparency in corporate development.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
 </div>
+
+<div id="view-insight-4" class="spa-view" style="display:none;">
+    <div class="snap-container">
+        <!-- Section 1: Hero -->
+        <section>
+            <div class="section-bg">
+                <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-12-scaled.jpg" alt="Hero">
+            </div>
+            <div class="overlay"></div>
+            <div class="content">
+                <span class="tag">Exclusive Insight</span>
+                <h1 style="font-size: clamp(40px, 8vw, 120px);">Why <span class="italic-accent" style="color: var(--accent-lime);">Inequality</span><br>Persists</h1>
+                <div class="author-info">
+                    <img src="https://secure.gravatar.com/avatar/5c4f7d314b1333a63f1f505274fed38df3f9317a1cfd3722aba48a88a738a663?s=96&d=mm&r=g" alt="Simphiwe">
+                    <p>By Simphiwe Mtetwa</p>
+                </div>
+            </div>
+            <div class="scroll-indicator"><i class="fas fa-chevron-down"></i></div>
+        </section>
+
+        <!-- Section 2: Intro & Audio -->
+        <section style="background: #111;">
+            <div class="content">
+                <h2 style="font-size: 48px;">The Calculus of <span class="italic-accent">Power</span></h2>
+                <p class="intro-text">In the mid-1980s, Anglo-American developed scenario models for South Africa’s future. Business had done its arithmetic long before the negotiations began. They calculated what would need to be conceded to preserve the system.</p>
+                
+                <div class="audio-wrapper">
+                    <i class="fas fa-play-circle" style="font-size: 40px; color: var(--accent-lime);"></i>
+                    <audio controls>
+                        <source src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-1.mp3" type="audio/mpeg">
+                    </audio>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: The Core Insight -->
+        <section style="background: #000;">
+            <div class="content">
+                <h2 class="quote-text">"Slaves made a deal with their <span class="italic-accent" style="color: var(--accent-lime);">masters</span>!"</h2>
+                <p style="margin-top: 40px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.4);">Steven Friedman</p>
+            </div>
+        </section>
+
+        <!-- Section 4: The Metaphor -->
+        <section>
+            <div class="section-bg">
+                <img src="https://images.unsplash.com/photo-1584622650111-993a426fbf0a?w=1600&h=1000&fit=crop" alt="Tiles" style="opacity: 0.3;">
+            </div>
+            <div class="content">
+                <h2 style="font-size: 48px;">The <span class="italic-accent">Renovation</span> Metaphor</h2>
+                <p class="intro-text">"I could afford R10,000 for house maintenance precisely because I had considerably more than R10,000. My willingness to spend rested on a quiet certainty: that doing so would not destabilise me."</p>
+                <p class="intro-text" style="margin-top: 30px;">This is how inequality was constructed—those who offered concessions ensured they would not threaten what they intended to keep.</p>
+            </div>
+        </section>
+
+        <!-- Section 5: The Conclusion -->
+        <section style="background: #111;">
+            <div class="content">
+                <h2 style="font-size: 48px;">Beyond the <span class="italic-accent">Tiles</span></h2>
+                <p class="intro-text" style="margin-bottom: 50px;">The challenge now is not simply to do more within the existing framework but to question the framework itself. The renovation goes far deeper than the tiles.</p>
+                
+                <div style="padding: 40px; border: 1px solid rgba(255,255,255,0.1); border-radius: 40px; background: rgba(255,255,255,0.02);">
+                    <img src="https://secure.gravatar.com/avatar/5c4f7d314b1333a63f1f505274fed38df3f9317a1cfd3722aba48a88a738a663?s=140&d=mm&r=g" alt="Simphiwe" style="width: 100px; border-radius: 50%; margin-bottom: 20px;">
+                    <h3 style="font-family: var(--font-serif); font-size: 28px;">Simphiwe Mtetwa</h3>
+                    <p style="font-size: 14px; opacity: 0.6; max-width: 600px; margin: 0 auto;">Leading the conversation on Corporate Social Responsibility in South Africa.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: More Insights -->
+        <section style="background: #000;">
+            <div class="content" style="max-width: 1400px;">
+                <h2 style="font-size: 48px; margin-bottom: 40px;">Discover <span class="italic-accent" style="color: var(--accent-lime);">More</span></h2>
+                
+                <div class="v4-grid">
+                    <a href="#" class="v4-card">
+                        <div class="v4-card-img"><img src="https://cdn.prod.website-files.com/69e12ca9c69e68ea68efc7b7/69e12ca9c69e68ea68efcb82_Zonder%20bila%20geen%20zicht%20op%20het%20werk%20-%20bijgesneden.avif" alt="Insight 1"></div>
+                        <div class="v4-card-info"><span>March 5, 2026</span><h3>Without bilas no view of the work</h3></div>
+                    </a>
+                    <a href="#" class="v4-card">
+                        <div class="v4-card-img"><img src="https://cdn.prod.website-files.com/69e12ca9c69e68ea68efc7b7/69e12ca9c69e68ea68efcbb8_bf5bc566e0213f5b083eae41b4d249e4.avif" alt="Insight 2"></div>
+                        <div class="v4-card-info"><span>January 29, 2026</span><h3>Say goodbye to the Polish Diet</h3></div>
+                    </a>
+                    <a href="#" class="v4-card">
+                        <div class="v4-card-img"><img src="https://cdn.prod.website-files.com/69e12ca9c69e68ea68efc7b7/69e12ca9c69e68ea68efcb81_985eeee20a2738cba702e73b4299beb6.avif" alt="Insight 3"></div>
+                        <div class="v4-card-info"><span>December 17, 2025</span><h3>Informal power: use that energy</h3></div>
+                    </a>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+
 <div id="view-insight-5" class="spa-view" style="display:none;">
 
             <!-- Edge-to-Edge Hero -->
@@ -2229,6 +2590,25 @@
 </div>
 <div id="view-insight-6" class="spa-view" style="display:none;">
 
+    <section class="hero-v6">
+        <div class="hero-v6-image">
+            <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-10-scaled.jpg" alt="A 25-Year Vision in Motion">
+            <div class="hero-overlay" style="background: rgba(0,0,0,0.5);"></div>
+        </div>
+        <div class="hero-v6-content reveal">
+            <a href="#" onclick="showView('view-home')" class="back-link">
+                <i class="fas fa-arrow-left"></i> Back to overview
+            </a>
+            <span style="font-size: 12px; font-weight:800; color: var(--accent-lime); text-transform:uppercase; letter-spacing:3px; margin-bottom:20px; display:block;">Editor's View</span>
+            <h1>A 25-Year Vision in <span class="italic-accent">Motion</span></h1>
+            <p>Driving impact, enabling progress, and serving our communities with integrity.</p>
+            <a href="#insightContent" class="animated-line-link">
+                Read full article <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </section>
+
+    <main class="body-v6" id="insightContent">
         <aside class="sidebar-v6 reveal">
             <div class="sidebar-v6-item">
                 <span>By</span>
@@ -2236,61 +2616,86 @@
             </div>
             <div class="sidebar-v6-item">
                 <span>Date</span>
-                <strong style="font-size: 16px;">16 Apr 2026</strong>
+                <strong style="font-size: 16px;">13 Apr 2026</strong>
             </div>
             <div class="sidebar-v6-item" style="border:0;">
                 <span>Topic</span>
-                <strong style="font-size: 16px;">Leadership, CSI Strategy</strong>
+                <strong style="font-size: 16px;">Editor's View, CSI Indaba</strong>
             </div>
         </aside>
 
         <article class="main-text-v6 reveal">
-            <p>A chairman is not just a participant with a little more speaking time, but the one who determines whether the conversation is sharp enough to come to workable decisions. Because if the chairman does not ask for precision, no one will. And then a management team consisting of experienced, smart and responsible people can also come to weak decisions.</p>
+            <p>This closed session brings together confirmed and conditional speakers for the CSI Indaba, and marks a critical step in shaping the depth, direction and intellectual integrity of what we are building.</p>
 
-            <p>When assumptions, differences, doubts, alternatives and new perspectives remain unspoken and the chairman does nothing about them, ambiguities and dissatisfaction shift to after the meeting. And the haggling in the implementation begins.</p>
+            <p>From the outset, we have been intentional about what the CSI Indaba must be. Not simply another convening, but a platform that delivers clear value, sharp thinking, and meaningful contribution to the sector. The Intellectual Foundation sessions are a key part of that intent—ensuring that what is presented on stage aligns with what our delegates truly need from this space.</p>
 
-            <h4>Collegiality is not enough</h4>
-            <p>Chairing well is balancing between sharpness and collegiality. You want to give space to points of view and ideas, deal carefully with relationships and not intervene more heavily than necessary. But where collegiality overshoots into restraint, decisions become less sharp.</p>
+            <p>This does not exist in isolation. South Africa is home to many exceptional platforms advancing the CSI agenda, and we acknowledge the role they continue to play in driving growth and transformation across the sector. We have learned from them, and we respect the ground they have laid. At the same time, we are building something distinct.</p>
 
-            <blockquote>Many leaders are used to emphasizing giving space, connecting and equality. In meetings, that's not enough.</blockquote>
-
-            <h3>Where chairmen lose sharpness</h3>
-            <p>Chairmanship weakens as soon as the chairman spares the atmosphere too much, participates in the content or takes the participants through the conversation too quickly. Do you recognize these 3 'weak spots'?</p>
+            <p>I would like to extend my sincere thanks to every individual who submitted a speaker proposal earlier this year. Each 600-word submission represented not only an idea, but a commitment to shaping the future of CSI. We read every single one—personally, I read nearly all of them in full. That process was important to us. It was about recognising your voice, your thinking, and your contribution to this industry.</p>
 
             <ul class="list-v6">
-                <li>
-                    <strong>Maintaining harmony</strong>
-                    As soon as the conversation becomes more exciting, many chairmen tend to spare the relationship. They don't want to cause irritation, don't cut anyone off, don't ask too hard questions and don't exercise power too visibly.
-                </li>
-                <li>
-                    <strong>Participating too much on content</strong>
-                    Many leaders focus their attention in meetings primarily on dossiers, positions, risks and outcomes. But a chairman who moves on to arguing and persuading quickly loses control of the conversation.
-                </li>
-                <li>
-                    <strong>Wanting to speed up</strong>
-                    Decisions must go ahead, the meeting must not overrun. As a result, presidents are quick to opt for pace over precision. But a conversation is not productive because it moves quickly.
-                </li>
+                <li><strong>To those selected as speakers</strong> congratulations.</li>
+                <li><strong>To those in the conditional category</strong> congratulations.</li>
+                <li><strong>And to those not selected this year</strong> this is not a reflection of your work, but rather a reflection of a very deliberate and focused first-year agenda.</li>
             </ul>
 
-            <h3>What strong chairmen do well</h3>
-            <p>Good chairmanship does not require permanent rigid control or constant intervention. But if there is ambiguity, tension rises or a decision becomes difficult, the chairman must visibly take responsibility for this.</p>
+            <blockquote>Because the CSI Indaba is not a once-off event. It is a 25-year vision.</blockquote>
 
-            <ul class="list-v6">
-                <li>
-                    <strong>Distinguish what the participants have to do</strong>
-                    Not every item on the agenda requires the same attention and action. Sometimes participants have to explore, sometimes weigh, and sometimes decide. The chairman helps by making that distinction clear.
-                </li>
-                <li>
-                    <strong>Discuss where differences lie</strong>
-                    As soon as two people mean something else, it must become visible. Not smoothing out, but elaborating: Is this difference about content, feasibility, risk, pace, ownership or priority?
-                </li>
-                <li>
-                    <strong>Underline what has been decided</strong>
-                    Many decisions end with a feeling of agreement, but with too little guidance. Strong chairing therefore also requires a decisive conclusion. What is decided here? What exactly not?
-                </li>
-            </ul>
+            <p>What you are beginning to see now—monthly webinars, ongoing podcast conversations, curated engagements—is the start of a continuum. A build-up that is responsive to the sector, aligned to your needs, and designed to deepen the quality of discourse long before we gather in person.</p>
+
+            <p>We are also seeing new audiences emerge, alongside a broader and more diverse set of partners joining this journey. That, in itself, is a powerful signal of what is possible. Tickets are now at full price, and I encourage you to secure your place. Those who join us early—particularly in April—will gain access to our full webinar series at no additional cost. These sessions are not supplementary; they are foundational to the Indaba experience.</p>
+
+            <p>In the coming months, we will be joined by voices such as clinical psychologist Nomfundo Mogapi, among others, as we continue to build towards a programme that is both rigorous and relevant. As you consider your participation, I encourage you to be deliberate. Be clear about what you seek to gain, and equally clear about what you intend to contribute.</p>
+
+            <h3 style="margin-top: 60px;">Because ultimately, our collective responsibility is simple:</h3>
+            <p style="font-size: 24px; font-family: var(--font-serif); font-style: italic; color: #000; line-height: 1.4;">to drive impact, enable progress, and serve our communities with integrity—while ensuring that the work we do is recognised, valued, and properly compensated. This is the work. And this is just the beginning.</p>
         </article>
-    
+    </main>
+
+    <section class="more-insights-v6 reveal">
+        <div class="more-insights-inner">
+            <div class="sidebar-v6-item" style="border-bottom: 1px solid #eee; margin-bottom: 40px; padding-bottom: 20px;">
+                <span>Discover More</span>
+                <h2 style="font-family: var(--font-serif); font-size: 32px;">Other Insights</h2>
+            </div>
+            
+            <div class="insights-grid-v6">
+                <!-- Article 1 -->
+                <a href="#" class="insight-card-v6">
+                    <div class="insight-card-image">
+                        <img src="https://cdn.prod.website-files.com/69e12ca9c69e68ea68efc7b7/69e12ca9c69e68ea68efcb82_Zonder%20bila%20geen%20zicht%20op%20het%20werk%20-%20bijgesneden.avif" alt="Insight 1">
+                    </div>
+                    <div class="insight-card-content">
+                        <span>March 5, 2026</span>
+                        <h3>Without bilas no view of the work</h3>
+                    </div>
+                </a>
+
+                <!-- Article 2 -->
+                <a href="#" class="insight-card-v6">
+                    <div class="insight-card-image">
+                        <img src="https://cdn.prod.website-files.com/69e12ca9c69e68ea68efc7b7/69e12ca9c69e68ea68efcbb8_bf5bc566e0213f5b083eae41b4d249e4.avif" alt="Insight 2">
+                    </div>
+                    <div class="insight-card-content">
+                        <span>January 29, 2026</span>
+                        <h3>Say goodbye to the Polish Diet</h3>
+                    </div>
+                </a>
+
+                <!-- Article 3 -->
+                <a href="#" class="insight-card-v6">
+                    <div class="insight-card-image">
+                        <img src="https://cdn.prod.website-files.com/69e12ca9c69e68ea68efc7b7/69e12ca9c69e68ea68efcb81_985eeee20a2738cba702e73b4299beb6.avif" alt="Insight 3">
+                    </div>
+                    <div class="insight-card-content">
+                        <span>December 17, 2025</span>
+                        <h3>Informal power: use that energy</h3>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </section>
+
 </div>
 <div id="view-insight-7" class="spa-view" style="display:none;">
 
@@ -2464,6 +2869,646 @@
         </section>
     
 </div>
+<div id="view-podcast-01" class="spa-view" style="display:none;">
+    <main class="article-v3-wrapper" style="padding-top: 0;">
+        <!-- Immersive Hero - Homepage Style -->
+        <section class="hero-v3 reveal">
+            <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-10-scaled.jpg" alt="Episode Image">
+            <div class="hero-v3-overlay" style="padding: 100px 5%; background: linear-gradient(to bottom, transparent 20%, rgba(0,0,0,0.9) 100%);">
+                <span class="kicker" style="color: var(--accent-lime); border: none; margin-bottom: 20px;">Podcast Series (01)</span>
+                <h1 style="font-size: clamp(42px, 8vw, 86px); line-height: 1;"><span class="italic-accent">A 25-Year</span> Vision in Motion</h1>
+                
+                <div style="display: flex; align-items: center; gap: 25px; margin-top: 40px;">
+                    <div class="author-thumb" style="width: 60px; height: 60px; border: 2px solid var(--accent-lime);">
+                        <img src="https://secure.gravatar.com/avatar/5c4f7d314b1333a63f1f505274fed38df3f9317a1cfd3722aba48a88a738a663?s=96&d=mm&r=g" alt="Simphiwe Mtetwa">
+                    </div>
+                    <div>
+                        <strong style="font-size: 18px; color: #fff;">Simphiwe Mtetwa</strong><br>
+                        <span style="font-size: 14px; opacity: 0.6; color: #fff;">April 13, 2026 • 3 min read</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Floating Audio Player - Premium Design -->
+        <div class="reveal" style="max-width: 1400px; margin: -50px auto 100px; padding: 0 5%; position: relative; z-index: 20;">
+            <div style="background: #fff; padding: 40px; border-radius: 30px; box-shadow: 0 40px 100px rgba(0,0,0,0.1); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 40px;">
+                <div style="flex: 1; min-width: 300px;">
+                    <span class="kicker">Now Playing</span>
+                    <h2 style="font-family: var(--font-serif); font-size: 28px; margin: 5px 0 0;">Conversations That Shape The Future</h2>
+                </div>
+                <div style="flex: 1.5; min-width: 350px;">
+                    <div class="audio-pill" style="background: #f4f4f4; padding: 15px 30px; border-radius: 100px; display: flex; align-items: center; gap: 20px;">
+                        <div style="width: 45px; height: 45px; background: var(--accent-lime); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; font-size: 18px;">
+                            <i class="fas fa-play"></i>
+                        </div>
+                        <audio controls style="width: 100%;">
+                            <source src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-1.mp3" type="audio/mpeg">
+                        </audio>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <section class="content-card-v3 reveal" style="padding: 0 5%; margin-bottom: 120px;">
+            <div class="article-grid-v3" style="max-width: 1000px;">
+                <article class="article-main-v3">
+                    <p style="font-size: 22px; line-height: 1.6; color: var(--text-main); font-weight: 500; margin-bottom: 60px;">
+                        <span class="dropcap">W</span>hat an extraordinary month this has been. My team and I are convening a private session with <span class="italic-accent">Professor Steven Friedman</span> of the University of Johannesburg. This marks a critical step in shaping the intellectual integrity of what we are building.
+                    </p>
+
+                    <p>From the outset, we have been intentional about what the CSI Indaba must be. Not simply another convening, but a platform that delivers clear value, sharp thinking, and meaningful contribution to the sector. The Intellectual Foundation sessions are a key part of that intent—ensuring that what is presented on stage aligns with what our delegates truly need from this space.</p>
+
+                    <p>This does not exist in isolation. South Africa is home to many exceptional platforms advancing the CSI agenda, and we acknowledge the role they continue to play in driving growth and transformation across the sector. We have learned from them, and we respect the ground they have laid. At the same time, <span class="italic-accent">we are building something distinct</span>.</p>
+                </article>
+            </div>
+        </section>
+
+        <!-- Dynamic Section - Speaker Cards -->
+        <section class="reveal" style="padding: 120px 5%; background: #fcfcfc; border-top: 1px solid #eee; border-bottom: 1px solid #eee;">
+            <div style="max-width: 1400px; margin: 0 auto;">
+                <div style="margin-bottom: 80px;">
+                    <span class="kicker">Recognition & Intent</span>
+                    <h2 style="font-family: var(--font-serif); font-size: 48px;">Speakers & <span class="italic-accent">Contributors</span></h2>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                    <div style="padding: 40px; background: #fff; border-radius: 20px; border: 1px solid #eee; transition: transform 0.4s ease;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <span class="kicker" style="color: var(--accent-lime);">Selected</span>
+                        <h4 style="font-family: var(--font-serif); font-size: 24px; margin: 15px 0;">Primary Speakers</h4>
+                        <p style="font-size: 14px; color: var(--text-muted);">Congratulations to those selected to lead the discourse on our main stage.</p>
+                    </div>
+                    <div style="padding: 40px; background: #fff; border-radius: 20px; border: 1px solid #eee; transition: transform 0.4s ease;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <span class="kicker" style="color: #8bc034;">Conditional</span>
+                        <h4 style="font-family: var(--font-serif); font-size: 24px; margin: 15px 0;">Strategic Category</h4>
+                        <p style="font-size: 14px; color: var(--text-muted);">Confirmed participants shaping the depth and direction of our first-year agenda.</p>
+                    </div>
+                    <div style="padding: 40px; background: #fff; border-radius: 20px; border: 1px solid #eee; transition: transform 0.4s ease;" onmouseover="this.style.transform='translateY(-10px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <span class="kicker">Acknowledgment</span>
+                        <h4 style="font-family: var(--font-serif); font-size: 24px; margin: 15px 0;">All Applicants</h4>
+                        <p style="font-size: 14px; color: var(--text-muted);">Every submission represents a commitment to shaping the future of CSI in Africa.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impact Section - Dark Theme -->
+        <section class="reveal" style="background: var(--text-main); color: #fff; padding: 150px 5%; text-align: center; position: relative; overflow: hidden;">
+            <div style="position: absolute; top: -10%; right: -5%; font-size: 400px; color: rgba(255,255,255,0.03); font-family: var(--font-serif); font-weight: 800; pointer-events: none;">01</div>
+            <div style="max-width: 1000px; margin: 0 auto; position: relative; z-index: 2;">
+                <span class="kicker" style="color: var(--accent-lime); border: none;">The Vision</span>
+                <h2 style="font-family: var(--font-serif); font-size: clamp(40px, 6vw, 64px); line-height: 1.1; margin: 30px 0 60px;">The CSI Indaba is not a once-off event. It is a <span class="italic-accent" style="color: var(--accent-lime);">25-year vision</span>.</h2>
+                
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; text-align: left; margin-top: 100px;">
+                    <div>
+                        <p style="font-size: 16px; opacity: 0.8; line-height: 1.8;">What you are beginning to see now—webinars, podcast conversations, curated engagements—is the start of a continuum responsive to the sector.</p>
+                    </div>
+                    <div>
+                        <p style="font-size: 16px; opacity: 0.8; line-height: 1.8;">Our collective responsibility is simple: to drive impact, enable progress, and serve our communities with integrity.</p>
+                    </div>
+                </div>
+
+                <a href="#" onclick="showView('view-home')" class="animated-line-link" style="color: var(--accent-lime); margin-top: 80px; font-size: 14px;">
+                    Explore more episodes <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </section>
+
+        <!-- Author Footer Card -->
+        <section class="content-card-v3 reveal" style="padding: 120px 5%; border-top: none;">
+            <div class="article-grid-v3" style="max-width: 1200px;">
+                <div style="display: flex; gap: 60px; align-items: center; flex-wrap: wrap;">
+                    <div style="width: 180px; height: 180px; border-radius: 50%; overflow: hidden; border: 4px solid var(--accent-lime);">
+                        <img src="https://secure.gravatar.com/avatar/5c4f7d314b1333a63f1f505274fed38df3f9317a1cfd3722aba48a88a738a663?s=200&d=mm&r=g" alt="Simphiwe" style="width:100%; height:100%; object-fit:cover;">
+                    </div>
+                    <div style="flex: 1; min-width: 300px;">
+                        <h3 style="font-family: var(--font-serif); font-size: 36px; margin-bottom: 20px;">Simphiwe Mtetwa</h3>
+                        <p style="font-size: 16px; color: var(--text-muted); line-height: 1.6; max-width: 800px;">Leading the conversation on Corporate Social Responsibility in South Africa. We help government, corporates, and NGOs to reach their markets through appropriate, targeted development news.</p>
+                        <div style="margin-top: 30px; display: flex; gap: 30px;">
+                            <a href="#" class="animated-line-link" style="font-size: 12px; color: var(--text-main);">LinkedIn</a>
+                            <a href="#" class="animated-line-link" style="font-size: 12px; color: var(--text-main);">Spotify</a>
+                            <a href="#" class="animated-line-link" style="font-size: 12px; color: var(--text-main);">Twitter</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- More Podcasts Section - Rebranded Quick Links -->
+        <section class="podcasts-section reveal" style="padding: 120px 5%; background: #fff; position: relative; border-top: 1px solid #eee;">
+            <div style="max-width: 1400px; margin: 0 auto;">
+                <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px;">
+                    <div>
+                        <span class="kicker">Discovery</span>
+                        <h2 style="font-size: clamp(36px, 5vw, 56px); margin-bottom: 0;">More <span class="italic-accent">Podcasts</span></h2>
+                    </div>
+                    <a href="#" onclick="showView('view-home')" class="animated-line-link" style="color: var(--accent-lime);">
+                        View all episodes <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+
+                <div class="blog-overlay-grid">
+                    <!-- Podcast 1 -->
+                    <div class="blog-card-overlay-alt">
+                        <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-12-scaled.jpg" alt="Podcast">
+                        <div class="card-gradient" onclick="showView('view-podcast-01')" style="cursor: pointer;"></div>
+                        <div class="card-content">
+                            <div style="position: absolute; top: 20px; right: 20px; background: var(--accent-lime); color: #000; padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: 800; z-index: 10;">32:15</div>
+                            <div class="author-thumb" style="margin-bottom: 15px;">
+                                <img src="https://secure.gravatar.com/avatar/5c4f7d314b1333a63f1f505274fed38df3f9317a1cfd3722aba48a88a738a663?s=96&d=mm&r=g" alt="Simphiwe">
+                            </div>
+                            <h4>Conversations That Shape The Future of Africa</h4>
+                            <p>Simphiwe Mtetwa discusses systemic change with influential voices.</p>
+                            <a href="#" class="animated-line-link" style="color: var(--accent-lime); margin-top: 20px;">
+                                Listen now <i class="fas fa-play"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Podcast 2 -->
+                    <div class="blog-card-overlay-alt">
+                        <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-10-scaled.jpg" alt="Podcast">
+                        <div class="card-gradient" onclick="showView('view-podcast-02')" style="cursor: pointer;"></div>
+                        <div class="card-content">
+                            <div style="position: absolute; top: 20px; right: 20px; background: var(--accent-lime); color: #000; padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: 800; z-index: 10;">28:42</div>
+                            <div class="author-thumb" style="margin-bottom: 15px;">
+                                <img src="https://secure.gravatar.com/avatar/5c4f7d314b1333a63f1f505274fed38df3f9317a1cfd3722aba48a88a738a663?s=96&d=mm&r=g" alt="Simphiwe">
+                            </div>
+                            <h4>Dismantling Inequality: A Framework for Change</h4>
+                            <p>A deep dive into socio-economic realities and measurable change.</p>
+                            <a href="#" class="animated-line-link" style="color: var(--accent-lime); margin-top: 20px;">
+                                Listen now <i class="fas fa-play"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Podcast 3 -->
+                    <div class="blog-card-overlay-alt">
+                        <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-11-scaled.jpg" alt="Podcast">
+                        <div class="card-gradient" onclick="showView('view-podcast-03')" style="cursor: pointer;"></div>
+                        <div class="card-content">
+                            <div style="position: absolute; top: 20px; right: 20px; background: var(--accent-lime); color: #000; padding: 4px 12px; border-radius: 20px; font-size: 10px; font-weight: 800; z-index: 10;">45:18</div>
+                            <div class="author-thumb" style="margin-bottom: 15px;">
+                                <img src="https://secure.gravatar.com/avatar/5c4f7d314b1333a63f1f505274fed38df3f9317a1cfd3722aba48a88a738a663?s=96&d=mm&r=g" alt="Simphiwe">
+                            </div>
+                            <h4>The Future of Corporate Social Investment</h4>
+                            <p>Exploring how CSI is evolving to meet modern demands.</p>
+                            <a href="#" class="animated-line-link" style="color: var(--accent-lime); margin-top: 20px;">
+                                Listen now <i class="fas fa-play"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+</div>
+
+<div id="view-podcast-02" class="spa-view" style="display:none;">
+    <style>
+        #view-podcast-02 { 
+            background-color: #f5f5f5; 
+            padding: 0;
+            color: #000;
+        }
+        #view-podcast-02 .main-container {
+            display: flex;
+            height: 100vh;
+            overflow: hidden;
+        }
+        #view-podcast-02 .left-panel {
+            flex: 1;
+            background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 50%, #0f0f0f 100%);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            overflow: hidden;
+            height: 100%;
+        }
+        #view-podcast-02 .right-panel {
+            flex: 1;
+            background: #fff;
+            padding: 2.5rem 3rem;
+            overflow-y: auto;
+            height: 100%;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        #view-podcast-02 .right-panel::-webkit-scrollbar {
+            display: none;
+        }
+        #view-podcast-02 .hero-image-container {
+            position: relative;
+            width: 100%;
+            height: 55vh;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        #view-podcast-02 .hero-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+        }
+        #view-podcast-02 .mailchimp-logo {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            width: 60px;
+            height: 60px;
+            z-index: 10;
+        }
+        #view-podcast-02 .episode-label {
+            position: absolute;
+            bottom: 8rem;
+            left: 2rem;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #D4FF00;
+            line-height: 1;
+        }
+        #view-podcast-02 .topic-label {
+            position: absolute;
+            bottom: 4rem;
+            right: 2rem;
+            font-size: 3rem;
+            font-weight: 900;
+            color: #D4FF00;
+            line-height: 1;
+        }
+        #view-podcast-02 .brand-text-large {
+            position: absolute;
+            bottom: -2rem;
+            left: 50%;
+            transform: translateX(-50%) rotate(180deg);
+            font-size: 6rem;
+            font-weight: 900;
+            color: #D4FF00;
+            opacity: 0.9;
+            white-space: nowrap;
+            letter-spacing: -0.02em;
+        }
+        #view-podcast-02 .audio-player {
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 1.25rem 1.5rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        #view-podcast-02 .play-pause-btn {
+            width: 48px;
+            height: 48px;
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            border-radius: 50%;
+            color: #ffffff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+        #view-podcast-02 .player-info {
+            flex: 1;
+            min-width: 0;
+        }
+        #view-podcast-02 .player-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #ffffff;
+            margin-bottom: 0.35rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        #view-podcast-02 .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        #view-podcast-02 .progress-bar {
+            flex: 1;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 2px;
+            cursor: pointer;
+            position: relative;
+        }
+        #view-podcast-02 .progress-fill {
+            width: 49%;
+            height: 100%;
+            background: #D4FF00;
+            border-radius: 2px;
+        }
+        #view-podcast-02 .time-display {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.7);
+            font-variant-numeric: tabular-nums;
+            white-space: nowrap;
+        }
+        #view-podcast-02 .volume-btn {
+            width: 40px;
+            height: 40px;
+            background: none;
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            flex-shrink: 0;
+        }
+        #view-podcast-02 .show-info {
+            margin-top: auto;
+            padding-top: 2rem;
+        }
+        #view-podcast-02 .show-title {
+            font-size: 3.5rem;
+            font-weight: 400;
+            color: #ffffff;
+            margin-bottom: 0.75rem;
+            line-height: 1.1;
+        }
+        #view-podcast-02 .show-episode {
+            font-size: 1.15rem;
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 2rem;
+            font-weight: 500;
+        }
+        #view-podcast-02 .subscribe-btn {
+            display: inline-block;
+            padding: 0.85rem 2.5rem;
+            background: transparent;
+            border: 2px solid #ffffff;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.85rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        #view-podcast-02 .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-left: auto;
+            align-items: center;
+        }
+        #view-podcast-02 .social-icon {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        #view-podcast-02 .bottom-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+        }
+        #view-podcast-02 .right-panel {
+            background: #fff;
+            padding: 2.5rem 3rem;
+            overflow-y: auto;
+            max-height: 100vh;
+        }
+        #view-podcast-02 .right-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding-bottom: 1.5rem;
+        }
+        #view-podcast-02 .show-logo-text {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #000;
+            letter-spacing: -0.02em;
+        }
+        #view-podcast-02 .menu-btn {
+            width: 44px;
+            height: 44px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            padding: 8px;
+        }
+        #view-podcast-02 .menu-line {
+            width: 28px;
+            height: 2.5px;
+            background: #000;
+            border-radius: 2px;
+        }
+        #view-podcast-02 .season-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        #view-podcast-02 .season-label, #view-podcast-02 .episodes-count {
+            font-size: 0.85rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: #000;
+        }
+        #view-podcast-02 .episode-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2.5rem;
+        }
+        #view-podcast-02 .episode-item {
+            display: grid;
+            grid-template-columns: 180px 1fr;
+            gap: 1.75rem;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid #e8e8e8;
+        }
+        #view-podcast-02 .episode-thumbnail {
+            width: 100%;
+            aspect-ratio: 16/9;
+            object-fit: cover;
+            border-radius: 4px;
+            background: #e0e0e0;
+        }
+        #view-podcast-02 .episode-title {
+            font-size: 1.65rem;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+        #view-podcast-02 .episode-description {
+            font-size: 0.95rem;
+            color: #444;
+            line-height: 1.6;
+            margin-bottom: 0.75rem;
+        }
+        #view-podcast-02 .episode-duration {
+            font-size: 0.9rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        @media (max-width: 1200px) {
+            #view-podcast-02 .main-container { grid-template-columns: 1fr; }
+            #view-podcast-02 .hero-image-container { height: 45vh; }
+            #view-podcast-02 .brand-text-large { font-size: 4rem; }
+        }
+    </style>
+    <div class="main-container">
+        <!-- Left Panel -->
+        <div class="left-panel">
+            <!-- Mailchimp Logo -->
+            <svg class="mailchimp-logo" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="50" cy="50" r="48" fill="#D4FF00"/>
+                <path d="M30 45 Q35 35 45 38 Q50 32 58 38 Q65 33 70 42 Q72 50 68 56 Q62 64 52 62 Q44 66 36 60 Q28 54 30 45Z" fill="#000"/>
+                <circle cx="42" cy="46" r="3" fill="#000"/>
+                <circle cx="58" cy="46" r="3" fill="#000"/>
+                <path d="M45 54 Q50 57 55 54" stroke="#000" stroke-width="2" fill="none" stroke-linecap="round"/>
+            </svg>
+            <!-- Hero Image Container -->
+            <div class="hero-image-container">
+                <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-12-scaled.jpg" alt="Inequality Theme" class="hero-image">
+                <div class="episode-label">E2</div>
+                <div class="topic-label">Inequality</div>
+                <div class="brand-text-large">Simphiwe Mtetwa</div>
+            </div>
+            <!-- Audio Player -->
+            <div class="audio-player">
+                <button class="play-pause-btn"><i class="fas fa-play"></i></button>
+                <div class="player-info">
+                    <div class="player-title">Dismantling Inequality: A Framework for Change</div>
+                    <div class="progress-container">
+                        <div class="progress-bar"><div class="progress-fill"></div></div>
+                        <span class="time-display">10:15 / 28:42</span>
+                    </div>
+                </div>
+                <button class="volume-btn"><i class="fas fa-volume-up"></i></button>
+            </div>
+            <!-- Show Info -->
+            <div class="show-info">
+                <h1 class="show-title">Simphiwe Mtetwa</h1>
+                <p class="show-episode">S1:E2 Dismantling Inequality: A Framework for Change</p>
+                <div class="bottom-bar">
+                    <button class="subscribe-btn" onclick="showView('view-home')">BACK TO HOME</button>
+                    <div class="social-links">
+                        <a href="#" class="social-icon"><i class="fab fa-spotify"></i></a>
+                        <a href="#" class="social-icon"><i class="fab fa-apple"></i></a>
+                        <a href="#" class="social-icon"><i class="fas fa-rss"></i></a>
+                        <a href="#" class="social-icon"><i class="fas fa-share-alt"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Right Panel -->
+        <div class="right-panel">
+            <div class="right-header">
+                <div class="show-logo-text">Simphiwe Mtetwa</div>
+                <button class="menu-btn" onclick="showView('view-podcast-hub')">
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                    <span class="menu-line"></span>
+                </button>
+            </div>
+            <div class="season-header">
+                <span class="season-label">SEASON 1</span>
+                <span class="episodes-count">06 EPISODES</span>
+            </div>
+            <div class="episode-list">
+                <article class="episode-item" onclick="showView('view-podcast-01')" style="cursor: pointer;">
+                    <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-10-scaled.jpg" alt="Episode 1" class="episode-thumbnail">
+                    <div class="episode-content">
+                        <div class="episode-number-label">EPISODE 01</div>
+                        <div class="episode-title">A 25-Year Vision in Motion</div>
+                        <p class="episode-description">Simphiwe Mtetwa discusses the intellectual integrity behind the upcoming CSI Indaba.</p>
+                        <div class="episode-duration">32:15</div>
+                    </div>
+                </article>
+                <article class="episode-item active" style="background: rgba(212, 255, 0, 0.05); border-radius: 12px; padding: 20px; border: 1px solid #D4FF00;">
+                    <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-12-scaled.jpg" alt="Episode 2" class="episode-thumbnail">
+                    <div class="episode-content">
+                        <div class="episode-number-label" style="color: #D4FF00;">NOW PLAYING</div>
+                        <div class="episode-title">Dismantling Inequality</div>
+                        <p class="episode-description">A deep dive into socio-economic realities and measurable systemic change in Africa.</p>
+                        <div class="episode-duration">28:42</div>
+                    </div>
+                </article>
+                <article class="episode-item" onclick="showView('view-podcast-03')" style="cursor: pointer;">
+                    <img src="https://simphiwemtetwa.africa/wp-content/uploads/2026/04/SIMPHIWE-MTETWA-1920-x-825-mm-11-scaled.jpg" alt="Episode 3" class="episode-thumbnail">
+                    <div class="episode-content">
+                        <div class="episode-number-label">EPISODE 03</div>
+                        <div class="episode-title">The Future of CSI</div>
+                        <p class="episode-description">Exploring how CSI is evolving to meet modern demands across the continent.</p>
+                        <div class="episode-duration">45:18</div>
+                    </div>
+                </article>
+                <!-- Episode 4 -->
+                <article class="episode-item" style="cursor: pointer;">
+                    <img src="https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=400&h=225&fit=crop" alt="Episode 4" class="episode-thumbnail">
+                    <div class="episode-content">
+                        <div class="episode-number-label">EPISODE 04</div>
+                        <div class="episode-title">Dual Heritage, Singular Story</div>
+                        <p class="episode-description">Navigating multicultural identity and the rich tapestry of dual heritage in Africa.</p>
+                        <div class="episode-duration">37:12</div>
+                    </div>
+                </article>
+                <!-- Episode 5 -->
+                <article class="episode-item" style="cursor: pointer;">
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&h=225&fit=crop" alt="Episode 5" class="episode-thumbnail">
+                    <div class="episode-content">
+                        <div class="episode-number-label">EPISODE 05</div>
+                        <div class="episode-title">Whisper Loud: The Voice of Change</div>
+                        <p class="episode-description">How grassroots communication is becoming a global phenomenon in social justice.</p>
+                        <div class="episode-duration">34:05</div>
+                    </div>
+                </article>
+                <!-- Episode 6 -->
+                <article class="episode-item" style="cursor: pointer;">
+                    <img src="https://images.unsplash.com/photo-1579783902614-a3fb3927b6a5?w=400&h=225&fit=crop" alt="Episode 6" class="episode-thumbnail">
+                    <div class="episode-content">
+                        <div class="episode-number-label">EPISODE 06</div>
+                        <div class="episode-title">Tiny Kitchens, Big Dreams</div>
+                        <p class="episode-description">Why small-scale initiatives are making impossibly large impacts in local communities.</p>
+                        <div class="episode-duration">31:22</div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="view-podcast-03" class="spa-view" style="display:none; padding: 160px 5%; background: #fff; min-height: 100vh;">
+    <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+        <span class="kicker">Episode 03</span>
+        <h1 style="font-family: var(--font-serif); font-size: 56px; margin: 20px 0; color: #000;">The Future of Corporate Social Investment</h1>
+        <p style="font-size: 18px; color: var(--text-muted);">Content coming soon...</p>
+        <a href="#" onclick="showView('view-home')" class="btn btn-primary" style="margin-top: 40px;">Back to Home</a>
+    </div>
+</div>
+
 <script>
         // Scroll Reveal Logic
         const observerOptions = {
@@ -2549,6 +3594,13 @@
 
             heroSlides[index].classList.add('active');
             heroTabs[index].classList.add('active');
+
+            // Force play video if present
+            const activeVideo = heroSlides[index].querySelector('video');
+            if (activeVideo) {
+                activeVideo.play().catch(e => console.log("Video autoplay blocked or error:", e));
+            }
+
             currentHeroSlide = index;
 
             heroStartTime = Date.now();
@@ -2580,13 +3632,39 @@
             const thumb = document.getElementById('editorialThumbnail');
             const closeBtn = document.getElementById('closeSectionVideoBtn');
 
-            // Set iframe src FIRST so it starts loading
-            vid.src = 'https://drive.google.com/file/d/1jZgsPQ0uG37B-xShAgIcgnVlayJId5I2/preview';
+            // Use the reliable GitHub raw link from repo video-2
+            vid.src = 'https://raw.githubusercontent.com/vandermerwejack611-cloud/video-2/main/WhatsApp%20Video%202026-05-07%20at%2010.08.45%20PM%20(1).mp4';
+            
+            vid.load();
+            vid.muted = false; // Ensure audio is enabled
+            vid.play().catch(e => console.log("Video playback error:", e));
+
+            // Animate the text when video starts
+            const heading = document.getElementById('editorialHeading');
+            if (heading) {
+                heading.style.color = '#fff';
+                heading.style.transform = 'scale(1.1)';
+            }
 
             section.classList.add('video-active');
+            vid.style.opacity = '1';
             thumb.style.opacity = '0';
             thumb.style.pointerEvents = 'none';
             closeBtn.style.display = 'flex';
+
+            // Show and handle volume control
+            const volCtrl = document.getElementById('videoVolumeControl');
+            const volRange = document.getElementById('videoVolumeRange');
+            if (volCtrl && volRange) {
+                volCtrl.style.display = 'flex';
+                volRange.oninput = (e) => {
+                    vid.volume = e.target.value;
+                    const icon = document.getElementById('volumeIcon');
+                    if (vid.volume == 0) icon.className = 'fas fa-volume-mute';
+                    else if (vid.volume < 0.5) icon.className = 'fas fa-volume-down';
+                    else icon.className = 'fas fa-volume-up';
+                };
+            }
         }
 
         function stopSectionVideo() {
@@ -2594,7 +3672,11 @@
             const vid = document.getElementById('sectionBgVideo');
             const thumb = document.getElementById('editorialThumbnail');
             const closeBtn = document.getElementById('closeSectionVideoBtn');
+            const volCtrl = document.getElementById('videoVolumeControl');
 
+            vid.pause();
+            vid.muted = true;
+            vid.style.opacity = '0';
             section.classList.remove('video-active');
             thumb.style.opacity = '1';
             thumb.style.pointerEvents = 'auto';
@@ -3038,19 +4120,18 @@
 
         
 
-        /* ====== FULL WIDTH ARTICLE DESIGN ====== */
         .article-v3-wrapper {
-            padding: 120px 20px 60px;
-            max-width: 1600px;
-            margin: 0 auto;
+            padding: 120px 0 60px;
+            width: 100%;
+            margin: 0;
         }
 
         /* Immersive Hero */
         .hero-v3 {
             position: relative;
             width: 100%;
-            height: 80vh;
-            border-radius: var(--radius-large);
+            height: 90vh;
+            border-radius: 0;
             overflow: hidden;
             margin-bottom: 40px;
         }
@@ -3090,24 +4171,91 @@
         /* Content Card */
         .content-card-v3 {
             background: #fff;
-            border-radius: var(--radius-large);
             padding: 100px 5%;
             margin-bottom: 40px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.03);
         }
 
         .article-grid-v3 {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 80px;
-            max-width: 1400px;
+            display: block;
+            max-width: 1200px;
             margin: 0 auto;
+            padding: 0 5%;
         }
 
         .article-sidebar {
             position: sticky;
             top: 120px;
             height: fit-content;
+        }
+
+        /* Other Insights Styles */
+        .other-insights-v3 {
+            padding: 120px 5%;
+            background: #fff;
+            border-top: 1px solid #eee;
+        }
+
+        .insights-grid-v3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+            max-width: 1400px;
+            margin: 60px auto 0;
+        }
+
+        .insight-card-v3 {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .insight-card-v3:hover {
+            transform: translateY(-10px);
+        }
+
+        .insight-card-img {
+            width: 100%;
+            aspect-ratio: 16/10;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 24px;
+            background: #eee;
+        }
+
+        .insight-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .insight-card-v3:hover .insight-card-img img {
+            transform: scale(1.1);
+        }
+
+        .insight-card-content span {
+            display: block;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--accent-lime);
+            margin-bottom: 12px;
+        }
+
+        .insight-card-content h3 {
+            font-family: var(--font-serif);
+            font-size: 22px;
+            margin-bottom: 12px;
+            line-height: 1.3;
+            color: var(--text-main);
+        }
+
+        .insight-card-content p {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.6;
         }
 
         .sidebar-meta {
@@ -3219,32 +4367,21 @@
 
         body, 
 
-        /* Full Screen Snap */
+        /* Optimized for SPA */
         .snap-container {
-            height: 100vh;
-            overflow-y: scroll;
-            scroll-snap-type: y mandatory;
+            width: 100%;
         }
 
-        section {
-            height: 100vh;
-            width: 100vw;
-            scroll-snap-align: start;
+        #view-insight-4 section {
+            min-height: 80vh;
+            width: 100%;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
             overflow: hidden;
+            padding: 120px 0;
         }
-
-        /* ====== HEADER ====== */
-        
-
-        
-
-        
-
-        
 
         /* ====== SECTIONS ====== */
         .section-bg {
@@ -3417,8 +4554,7 @@
         }
         @media (max-width: 992px) {
             .v4-grid { grid-template-columns: 1fr; }
-            .snap-container { scroll-snap-type: none; height: auto; }
-            section { height: auto; min-height: 100vh; padding: 100px 0; }
+            section { min-height: 100vh; padding: 100px 0; }
         }
     `,
     'view-insight-5': `
@@ -3612,6 +4748,68 @@
             .hero-title-card { left: 20px; bottom: 20px; padding: 30px; width: 90%; }
             .bio-block-v5 { flex-direction: column; text-align: center; padding: 40px; }
         }
+
+        /* Other Insights Section */
+        .other-insights-v5 {
+            margin-top: 120px;
+            padding-top: 80px;
+            border-top: 1px solid rgba(0,0,0,0.1);
+        }
+
+        .v5-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .v5-card {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .v5-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .v5-card-img {
+            aspect-ratio: 16/10;
+            border-radius: 20px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .v5-card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .v5-card:hover .v5-card-img img {
+            transform: scale(1.1);
+        }
+
+        .v5-card-info span {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-grey);
+            font-weight: 700;
+        }
+
+        .v5-card-info h3 {
+            font-family: var(--font-serif);
+            font-size: 22px;
+            margin-top: 10px;
+            line-height: 1.3;
+        }
+
+        @media (max-width: 768px) {
+            .v5-grid { grid-template-columns: 1fr; }
+        }
     `,
     'view-insight-6': `
         #view-insight-6 {
@@ -3638,70 +4836,74 @@
         
 
         /* ====== SPLIT HERO ====== */
+        /* ====== FULL WIDTH HERO V6 ====== */
         .hero-v6 {
-            padding: 140px 40px 80px;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
+            height: 80vh;
+            display: flex;
             align-items: center;
-            max-width: 1600px;
-            margin: 0 auto;
-        }
-
-        .hero-v6-content {
-            padding-right: 40px;
-        }
-
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            text-decoration: none;
-            color: var(--text-grey);
-            font-size: 11px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            margin-bottom: 40px;
-        }
-
-        .hero-v6-content h1 {
-            font-family: var(--font-serif);
-            font-size: clamp(40px, 5vw, 84px);
-            line-height: 1;
-            margin-bottom: 30px;
-            border-left: 6px solid var(--accent-lime);
-            padding-left: 30px;
-        }
-
-        .hero-v6-content p {
-            font-size: 18px;
-            color: var(--text-grey);
-            max-width: 500px;
-            line-height: 1.6;
+            justify-content: center;
+            position: relative;
+            padding: 0 5%;
+            overflow: hidden;
+            background: #000;
         }
 
         .hero-v6-image {
+            position: absolute;
+            top: 0;
+            left: 0;
             width: 100%;
-            height: 700px;
-            border-radius: var(--radius-large);
-            overflow: hidden;
+            height: 100%;
+            z-index: 1;
         }
 
         .hero-v6-image img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            opacity: 0.5; /* Darken for readability */
         }
+
+        .hero-v6-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: #fff;
+            max-width: 1000px;
+        }
+
+        .hero-v6-content .back-link {
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 30px;
+        }
+
+        .hero-v6-content h1 {
+            font-family: var(--font-serif);
+            font-size: clamp(40px, 6vw, 100px);
+            line-height: 1.1;
+            margin-bottom: 25px;
+            border-left: 0;
+            padding-left: 0;
+            color: #fff;
+        }
+
+        .hero-v6-content p {
+            font-size: 22px;
+            color: rgba(255,255,255,0.8);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.5;
+        }
+
 
         /* ====== ARTICLE BODY ====== */
         .body-v6 {
             max-width: 1600px;
             margin: 0 auto;
-            padding: 0 40px 100px;
+            padding: 100px 5% 150px;
             display: grid;
-            grid-template-columns: 250px 1fr;
-            gap: 100px;
+            grid-template-columns: 280px 1fr;
+            gap: 120px;
         }
 
         .sidebar-v6 {
@@ -3800,6 +5002,60 @@
             .hero-v6-content { padding-right: 0; }
             .body-v6 { grid-template-columns: 1fr; }
             .sidebar-v6 { position: relative; top: 0; display: flex; gap: 40px; flex-wrap: wrap; }
+        }
+
+        /* Related Insights V6 */
+        .more-insights-v6 {
+            background: #fff;
+            padding: 100px 40px;
+            border-top: 1px solid #eee;
+        }
+        .more-insights-inner {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        .insights-grid-v6 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+        .insight-card-v6 {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .insight-card-image {
+            width: 100%;
+            height: 300px;
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        .insight-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .insight-card-v6:hover .insight-card-image img {
+            transform: scale(1.05);
+        }
+        .insight-card-content span {
+            display: block;
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-grey);
+            margin-bottom: 10px;
+        }
+        .insight-card-content h3 {
+            font-family: var(--font-serif);
+            font-size: 24px;
+            line-height: 1.2;
+        }
+        @media (max-width: 768px) {
+            .insights-grid-v6 { grid-template-columns: 1fr; }
         }
     `,
     'view-insight-7': `
