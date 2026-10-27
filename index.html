@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BUDGET.MONO — AI Annual Budget Analyzer & Optimizer</title>
+<title>Business Responsibility Scorecard — CSI Ubuntu Advisory</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
@@ -12,7 +12,7 @@ tailwind.config = {
   theme: {
     extend: {
       colors: {
-        brand: { black: '#18181B', primary: '#FACC15', primaryDark: '#EAB308', white: '#FFFFFF' }
+        brand: { black: '#18181B', primary: '#D99A55', primaryDark: '#C7833D', white: '#FFFFFF' }
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
@@ -23,8 +23,8 @@ tailwind.config = {
 }
 </script>
 <style>
-  ::selection { background: #FACC15; color: #18181B; }
-  * { scrollbar-width: thin; scrollbar-color: #FACC15 #18181B; }
+  ::selection { background: #D99A55; color: #18181B; }
+  * { scrollbar-width: thin; scrollbar-color: #D99A55 #18181B; }
   body { cursor: none; }
 
   /* Kinetic Typography */
@@ -84,7 +84,7 @@ tailwind.config = {
     position: fixed;
     pointer-events: none;
     border-radius: 50%;
-    background: #FACC15;
+    background: #D99A55;
     z-index: 9999;
     mix-blend-mode: multiply;
   }
@@ -98,7 +98,7 @@ tailwind.config = {
     position: fixed;
     width: 20px;
     height: 20px;
-    border: 2px solid #FACC15;
+    border: 2px solid #D99A55;
     border-radius: 50%;
     pointer-events: none;
     z-index: 10000;
@@ -109,7 +109,7 @@ tailwind.config = {
     position: fixed;
     width: 4px;
     height: 4px;
-    background: #FACC15;
+    background: #D99A55;
     border-radius: 50%;
     pointer-events: none;
     z-index: 10001;
@@ -140,7 +140,7 @@ tailwind.config = {
     transition: all 0.3s ease;
   }
   .spread-dot.active {
-    background: #FACC15;
+    background: #D99A55;
     transform: scale(1.5);
   }
 
@@ -159,7 +159,7 @@ tailwind.config = {
     transition: border-color 0.3s ease;
   }
   .mono-input:focus {
-    border-bottom-color: #FACC15;
+    border-bottom-color: #D99A55;
   }
   .mono-input::placeholder {
     color: rgba(255,255,255,0.2);
@@ -181,7 +181,7 @@ tailwind.config = {
     border-left: 4px solid transparent;
   }
   .opt-card:hover {
-    border-left-color: #FACC15;
+    border-left-color: #D99A55;
     transform: translateX(8px);
   }
 
@@ -215,12 +215,13 @@ tailwind.config = {
     <div class="w-8 h-8 bg-brand-primary rounded-sm flex items-center justify-center logo-construct">
       <span class="text-brand-black font-serif font-black text-sm">B</span>
     </div>
-    <span class="text-xs font-bold tracking-[0.3em] uppercase">Budget.Mono</span>
+    <span class="text-xs font-bold tracking-[0.3em] uppercase">Responsibility Scorecard</span>
   </div>
   <div class="hidden md:flex items-center gap-8">
     <a href="#hero" class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/60 hover:text-brand-primary transition-colors duration-150">Home</a>
     <a href="#analyzer" class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/60 hover:text-brand-primary transition-colors duration-150">Analyzer</a>
-    <a href="#optimizer" class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/60 hover:text-brand-primary transition-colors duration-150">Optimizer</a>
+    <a href="#four-rungs" class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/60 hover:text-brand-primary transition-colors duration-150">Four Rungs</a>
+    <a href="#optimizer" class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/60 hover:text-brand-primary transition-colors duration-150">Transition Planner</a>
     <a href="#specimens" class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/60 hover:text-brand-primary transition-colors duration-150">Specimens</a>
     <a href="#talks" class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/60 hover:text-brand-primary transition-colors duration-150">Talks</a>
     <a href="#contact" class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/60 hover:text-brand-primary transition-colors duration-150">Contact</a>
@@ -234,7 +235,8 @@ tailwind.config = {
 <div id="mobile-menu" class="fixed inset-0 z-40 bg-brand-black flex flex-col items-center justify-center gap-8 transition-all duration-500 opacity-0 pointer-events-none">
   <a href="#hero" class="mobile-link text-3xl font-serif font-black tracking-tight hover:text-brand-primary transition-colors">Home</a>
   <a href="#analyzer" class="mobile-link text-3xl font-serif font-black tracking-tight hover:text-brand-primary transition-colors">Analyzer</a>
-  <a href="#optimizer" class="mobile-link text-3xl font-serif font-black tracking-tight hover:text-brand-primary transition-colors">Optimizer</a>
+  <a href="#four-rungs" class="mobile-link text-3xl font-serif font-black tracking-tight hover:text-brand-primary transition-colors">Four Rungs</a>
+  <a href="#optimizer" class="mobile-link text-3xl font-serif font-black tracking-tight hover:text-brand-primary transition-colors">Transition Planner</a>
   <a href="#specimens" class="mobile-link text-3xl font-serif font-black tracking-tight hover:text-brand-primary transition-colors">Specimens</a>
   <a href="#talks" class="mobile-link text-3xl font-serif font-black tracking-tight hover:text-brand-primary transition-colors">Talks</a>
   <a href="#contact" class="mobile-link text-3xl font-serif font-black tracking-tight hover:text-brand-primary transition-colors">Contact</a>
@@ -251,12 +253,12 @@ tailwind.config = {
   <div class="relative z-10 text-center max-w-7xl mx-auto">
     <div class="overflow-hidden mb-2 md:mb-4">
       <div class="kinetic-1 text-[3rem] md:text-[8rem] lg:text-[10rem] font-black leading-[0.85] tracking-[-0.06em] font-serif">
-        BUDGET
+        RESPONSIBILITY
       </div>
     </div>
     <div class="overflow-hidden mb-2 md:mb-4">
       <div class="kinetic-2 text-[3rem] md:text-[8rem] lg:text-[10rem] font-black leading-[0.85] tracking-[-0.06em] font-serif text-brand-primary">
-        ANNUAL
+        SCORECARD
       </div>
     </div>
     <div class="overflow-hidden mb-6 md:mb-10">
@@ -271,16 +273,16 @@ tailwind.config = {
     </div>
 
     <p class="kinetic-4 text-sm md:text-base font-light tracking-[0.2em] uppercase text-white/50 max-w-xl mx-auto">
-      AI-Powered Budget Intelligence — Analyze. Optimize. Save.
+      Evidence-led CSI funding alignment — Assess. Understand. Plan.
     </p>
 
     <div class="kinetic-5 mt-10 md:mt-14 flex flex-col sm:flex-row items-center justify-center gap-4">
       <a href="#analyzer" class="group inline-flex items-center gap-3 bg-brand-primary text-brand-black px-8 py-4 rounded-sm text-sm font-bold tracking-[0.15em] uppercase hover:-translate-y-1 transition-all duration-150 shadow-[0_10px_15px_-3px_rgba(250,204,21,0.2)]" style="animation: pulseGlow 3s infinite;">
-        Start Analysis
+        Start Assessment
         <iconify-icon icon="lucide:arrow-down" width="16" class="group-hover:translate-y-1 transition-transform"></iconify-icon>
       </a>
       <a href="#optimizer" class="inline-flex items-center gap-3 border border-white/20 px-8 py-4 rounded-sm text-sm font-bold tracking-[0.15em] uppercase hover:border-brand-primary hover:text-brand-primary transition-all duration-150">
-        View Optimizer
+        View Transition Planner
       </a>
     </div>
   </div>
@@ -295,7 +297,7 @@ tailwind.config = {
 </section>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- SPREAD 01 — BUDGET INPUT -->
+<!-- SPREAD 01 — RESPONSIBILITY INPUT -->
 <!-- ═══════════════════════════════════════ -->
 <section id="analyzer" class="relative min-h-screen px-6 md:px-10 py-24 md:py-32">
   <div class="max-w-7xl mx-auto">
@@ -307,10 +309,10 @@ tailwind.config = {
     </div>
 
     <h2 class="text-4xl md:text-6xl lg:text-7xl font-serif font-black tracking-[-0.04em] leading-[0.9] mb-4">
-      Enter Your<br><span class="text-brand-primary italic">Annual</span> Budget
+      Assess Your<br><span class="text-brand-primary italic">Funding</span> Portfolio
     </h2>
     <p class="text-base md:text-lg font-light text-white/50 max-w-2xl mb-12 md:mb-16 leading-relaxed">
-      Input your annual income and expenses across categories. Our AI engine will analyze spending patterns, identify inefficiencies, and generate a personalized optimization strategy.
+      Review corporate CSI funding against the proposed four-rung CSI Ubuntu Scorecard. Confirm the funding base, review evidence and classifications, and model responsible transition options.
     </p>
 
     <div class="grid md:grid-cols-2 gap-12 md:gap-20">
@@ -320,7 +322,7 @@ tailwind.config = {
           <div class="w-10 h-10 rounded-sm bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center">
             <iconify-icon icon="lucide:trending-up" width="20" class="text-brand-primary"></iconify-icon>
           </div>
-          <span class="text-xs font-bold tracking-[0.2em] uppercase">Annual Income</span>
+          <span class="text-xs font-bold tracking-[0.2em] uppercase">Confirmed Funding Base</span>
         </div>
 
         <div class="space-y-6">
@@ -361,26 +363,26 @@ tailwind.config = {
           <div class="w-10 h-10 rounded-sm bg-red-500/10 border border-red-500/30 flex items-center justify-center">
             <iconify-icon icon="lucide:trending-down" width="20" class="text-red-400"></iconify-icon>
           </div>
-          <span class="text-xs font-bold tracking-[0.2em] uppercase">Annual Expenses</span>
+          <span class="text-xs font-bold tracking-[0.2em] uppercase">Funding Allocations</span>
         </div>
 
         <div class="space-y-6">
           <div>
-            <label class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/40 mb-2 block">Housing / Rent</label>
+            <label class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/40 mb-2 block">Stability / Rent</label>
             <div class="relative">
               <span class="absolute left-0 top-1/2 -translate-y-1/2 text-red-400 font-bold text-lg">$</span>
               <input type="number" id="exp-housing" class="mono-input pl-8" placeholder="24,000" value="24000">
             </div>
           </div>
           <div>
-            <label class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/40 mb-2 block">Food & Groceries</label>
+            <label class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/40 mb-2 block">Food & Survival</label>
             <div class="relative">
               <span class="absolute left-0 top-1/2 -translate-y-1/2 text-red-400 font-bold text-lg">$</span>
               <input type="number" id="exp-food" class="mono-input pl-8" placeholder="9,600" value="9600">
             </div>
           </div>
           <div>
-            <label class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/40 mb-2 block">Transportation</label>
+            <label class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/40 mb-2 block">Self-reliance</label>
             <div class="relative">
               <span class="absolute left-0 top-1/2 -translate-y-1/2 text-red-400 font-bold text-lg">$</span>
               <input type="number" id="exp-transport" class="mono-input pl-8" placeholder="6,000" value="6000">
@@ -394,7 +396,7 @@ tailwind.config = {
             </div>
           </div>
           <div>
-            <label class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/40 mb-2 block">Entertainment & Lifestyle</label>
+            <label class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/40 mb-2 block">Security & Lifestyle</label>
             <div class="relative">
               <span class="absolute left-0 top-1/2 -translate-y-1/2 text-red-400 font-bold text-lg">$</span>
               <input type="number" id="exp-entertainment" class="mono-input pl-8" placeholder="7,200" value="7200">
@@ -436,7 +438,7 @@ tailwind.config = {
     <div class="mt-16 flex flex-col items-center">
       <button id="analyze-btn" class="group relative inline-flex items-center gap-4 bg-brand-primary text-brand-black px-12 py-5 rounded-sm text-sm font-bold tracking-[0.2em] uppercase hover:-translate-y-1 transition-all duration-150 shadow-[0_10px_15px_-3px_rgba(250,204,21,0.2)]">
         <iconify-icon icon="lucide:cpu" width="20"></iconify-icon>
-        Run AI Analysis
+        Calculate Alignment Score
         <div class="absolute inset-0 rounded-sm overflow-hidden">
           <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
         </div>
@@ -453,7 +455,7 @@ tailwind.config = {
     <div class="flex items-center gap-6 mb-4">
       <span class="text-[10px] font-bold tracking-[0.3em] uppercase text-brand-primary">Spread 02</span>
       <div class="flex-1 h-[1px] bg-white/10"></div>
-      <span class="text-[10px] font-bold tracking-[0.3em] uppercase text-white/30">Analysis</span>
+      <span class="text-[10px] font-bold tracking-[0.3em] uppercase text-white/30">Funding Alignment</span>
     </div>
 
     <h2 class="text-4xl md:text-6xl lg:text-7xl font-serif font-black tracking-[-0.04em] leading-[0.9] mb-16">
@@ -516,7 +518,7 @@ tailwind.config = {
         <div class="relative w-48 h-48 mx-auto mb-8">
           <svg viewBox="0 0 100 100" class="w-full h-full -rotate-90">
             <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="8"/>
-            <circle id="score-ring" cx="50" cy="50" r="42" fill="none" stroke="#FACC15" stroke-width="8" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="80" class="transition-all duration-1000"/>
+            <circle id="score-ring" cx="50" cy="50" r="42" fill="none" stroke="#D99A55" stroke-width="8" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="80" class="transition-all duration-1000"/>
           </svg>
           <div class="absolute inset-0 flex flex-col items-center justify-center">
             <span id="score-value" class="text-4xl font-black font-serif">70</span>
@@ -532,19 +534,49 @@ tailwind.config = {
 <!-- ═══════════════════════════════════════ -->
 <!-- SPREAD 03 — OPTIMIZER -->
 <!-- ═══════════════════════════════════════ -->
+
+<!-- CSI UBUNTU SCORECARD — FOUR RUNGS -->
+<section id="four-rungs" class="relative px-6 md:px-10 py-24 md:py-32 bg-zinc-900">
+  <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+    <div>
+      <span class="text-[10px] font-bold tracking-[0.3em] uppercase text-white/40">The Responsibility Perspective</span>
+      <h2 class="mt-6 text-5xl md:text-7xl font-serif font-black leading-[0.95] tracking-tight">
+        See the whole<br><span class="text-brand-primary italic">funding picture.</span>
+      </h2>
+      <p class="mt-6 text-white/60 max-w-xl leading-relaxed">From immediate relief to lasting security. The four-rung model helps the advisory team examine what funding supports, how allocations compare with the proposed reference weights, and where evidence still needs review.</p>
+      <p class="mt-5 text-xs tracking-wide text-white/35">Initial reference weights · methodology remains subject to approval</p>
+    </div>
+    <div class="max-w-lg w-full mx-auto">
+      <div class="space-y-1 text-center">
+        <div class="mx-auto w-[48%] px-3 py-5 font-bold text-sm text-white" style="background:#42698a;clip-path:polygon(12% 0,88% 0,100% 100%,0 100%)">Security <small class="ml-2 opacity-60">30%</small></div>
+        <div class="mx-auto w-[62%] px-3 py-5 font-bold text-sm text-white" style="background:#6e91ad;clip-path:polygon(10% 0,90% 0,100% 100%,0 100%)">Self-reliance <small class="ml-2 opacity-70">30%</small></div>
+        <div class="mx-auto w-[77%] px-3 py-5 font-bold text-sm text-zinc-900" style="background:#d5a66e;clip-path:polygon(8% 0,92% 0,100% 100%,0 100%)">Stability <small class="ml-2 opacity-60">25%</small></div>
+        <div class="mx-auto w-[92%] px-3 py-5 font-bold text-sm text-zinc-900" style="background:#e49a68;clip-path:polygon(7% 0,93% 0,100% 100%,0 100%)">Survival <small class="ml-2 opacity-60">15%</small></div>
+      </div>
+      <div class="mt-8 grid sm:grid-cols-2 gap-4 text-sm">
+        <div class="border border-white/10 p-4"><span class="text-brand-primary text-[10px] uppercase tracking-[0.2em] font-bold">01 · Survival</span><p class="mt-2 text-white/60">Immediate relief, food assistance, emergency shelter and crisis healthcare.</p></div>
+        <div class="border border-white/10 p-4"><span class="text-brand-primary text-[10px] uppercase tracking-[0.2em] font-bold">02 · Stability</span><p class="mt-2 text-white/60">Dependable water, sanitation, electricity, clinics and transport.</p></div>
+        <div class="border border-white/10 p-4"><span class="text-brand-primary text-[10px] uppercase tracking-[0.2em] font-bold">03 · Self-reliance</span><p class="mt-2 text-white/60">Education pathways, employment, enterprise development and market access.</p></div>
+        <div class="border border-white/10 p-4"><span class="text-brand-primary text-[10px] uppercase tracking-[0.2em] font-bold">04 · Security</span><p class="mt-2 text-white/60">Secure tenure, safer environments and resilience to disruption.</p></div>
+      </div>
+      <p class="mt-5 text-xs text-white/35">A funding alignment score is not a measure of the percentage of inequality reduced. Each rand is counted once; uncertain items remain unclassified until reviewed.</p>
+    </div>
+  </div>
+</section>
+
 <section id="optimizer" class="relative min-h-screen px-6 md:px-10 py-24 md:py-32">
   <div class="max-w-7xl mx-auto">
     <div class="flex items-center gap-6 mb-4">
       <span class="text-[10px] font-bold tracking-[0.3em] uppercase text-brand-primary">Spread 03</span>
       <div class="flex-1 h-[1px] bg-white/10"></div>
-      <span class="text-[10px] font-bold tracking-[0.3em] uppercase text-white/30">Optimizer</span>
+      <span class="text-[10px] font-bold tracking-[0.3em] uppercase text-white/30">Transition Planner</span>
     </div>
 
     <h2 class="text-4xl md:text-6xl lg:text-7xl font-serif font-black tracking-[-0.04em] leading-[0.9] mb-4">
       <span class="text-brand-primary italic">Optimize</span> &<br>Save More
     </h2>
     <p class="text-base md:text-lg font-light text-white/50 max-w-2xl mb-16 leading-relaxed">
-      AI-generated recommendations ranked by impact. Each suggestion includes projected annual savings and effort level.
+      Explore funding transition options while protecting essential services, existing commitments and programme continuity. All scenarios display their assumptions.
     </p>
 
     <!-- Optimization Cards -->
@@ -556,7 +588,7 @@ tailwind.config = {
     <div class="bg-brand-primary text-brand-black p-10 md:p-16 rounded-sm">
       <div class="grid md:grid-cols-3 gap-8 items-center">
         <div class="md:col-span-2">
-          <span class="text-[10px] font-bold tracking-[0.3em] uppercase text-brand-black/50 block mb-3">Projected Annual Savings</span>
+          <span class="text-[10px] font-bold tracking-[0.3em] uppercase text-brand-black/50 block mb-3">Modelled Funding Change</span>
           <div class="flex items-baseline gap-3">
             <span id="projected-savings" class="text-5xl md:text-7xl font-black font-serif">$8,400</span>
             <span class="text-lg font-medium text-brand-black/60">/year</span>
@@ -571,7 +603,7 @@ tailwind.config = {
 
     <!-- Color Palette Film Strip -->
     <div class="mt-20">
-      <h3 class="text-lg font-bold tracking-wide mb-6">Budget Category Palette</h3>
+      <h3 class="text-lg font-bold tracking-wide mb-6">Four-Rung Funding Model</h3>
       <div class="overflow-hidden relative h-16 rounded-sm border border-white/10">
         <div id="film-strip" class="flex h-full film-strip" style="width: 200%;">
           <!-- Injected by JS -->
@@ -624,7 +656,7 @@ tailwind.config = {
       <div class="draggable absolute p-6 bg-zinc-800 border border-white/10 rounded-sm shadow-2xl" style="left: 15%; top: 55%; width: 340px;" data-scale="1">
         <span class="text-[9px] font-bold tracking-[0.3em] uppercase text-brand-primary block mb-4">Inter — Light / Tracking</span>
         <div class="specimen-text text-sm font-sans font-light tracking-[0.2em] uppercase leading-relaxed mb-4">
-          ANNUAL BUDGET ANALYZER<br>AI-POWERED OPTIMIZATION<br>EDITORIAL MONOGRAPH DESIGN
+          SCORECARD RESPONSIBILITY ANALYZER<br>AI-POWERED OPTIMIZATION<br>EDITORIAL MONOGRAPH DESIGN
         </div>
         <p class="text-xs text-white/30 leading-relaxed">Small caps style for labels, metadata, and category headers.</p>
       </div>
@@ -678,7 +710,7 @@ tailwind.config = {
     </div>
 
     <h2 class="text-4xl md:text-6xl lg:text-7xl font-serif font-black tracking-[-0.04em] leading-[0.9] mb-16">
-      Lectures &<br><span class="text-brand-primary italic">Talks</span>
+      Evidence &amp;<br><span class="text-brand-primary italic">Methodology</span>
     </h2>
 
     <div class="grid md:grid-cols-2 gap-8">
@@ -690,7 +722,7 @@ tailwind.config = {
         <div class="p-6">
           <span class="text-[9px] font-bold tracking-[0.3em] uppercase text-brand-primary block mb-2">Keynote · 2024</span>
           <h4 class="text-xl font-bold tracking-tight mb-2 group-hover:text-brand-primary transition-colors">The Typography of Money</h4>
-          <p class="text-sm text-white/40 leading-relaxed">How visual hierarchy and type design influence financial decision-making and budget perception.</p>
+          <p class="text-sm text-white/40 leading-relaxed">Documented evidence, transparent classifications and reviewer-approved findings support more accountable CSI funding decisions.</p>
         </div>
       </div>
 
@@ -726,7 +758,7 @@ tailwind.config = {
           Let's <span class="text-brand-primary italic">Build</span>
         </h2>
         <p class="text-base font-light text-white/50 max-w-md leading-relaxed mb-12">
-          Have a project in mind? Want to discuss budget optimization for your organization? Let's connect.
+          Use this workspace to prepare client assessments, review supporting evidence and develop practical funding transition plans.
         </p>
 
         <div class="space-y-6">
@@ -752,7 +784,7 @@ tailwind.config = {
         <div class="space-y-8">
           <div>
             <span class="text-[9px] font-bold tracking-[0.3em] uppercase text-white/30 block mb-2">Email</span>
-            <a href="mailto:hello@budgetmono.com" class="text-2xl font-serif font-black hover:text-brand-primary transition-colors">hello@budgetmono.com</a>
+            <a href="mailto:Private advisory workspace" class="text-2xl font-serif font-black hover:text-brand-primary transition-colors">Private advisory workspace</a>
           </div>
           <div>
             <span class="text-[9px] font-bold tracking-[0.3em] uppercase text-white/30 block mb-2">Social</span>
@@ -792,15 +824,15 @@ tailwind.config = {
           <div class="w-8 h-8 bg-brand-primary rounded-sm flex items-center justify-center">
             <span class="text-brand-black font-serif font-black text-sm">B</span>
           </div>
-          <span class="text-xs font-bold tracking-[0.3em] uppercase">Budget.Mono</span>
+          <span class="text-xs font-bold tracking-[0.3em] uppercase">Responsibility Scorecard</span>
         </div>
-        <p class="text-sm text-white/30 leading-relaxed">AI-powered annual budget analysis and optimization. Editorial design meets financial intelligence.</p>
+        <p class="text-sm text-white/30 leading-relaxed">A private advisory workspace for evidence-led CSI funding assessment, transition planning and responsible business reporting.</p>
       </div>
       <div>
         <span class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/40 block mb-4">Sections</span>
         <div class="space-y-2">
           <a href="#analyzer" class="text-sm text-white/50 hover:text-brand-primary transition-colors block">Analyzer</a>
-          <a href="#optimizer" class="text-sm text-white/50 hover:text-brand-primary transition-colors block">Optimizer</a>
+          <a href="#optimizer" class="text-sm text-white/50 hover:text-brand-primary transition-colors block">Transition Planner</a>
           <a href="#specimens" class="text-sm text-white/50 hover:text-brand-primary transition-colors block">Specimens</a>
           <a href="#talks" class="text-sm text-white/50 hover:text-brand-primary transition-colors block">Talks</a>
         </div>
@@ -822,7 +854,7 @@ tailwind.config = {
       </div>
     </div>
     <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5 gap-4">
-      <span class="text-[10px] text-white/20 tracking-wider">© 2025 BUDGET.MONO — ALL RIGHTS RESERVED</span>
+      <span class="text-[10px] text-white/20 tracking-wider">© 2025 RESPONSIBILITY.MONO — ALL RIGHTS RESERVED</span>
       <span class="text-[10px] text-white/20 tracking-wider">DESIGNED WITH EDITORIAL PRECISION</span>
     </div>
   </div>
@@ -924,14 +956,14 @@ function fmt(n) {
 
 // ─── Budget Data & Calculations ───
 const categories = [
-  { id: 'exp-housing', label: 'Housing', color: '#FACC15', icon: 'lucide:home' },
+  { id: 'exp-housing', label: 'Stability', color: '#D99A55', icon: 'lucide:home' },
   { id: 'exp-food', label: 'Food', color: '#FB923C', icon: 'lucide:utensils' },
   { id: 'exp-transport', label: 'Transport', color: '#F87171', icon: 'lucide:car' },
   { id: 'exp-utilities', label: 'Utilities', color: '#A78BFA', icon: 'lucide:zap' },
   { id: 'exp-entertainment', label: 'Lifestyle', color: '#34D399', icon: 'lucide:music' },
   { id: 'exp-healthcare', label: 'Health', color: '#60A5FA', icon: 'lucide:heart' },
   { id: 'exp-shopping', label: 'Shopping', color: '#F472B6', icon: 'lucide:shopping-bag' },
-  { id: 'exp-savings', label: 'Savings', color: '#FACC15', icon: 'lucide:piggy-bank' },
+  { id: 'exp-savings', label: 'Savings', color: '#D99A55', icon: 'lucide:piggy-bank' },
 ];
 
 function getValues() {
@@ -968,8 +1000,8 @@ document.querySelectorAll('.mono-input').forEach(input => {
   input.addEventListener('input', updateTotals);
 });
 
-// ─── Analysis Engine ───
-function runAnalysis() {
+// ─── Funding Alignment Engine ───
+function runFunding Alignment() {
   const data = getValues();
 
   // Update key metrics
@@ -1018,9 +1050,9 @@ function runAnalysis() {
 
   const housingRatio = data.totalIncome > 0 ? (data.expenses['exp-housing'] / data.totalIncome) * 100 : 0;
   if (housingRatio > 30) {
-    observations.push({ type: 'warning', text: `Housing costs at ${housingRatio.toFixed(0)}% of income exceeds the recommended 30% threshold.` });
+    observations.push({ type: 'warning', text: `Stability costs at ${housingRatio.toFixed(0)}% of income exceeds the recommended 30% threshold.` });
   } else {
-    observations.push({ type: 'good', text: `Housing costs at ${housingRatio.toFixed(0)}% of income — within the healthy 30% threshold.` });
+    observations.push({ type: 'good', text: `Stability costs at ${housingRatio.toFixed(0)}% of income — within the healthy 30% threshold.` });
   }
 
   const foodRatio = data.totalIncome > 0 ? (data.expenses['exp-food'] / data.totalIncome) * 100 : 0;
@@ -1086,7 +1118,7 @@ function runAnalysis() {
   const ring = document.getElementById('score-ring');
   const circumference = 2 * Math.PI * 42;
   ring.style.strokeDashoffset = circumference - (score / 100) * circumference;
-  ring.style.stroke = score > 70 ? '#FACC15' : score > 40 ? '#FB923C' : '#F87171';
+  ring.style.stroke = score > 70 ? '#D99A55' : score > 40 ? '#FB923C' : '#F87171';
 
   document.getElementById('score-value').textContent = score;
   const scoreLabel = document.getElementById('score-label');
@@ -1100,10 +1132,10 @@ function runAnalysis() {
 
   // Scroll to results
   document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
-  showToast('AI Analysis complete — 6 insights generated');
+  showToast('AI Funding Alignment complete — 6 insights generated');
 }
 
-// ─── Optimizer Engine ───
+// ─── Transition Planner Engine ───
 function generateOptimizations(data) {
   const opts = [];
   const housingRatio = data.totalIncome > 0 ? (data.expenses['exp-housing'] / data.totalIncome) * 100 : 0;
@@ -1114,7 +1146,7 @@ function generateOptimizations(data) {
 
   if (housingRatio > 30) {
     opts.push({
-      title: 'Housing Cost Restructure',
+      title: 'Stability Cost Restructure',
       desc: 'Your housing exceeds 30% of income. Consider negotiating rent, finding a roommate, or relocating to a more cost-effective area.',
       savings: Math.round(data.expenses['exp-housing'] * 0.15),
       effort: 'High',
@@ -1126,7 +1158,7 @@ function generateOptimizations(data) {
   if (foodRatio > 12) {
     opts.push({
       title: 'Meal Prep & Grocery Optimization',
-      desc: 'AI analysis shows potential savings through batch cooking, grocery list optimization, and reducing dining out by 40%.',
+      desc: 'AI analysis shows potential savings through evidence review, funding reconciliation, and reducing unclassified expenditure.',
       savings: Math.round(data.expenses['exp-food'] * 0.25),
       effort: 'Medium',
       impact: 'High',
@@ -1146,7 +1178,7 @@ function generateOptimizations(data) {
   if (lifestyleRatio > 6) {
     opts.push({
       title: 'Lifestyle Recalibration',
-      desc: 'Entertainment spending can be optimized by switching to free/low-cost alternatives without quality reduction.',
+      desc: 'Security spending can be optimized by switching to free/low-cost alternatives without quality reduction.',
       savings: Math.round(data.expenses['exp-entertainment'] * 0.3),
       effort: 'Medium',
       impact: 'High',
@@ -1232,8 +1264,8 @@ document.getElementById('analyze-btn').addEventListener('click', () => {
   btn.innerHTML = `<iconify-icon icon="lucide:loader-2" width="20" class="animate-spin"></iconify-icon> Analyzing...`;
   btn.disabled = true;
   setTimeout(() => {
-    runAnalysis();
-    btn.innerHTML = `<iconify-icon icon="lucide:cpu" width="20"></iconify-icon> Run AI Analysis`;
+    runFunding Alignment();
+    btn.innerHTML = `<iconify-icon icon="lucide:cpu" width="20"></iconify-icon> Calculate Alignment Score`;
     btn.disabled = false;
   }, 1500);
 });
@@ -1293,7 +1325,7 @@ updateTotals();
 
 // Auto-run analysis on load after a delay
 setTimeout(() => {
-  runAnalysis();
+  runFunding Alignment();
 }, 2000);
 
 // ─── Smooth scroll for anchors ───
@@ -1313,7 +1345,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BUDGET.MONO — AI Annual Budget Analyzer & Optimizer</title>
+<title>Business Responsibility Scorecard — CSI Ubuntu Advisory</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://code.iconify.design/iconify-icon/1.0.7/iconify-icon.min.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
@@ -1322,7 +1354,7 @@ tailwind.config = {
   theme: {
     extend: {
       colors: {
-        brand: { black: '#18181B', primary: '#FACC15', primaryDark: '#EAB308', white: '#FFFFFF' }
+        brand: { black: '#18181B', primary: '#D99A55', primaryDark: '#C7833D', white: '#FFFFFF' }
       },
       fontFamily: {
         sans: ['Inter', 'sans-serif'],
@@ -1333,8 +1365,8 @@ tailwind.config = {
 }
 </script>
 <style>
-  ::selection { background: #FACC15; color: #18181B; }
-  * { scrollbar-width: thin; scrollbar-color: #FACC15 #18181B; }
+  ::selection { background: #D99A55; color: #18181B; }
+  * { scrollbar-width: thin; scrollbar-color: #D99A55 #18181B; }
   body { cursor: none; }
 
   /* Kinetic Typography */
@@ -1394,7 +1426,7 @@ tailwind.config = {
     position: fixed;
     pointer-events: none;
     border-radius: 50%;
-    background: #FACC15;
+    background: #D99A55;
     z-index: 9999;
     mix-blend-mode: multiply;
   }
@@ -1408,7 +1440,7 @@ tailwind.config = {
     position: fixed;
     width: 20px;
     height: 20px;
-    border: 2px solid #FACC15;
+    border: 2px solid #D99A55;
     border-radius: 50%;
     pointer-events: none;
     z-index: 10000;
@@ -1419,7 +1451,7 @@ tailwind.config = {
     position: fixed;
     width: 4px;
     height: 4px;
-    background: #FACC15;
+    background: #D99A55;
     border-radius: 50%;
     pointer-events: none;
     z-index: 10001;
@@ -1450,7 +1482,7 @@ tailwind.config = {
     transition: all 0.3s ease;
   }
   .spread-dot.active {
-    background: #FACC15;
+    background: #D99A55;
     transform: scale(1.5);
   }
 
@@ -1469,7 +1501,7 @@ tailwind.config = {
     transition: border-color 0.3s ease;
   }
   .mono-input:focus {
-    border-bottom-color: #FACC15;
+    border-bottom-color: #D99A55;
   }
   .mono-input::placeholder {
     color: rgba(255,255,255,0.2);
@@ -1491,7 +1523,7 @@ tailwind.config = {
     border-left: 4px solid transparent;
   }
   .opt-card:hover {
-    border-left-color: #FACC15;
+    border-left-color: #D99A55;
     transform: translateX(8px);
   }
 
@@ -1525,12 +1557,12 @@ tailwind.config = {
     <div class="w-8 h-8 bg-brand-primary rounded-sm flex items-center justify-center logo-construct">
       <span class="text-brand-black font-serif font-black text-sm">B</span>
     </div>
-    <span class="text-xs font-bold tracking-[0.3em] uppercase">Budget.Mono</span>
+    <span class="text-xs font-bold tracking-[0.3em] uppercase">Responsibility Scorecard</span>
   </div>
   <div class="hidden md:flex items-center gap-8">
     <a href="#hero" class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/60 hover:text-brand-primary transition-colors duration-150">Home</a>
     <a href="#analyzer" class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/60 hover:text-brand-primary transition-colors duration-150">Analyzer</a>
-    <a href="#optimizer" class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/60 hover:text-brand-primary transition-colors duration-150">Optimizer</a>
+    <a href="#optimizer" class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/60 hover:text-brand-primary transition-colors duration-150">Transition Planner</a>
     <a href="#specimens" class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/60 hover:text-brand-primary transition-colors duration-150">Specimens</a>
     <a href="#talks" class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/60 hover:text-brand-primary transition-colors duration-150">Talks</a>
     <a href="#contact" class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/60 hover:text-brand-primary transition-colors duration-150">Contact</a>
@@ -1544,7 +1576,7 @@ tailwind.config = {
 <div id="mobile-menu" class="fixed inset-0 z-40 bg-brand-black flex flex-col items-center justify-center gap-8 transition-all duration-500 opacity-0 pointer-events-none">
   <a href="#hero" class="mobile-link text-3xl font-serif font-black tracking-tight hover:text-brand-primary transition-colors">Home</a>
   <a href="#analyzer" class="mobile-link text-3xl font-serif font-black tracking-tight hover:text-brand-primary transition-colors">Analyzer</a>
-  <a href="#optimizer" class="mobile-link text-3xl font-serif font-black tracking-tight hover:text-brand-primary transition-colors">Optimizer</a>
+  <a href="#optimizer" class="mobile-link text-3xl font-serif font-black tracking-tight hover:text-brand-primary transition-colors">Transition Planner</a>
   <a href="#specimens" class="mobile-link text-3xl font-serif font-black tracking-tight hover:text-brand-primary transition-colors">Specimens</a>
   <a href="#talks" class="mobile-link text-3xl font-serif font-black tracking-tight hover:text-brand-primary transition-colors">Talks</a>
   <a href="#contact" class="mobile-link text-3xl font-serif font-black tracking-tight hover:text-brand-primary transition-colors">Contact</a>
@@ -1561,12 +1593,12 @@ tailwind.config = {
   <div class="relative z-10 text-center max-w-7xl mx-auto">
     <div class="overflow-hidden mb-2 md:mb-4">
       <div class="kinetic-1 text-[3rem] md:text-[8rem] lg:text-[10rem] font-black leading-[0.85] tracking-[-0.06em] font-serif">
-        BUDGET
+        RESPONSIBILITY
       </div>
     </div>
     <div class="overflow-hidden mb-2 md:mb-4">
       <div class="kinetic-2 text-[3rem] md:text-[8rem] lg:text-[10rem] font-black leading-[0.85] tracking-[-0.06em] font-serif text-brand-primary">
-        ANNUAL
+        SCORECARD
       </div>
     </div>
     <div class="overflow-hidden mb-6 md:mb-10">
@@ -1581,16 +1613,16 @@ tailwind.config = {
     </div>
 
     <p class="kinetic-4 text-sm md:text-base font-light tracking-[0.2em] uppercase text-white/50 max-w-xl mx-auto">
-      AI-Powered Budget Intelligence — Analyze. Optimize. Save.
+      Evidence-led CSI funding alignment — Assess. Understand. Plan.
     </p>
 
     <div class="kinetic-5 mt-10 md:mt-14 flex flex-col sm:flex-row items-center justify-center gap-4">
       <a href="#analyzer" class="group inline-flex items-center gap-3 bg-brand-primary text-brand-black px-8 py-4 rounded-sm text-sm font-bold tracking-[0.15em] uppercase hover:-translate-y-1 transition-all duration-150 shadow-[0_10px_15px_-3px_rgba(250,204,21,0.2)]" style="animation: pulseGlow 3s infinite;">
-        Start Analysis
+        Start Assessment
         <iconify-icon icon="lucide:arrow-down" width="16" class="group-hover:translate-y-1 transition-transform"></iconify-icon>
       </a>
       <a href="#optimizer" class="inline-flex items-center gap-3 border border-white/20 px-8 py-4 rounded-sm text-sm font-bold tracking-[0.15em] uppercase hover:border-brand-primary hover:text-brand-primary transition-all duration-150">
-        View Optimizer
+        View Transition Planner
       </a>
     </div>
   </div>
@@ -1605,7 +1637,7 @@ tailwind.config = {
 </section>
 
 <!-- ═══════════════════════════════════════ -->
-<!-- SPREAD 01 — BUDGET INPUT -->
+<!-- SPREAD 01 — RESPONSIBILITY INPUT -->
 <!-- ═══════════════════════════════════════ -->
 <section id="analyzer" class="relative min-h-screen px-6 md:px-10 py-24 md:py-32">
   <div class="max-w-7xl mx-auto">
@@ -1617,10 +1649,10 @@ tailwind.config = {
     </div>
 
     <h2 class="text-4xl md:text-6xl lg:text-7xl font-serif font-black tracking-[-0.04em] leading-[0.9] mb-4">
-      Enter Your<br><span class="text-brand-primary italic">Annual</span> Budget
+      Assess Your<br><span class="text-brand-primary italic">Funding</span> Portfolio
     </h2>
     <p class="text-base md:text-lg font-light text-white/50 max-w-2xl mb-12 md:mb-16 leading-relaxed">
-      Input your annual income and expenses across categories. Our AI engine will analyze spending patterns, identify inefficiencies, and generate a personalized optimization strategy.
+      Review corporate CSI funding against the proposed four-rung CSI Ubuntu Scorecard. Confirm the funding base, review evidence and classifications, and model responsible transition options.
     </p>
 
     <div class="grid md:grid-cols-2 gap-12 md:gap-20">
@@ -1630,7 +1662,7 @@ tailwind.config = {
           <div class="w-10 h-10 rounded-sm bg-brand-primary/10 border border-brand-primary/30 flex items-center justify-center">
             <iconify-icon icon="lucide:trending-up" width="20" class="text-brand-primary"></iconify-icon>
           </div>
-          <span class="text-xs font-bold tracking-[0.2em] uppercase">Annual Income</span>
+          <span class="text-xs font-bold tracking-[0.2em] uppercase">Confirmed Funding Base</span>
         </div>
 
         <div class="space-y-6">
@@ -1671,26 +1703,26 @@ tailwind.config = {
           <div class="w-10 h-10 rounded-sm bg-red-500/10 border border-red-500/30 flex items-center justify-center">
             <iconify-icon icon="lucide:trending-down" width="20" class="text-red-400"></iconify-icon>
           </div>
-          <span class="text-xs font-bold tracking-[0.2em] uppercase">Annual Expenses</span>
+          <span class="text-xs font-bold tracking-[0.2em] uppercase">Funding Allocations</span>
         </div>
 
         <div class="space-y-6">
           <div>
-            <label class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/40 mb-2 block">Housing / Rent</label>
+            <label class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/40 mb-2 block">Stability / Rent</label>
             <div class="relative">
               <span class="absolute left-0 top-1/2 -translate-y-1/2 text-red-400 font-bold text-lg">$</span>
               <input type="number" id="exp-housing" class="mono-input pl-8" placeholder="24,000" value="24000">
             </div>
           </div>
           <div>
-            <label class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/40 mb-2 block">Food & Groceries</label>
+            <label class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/40 mb-2 block">Food & Survival</label>
             <div class="relative">
               <span class="absolute left-0 top-1/2 -translate-y-1/2 text-red-400 font-bold text-lg">$</span>
               <input type="number" id="exp-food" class="mono-input pl-8" placeholder="9,600" value="9600">
             </div>
           </div>
           <div>
-            <label class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/40 mb-2 block">Transportation</label>
+            <label class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/40 mb-2 block">Self-reliance</label>
             <div class="relative">
               <span class="absolute left-0 top-1/2 -translate-y-1/2 text-red-400 font-bold text-lg">$</span>
               <input type="number" id="exp-transport" class="mono-input pl-8" placeholder="6,000" value="6000">
@@ -1704,7 +1736,7 @@ tailwind.config = {
             </div>
           </div>
           <div>
-            <label class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/40 mb-2 block">Entertainment & Lifestyle</label>
+            <label class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/40 mb-2 block">Security & Lifestyle</label>
             <div class="relative">
               <span class="absolute left-0 top-1/2 -translate-y-1/2 text-red-400 font-bold text-lg">$</span>
               <input type="number" id="exp-entertainment" class="mono-input pl-8" placeholder="7,200" value="7200">
@@ -1746,7 +1778,7 @@ tailwind.config = {
     <div class="mt-16 flex flex-col items-center">
       <button id="analyze-btn" class="group relative inline-flex items-center gap-4 bg-brand-primary text-brand-black px-12 py-5 rounded-sm text-sm font-bold tracking-[0.2em] uppercase hover:-translate-y-1 transition-all duration-150 shadow-[0_10px_15px_-3px_rgba(250,204,21,0.2)]">
         <iconify-icon icon="lucide:cpu" width="20"></iconify-icon>
-        Run AI Analysis
+        Calculate Alignment Score
         <div class="absolute inset-0 rounded-sm overflow-hidden">
           <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700"></div>
         </div>
@@ -1763,7 +1795,7 @@ tailwind.config = {
     <div class="flex items-center gap-6 mb-4">
       <span class="text-[10px] font-bold tracking-[0.3em] uppercase text-brand-primary">Spread 02</span>
       <div class="flex-1 h-[1px] bg-white/10"></div>
-      <span class="text-[10px] font-bold tracking-[0.3em] uppercase text-white/30">Analysis</span>
+      <span class="text-[10px] font-bold tracking-[0.3em] uppercase text-white/30">Funding Alignment</span>
     </div>
 
     <h2 class="text-4xl md:text-6xl lg:text-7xl font-serif font-black tracking-[-0.04em] leading-[0.9] mb-16">
@@ -1826,7 +1858,7 @@ tailwind.config = {
         <div class="relative w-48 h-48 mx-auto mb-8">
           <svg viewBox="0 0 100 100" class="w-full h-full -rotate-90">
             <circle cx="50" cy="50" r="42" fill="none" stroke="rgba(255,255,255,0.05)" stroke-width="8"/>
-            <circle id="score-ring" cx="50" cy="50" r="42" fill="none" stroke="#FACC15" stroke-width="8" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="80" class="transition-all duration-1000"/>
+            <circle id="score-ring" cx="50" cy="50" r="42" fill="none" stroke="#D99A55" stroke-width="8" stroke-linecap="round" stroke-dasharray="264" stroke-dashoffset="80" class="transition-all duration-1000"/>
           </svg>
           <div class="absolute inset-0 flex flex-col items-center justify-center">
             <span id="score-value" class="text-4xl font-black font-serif">70</span>
@@ -1847,14 +1879,14 @@ tailwind.config = {
     <div class="flex items-center gap-6 mb-4">
       <span class="text-[10px] font-bold tracking-[0.3em] uppercase text-brand-primary">Spread 03</span>
       <div class="flex-1 h-[1px] bg-white/10"></div>
-      <span class="text-[10px] font-bold tracking-[0.3em] uppercase text-white/30">Optimizer</span>
+      <span class="text-[10px] font-bold tracking-[0.3em] uppercase text-white/30">Transition Planner</span>
     </div>
 
     <h2 class="text-4xl md:text-6xl lg:text-7xl font-serif font-black tracking-[-0.04em] leading-[0.9] mb-4">
       <span class="text-brand-primary italic">Optimize</span> &<br>Save More
     </h2>
     <p class="text-base md:text-lg font-light text-white/50 max-w-2xl mb-16 leading-relaxed">
-      AI-generated recommendations ranked by impact. Each suggestion includes projected annual savings and effort level.
+      Explore funding transition options while protecting essential services, existing commitments and programme continuity. All scenarios display their assumptions.
     </p>
 
     <!-- Optimization Cards -->
@@ -1866,7 +1898,7 @@ tailwind.config = {
     <div class="bg-brand-primary text-brand-black p-10 md:p-16 rounded-sm">
       <div class="grid md:grid-cols-3 gap-8 items-center">
         <div class="md:col-span-2">
-          <span class="text-[10px] font-bold tracking-[0.3em] uppercase text-brand-black/50 block mb-3">Projected Annual Savings</span>
+          <span class="text-[10px] font-bold tracking-[0.3em] uppercase text-brand-black/50 block mb-3">Modelled Funding Change</span>
           <div class="flex items-baseline gap-3">
             <span id="projected-savings" class="text-5xl md:text-7xl font-black font-serif">$8,400</span>
             <span class="text-lg font-medium text-brand-black/60">/year</span>
@@ -1881,7 +1913,7 @@ tailwind.config = {
 
     <!-- Color Palette Film Strip -->
     <div class="mt-20">
-      <h3 class="text-lg font-bold tracking-wide mb-6">Budget Category Palette</h3>
+      <h3 class="text-lg font-bold tracking-wide mb-6">Four-Rung Funding Model</h3>
       <div class="overflow-hidden relative h-16 rounded-sm border border-white/10">
         <div id="film-strip" class="flex h-full film-strip" style="width: 200%;">
           <!-- Injected by JS -->
@@ -1934,7 +1966,7 @@ tailwind.config = {
       <div class="draggable absolute p-6 bg-zinc-800 border border-white/10 rounded-sm shadow-2xl" style="left: 15%; top: 55%; width: 340px;" data-scale="1">
         <span class="text-[9px] font-bold tracking-[0.3em] uppercase text-brand-primary block mb-4">Inter — Light / Tracking</span>
         <div class="specimen-text text-sm font-sans font-light tracking-[0.2em] uppercase leading-relaxed mb-4">
-          ANNUAL BUDGET ANALYZER<br>AI-POWERED OPTIMIZATION<br>EDITORIAL MONOGRAPH DESIGN
+          SCORECARD RESPONSIBILITY ANALYZER<br>AI-POWERED OPTIMIZATION<br>EDITORIAL MONOGRAPH DESIGN
         </div>
         <p class="text-xs text-white/30 leading-relaxed">Small caps style for labels, metadata, and category headers.</p>
       </div>
@@ -1988,7 +2020,7 @@ tailwind.config = {
     </div>
 
     <h2 class="text-4xl md:text-6xl lg:text-7xl font-serif font-black tracking-[-0.04em] leading-[0.9] mb-16">
-      Lectures &<br><span class="text-brand-primary italic">Talks</span>
+      Evidence &amp;<br><span class="text-brand-primary italic">Methodology</span>
     </h2>
 
     <div class="grid md:grid-cols-2 gap-8">
@@ -2000,7 +2032,7 @@ tailwind.config = {
         <div class="p-6">
           <span class="text-[9px] font-bold tracking-[0.3em] uppercase text-brand-primary block mb-2">Keynote · 2024</span>
           <h4 class="text-xl font-bold tracking-tight mb-2 group-hover:text-brand-primary transition-colors">The Typography of Money</h4>
-          <p class="text-sm text-white/40 leading-relaxed">How visual hierarchy and type design influence financial decision-making and budget perception.</p>
+          <p class="text-sm text-white/40 leading-relaxed">Documented evidence, transparent classifications and reviewer-approved findings support more accountable CSI funding decisions.</p>
         </div>
       </div>
 
@@ -2036,7 +2068,7 @@ tailwind.config = {
           Let's <span class="text-brand-primary italic">Build</span>
         </h2>
         <p class="text-base font-light text-white/50 max-w-md leading-relaxed mb-12">
-          Have a project in mind? Want to discuss budget optimization for your organization? Let's connect.
+          Use this workspace to prepare client assessments, review supporting evidence and develop practical funding transition plans.
         </p>
 
         <div class="space-y-6">
@@ -2062,7 +2094,7 @@ tailwind.config = {
         <div class="space-y-8">
           <div>
             <span class="text-[9px] font-bold tracking-[0.3em] uppercase text-white/30 block mb-2">Email</span>
-            <a href="mailto:hello@budgetmono.com" class="text-2xl font-serif font-black hover:text-brand-primary transition-colors">hello@budgetmono.com</a>
+            <a href="mailto:Private advisory workspace" class="text-2xl font-serif font-black hover:text-brand-primary transition-colors">Private advisory workspace</a>
           </div>
           <div>
             <span class="text-[9px] font-bold tracking-[0.3em] uppercase text-white/30 block mb-2">Social</span>
@@ -2102,15 +2134,15 @@ tailwind.config = {
           <div class="w-8 h-8 bg-brand-primary rounded-sm flex items-center justify-center">
             <span class="text-brand-black font-serif font-black text-sm">B</span>
           </div>
-          <span class="text-xs font-bold tracking-[0.3em] uppercase">Budget.Mono</span>
+          <span class="text-xs font-bold tracking-[0.3em] uppercase">Responsibility Scorecard</span>
         </div>
-        <p class="text-sm text-white/30 leading-relaxed">AI-powered annual budget analysis and optimization. Editorial design meets financial intelligence.</p>
+        <p class="text-sm text-white/30 leading-relaxed">A private advisory workspace for evidence-led CSI funding assessment, transition planning and responsible business reporting.</p>
       </div>
       <div>
         <span class="text-[10px] font-bold tracking-[0.25em] uppercase text-white/40 block mb-4">Sections</span>
         <div class="space-y-2">
           <a href="#analyzer" class="text-sm text-white/50 hover:text-brand-primary transition-colors block">Analyzer</a>
-          <a href="#optimizer" class="text-sm text-white/50 hover:text-brand-primary transition-colors block">Optimizer</a>
+          <a href="#optimizer" class="text-sm text-white/50 hover:text-brand-primary transition-colors block">Transition Planner</a>
           <a href="#specimens" class="text-sm text-white/50 hover:text-brand-primary transition-colors block">Specimens</a>
           <a href="#talks" class="text-sm text-white/50 hover:text-brand-primary transition-colors block">Talks</a>
         </div>
@@ -2132,7 +2164,7 @@ tailwind.config = {
       </div>
     </div>
     <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5 gap-4">
-      <span class="text-[10px] text-white/20 tracking-wider">© 2025 BUDGET.MONO — ALL RIGHTS RESERVED</span>
+      <span class="text-[10px] text-white/20 tracking-wider">© 2025 RESPONSIBILITY.MONO — ALL RIGHTS RESERVED</span>
       <span class="text-[10px] text-white/20 tracking-wider">DESIGNED WITH EDITORIAL PRECISION</span>
     </div>
   </div>
@@ -2234,14 +2266,14 @@ function fmt(n) {
 
 // ─── Budget Data & Calculations ───
 const categories = [
-  { id: 'exp-housing', label: 'Housing', color: '#FACC15', icon: 'lucide:home' },
+  { id: 'exp-housing', label: 'Stability', color: '#D99A55', icon: 'lucide:home' },
   { id: 'exp-food', label: 'Food', color: '#FB923C', icon: 'lucide:utensils' },
   { id: 'exp-transport', label: 'Transport', color: '#F87171', icon: 'lucide:car' },
   { id: 'exp-utilities', label: 'Utilities', color: '#A78BFA', icon: 'lucide:zap' },
   { id: 'exp-entertainment', label: 'Lifestyle', color: '#34D399', icon: 'lucide:music' },
   { id: 'exp-healthcare', label: 'Health', color: '#60A5FA', icon: 'lucide:heart' },
   { id: 'exp-shopping', label: 'Shopping', color: '#F472B6', icon: 'lucide:shopping-bag' },
-  { id: 'exp-savings', label: 'Savings', color: '#FACC15', icon: 'lucide:piggy-bank' },
+  { id: 'exp-savings', label: 'Savings', color: '#D99A55', icon: 'lucide:piggy-bank' },
 ];
 
 function getValues() {
@@ -2278,8 +2310,8 @@ document.querySelectorAll('.mono-input').forEach(input => {
   input.addEventListener('input', updateTotals);
 });
 
-// ─── Analysis Engine ───
-function runAnalysis() {
+// ─── Funding Alignment Engine ───
+function runFunding Alignment() {
   const data = getValues();
 
   // Update key metrics
@@ -2328,9 +2360,9 @@ function runAnalysis() {
 
   const housingRatio = data.totalIncome > 0 ? (data.expenses['exp-housing'] / data.totalIncome) * 100 : 0;
   if (housingRatio > 30) {
-    observations.push({ type: 'warning', text: `Housing costs at ${housingRatio.toFixed(0)}% of income exceeds the recommended 30% threshold.` });
+    observations.push({ type: 'warning', text: `Stability costs at ${housingRatio.toFixed(0)}% of income exceeds the recommended 30% threshold.` });
   } else {
-    observations.push({ type: 'good', text: `Housing costs at ${housingRatio.toFixed(0)}% of income — within the healthy 30% threshold.` });
+    observations.push({ type: 'good', text: `Stability costs at ${housingRatio.toFixed(0)}% of income — within the healthy 30% threshold.` });
   }
 
   const foodRatio = data.totalIncome > 0 ? (data.expenses['exp-food'] / data.totalIncome) * 100 : 0;
@@ -2396,7 +2428,7 @@ function runAnalysis() {
   const ring = document.getElementById('score-ring');
   const circumference = 2 * Math.PI * 42;
   ring.style.strokeDashoffset = circumference - (score / 100) * circumference;
-  ring.style.stroke = score > 70 ? '#FACC15' : score > 40 ? '#FB923C' : '#F87171';
+  ring.style.stroke = score > 70 ? '#D99A55' : score > 40 ? '#FB923C' : '#F87171';
 
   document.getElementById('score-value').textContent = score;
   const scoreLabel = document.getElementById('score-label');
@@ -2410,10 +2442,10 @@ function runAnalysis() {
 
   // Scroll to results
   document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
-  showToast('AI Analysis complete — 6 insights generated');
+  showToast('AI Funding Alignment complete — 6 insights generated');
 }
 
-// ─── Optimizer Engine ───
+// ─── Transition Planner Engine ───
 function generateOptimizations(data) {
   const opts = [];
   const housingRatio = data.totalIncome > 0 ? (data.expenses['exp-housing'] / data.totalIncome) * 100 : 0;
@@ -2424,7 +2456,7 @@ function generateOptimizations(data) {
 
   if (housingRatio > 30) {
     opts.push({
-      title: 'Housing Cost Restructure',
+      title: 'Stability Cost Restructure',
       desc: 'Your housing exceeds 30% of income. Consider negotiating rent, finding a roommate, or relocating to a more cost-effective area.',
       savings: Math.round(data.expenses['exp-housing'] * 0.15),
       effort: 'High',
@@ -2436,7 +2468,7 @@ function generateOptimizations(data) {
   if (foodRatio > 12) {
     opts.push({
       title: 'Meal Prep & Grocery Optimization',
-      desc: 'AI analysis shows potential savings through batch cooking, grocery list optimization, and reducing dining out by 40%.',
+      desc: 'AI analysis shows potential savings through evidence review, funding reconciliation, and reducing unclassified expenditure.',
       savings: Math.round(data.expenses['exp-food'] * 0.25),
       effort: 'Medium',
       impact: 'High',
@@ -2456,7 +2488,7 @@ function generateOptimizations(data) {
   if (lifestyleRatio > 6) {
     opts.push({
       title: 'Lifestyle Recalibration',
-      desc: 'Entertainment spending can be optimized by switching to free/low-cost alternatives without quality reduction.',
+      desc: 'Security spending can be optimized by switching to free/low-cost alternatives without quality reduction.',
       savings: Math.round(data.expenses['exp-entertainment'] * 0.3),
       effort: 'Medium',
       impact: 'High',
@@ -2542,8 +2574,8 @@ document.getElementById('analyze-btn').addEventListener('click', () => {
   btn.innerHTML = `<iconify-icon icon="lucide:loader-2" width="20" class="animate-spin"></iconify-icon> Analyzing...`;
   btn.disabled = true;
   setTimeout(() => {
-    runAnalysis();
-    btn.innerHTML = `<iconify-icon icon="lucide:cpu" width="20"></iconify-icon> Run AI Analysis`;
+    runFunding Alignment();
+    btn.innerHTML = `<iconify-icon icon="lucide:cpu" width="20"></iconify-icon> Calculate Alignment Score`;
     btn.disabled = false;
   }, 1500);
 });
@@ -2603,7 +2635,7 @@ updateTotals();
 
 // Auto-run analysis on load after a delay
 setTimeout(() => {
-  runAnalysis();
+  runFunding Alignment();
 }, 2000);
 
 // ─── Smooth scroll for anchors ───
